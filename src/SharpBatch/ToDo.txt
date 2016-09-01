@@ -1,0 +1,12 @@
+﻿1 - Assembly Manager
+elenca tutte le dll che refenziano il progetto
+
+2 - BatchManager
+Cerca e carica nei serivce tutti i batch presenti nelle librerie che individua l' assemblyManager
+
+3 - BatchInvoker
+Si occupa di avviare i batch che sono stati caricati nel service
+
+4 - Batch middleware
+Middleware per l'intercettazione delle chiamate
+
