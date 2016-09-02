@@ -5,17 +5,46 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SharpBatch.internals;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace SharpBatch.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class SharpBatchServiceCollectionExtention
     {
-        public static IServiceCollection AddSharpBatch(this IServiceCollection service)
+        public static IServiceCollection AddSharpBatch(this IServiceCollection services)
         {
-            service.AddSingleton<IBatchActionFactory, BatchActionFactory>();
-            return service;
+            //Manager
+            services.AddSingleton(typeof(ApplicationBatchManager));
+
+            //Discovering batch
+            var batchActionManager = getBatchAction(services);
+            services.AddSingleton(typeof(ApplicationBatchManager), batchActionManager);
+
+            //batch Factory
+            services.AddSingleton<IBatchActionFactory, BatchActionFactory>();
+
+            return services;
         }
 
+        private static ApplicationBatchManager getBatchAction(IServiceCollection service)
+        {
+            var hostingService = (IHostingEnvironment)service.FirstOrDefault(t => t.ServiceType == typeof(IHostingEnvironment))?.ImplementationInstance;
+            var manager = (ApplicationBatchManager)service.FirstOrDefault(t => t.ServiceType == typeof(ApplicationBatchManager))?.ImplementationInstance;
+
+            if (manager == null)
+            {
+                manager = new ApplicationBatchManager();
+            }
+
+            var batchDescriptors = BatchActionDiscovery.discoveryBatchDescription(hostingService.ApplicationName);
+
+            foreach(var item in batchDescriptors)
+            {
+                manager.BatchActions.Add(item);
+            }
+
+            return manager;
+        }
          
     }
 }

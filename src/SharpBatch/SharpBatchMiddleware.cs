@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SharpBatch.internals;
+using System.Text;
 
 namespace SharpBatch
 {
@@ -30,15 +31,25 @@ namespace SharpBatch
         {
             PathString batchCallPath;
             //to do patternize it
-            if (context.Request.Path.StartsWithSegments(new PathString("batch/exec/"),out batchCallPath) )
+            if (context.Request.Path.StartsWithSegments(new PathString("/batch/exec"), out batchCallPath))
             {
                 var batchCallPathVector = batchCallPath.Value.Split('/');
-                if (batchCallPathVector.Length == 2)
+                if (batchCallPathVector.Length == 3)
                 {
-                    _batchActionFactory.Search(batchCallPathVector[0], batchCallPathVector[1]);
+                    var actionToExecute = _batchActionFactory.Search(batchCallPathVector[1], batchCallPathVector[2]);
+                    object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
+                    var result = actionToExecute.ActionInfo.Invoke(targhet, null);
+                    if (result == null)
+                    {
+                        result = string.Empty;
+                    }
+                    context.Response.Body.Write(Encoding.UTF8.GetBytes(result.ToString()), 0, result.ToString().Length);
                 }
             }
-            await _next.Invoke(context);
+            else
+            {
+                await _next.Invoke(context);
+            }
         }
     }
 }

@@ -84,7 +84,7 @@ namespace SharpBatch.internals
             object itemValue;
             try
             {
-                itemValue = _items.Where(p => p.Key.Equals(key)).First();
+                itemValue = _items.Where(p => p.Key.Equals(key)).First().Value;
                 found = true;
             }catch
             {
@@ -98,6 +98,18 @@ namespace SharpBatch.internals
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        public bool AddOrUpdate(string key, object value)
+        {
+            bool result = false;
+            if ( ContainsKey(key))
+            {
+                Remove(key);
+                result = true;
+            }
+            Add(key, value);
+            return result;
         }
     }
 }

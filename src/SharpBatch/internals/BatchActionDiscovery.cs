@@ -10,14 +10,17 @@ namespace SharpBatch.internals
     {
         public static IList<BatchActionDescriptor> discoveryBatchDescription(string assemblyName)
         {
+            List<BatchActionDescriptor> result = new List<BatchActionDescriptor>();
+
             IEnumerable<Assembly> assemblyList = AssemblyDiscoveryManager.EnlistAssemblyDependencies(assemblyName).ToList<Assembly>();
             
             foreach(var assembly in assemblyList)
             {
-                defaultActionDescriptionProvider.actionDescription(assembly.DefinedTypes);
+                var batchActionDescriptions = defaultActionDescriptionProvider.actionDescription(assembly.DefinedTypes);
+                result.AddRange(batchActionDescriptions);
             }
-            
-            return null;
+
+            return result;
         }
     }
 }

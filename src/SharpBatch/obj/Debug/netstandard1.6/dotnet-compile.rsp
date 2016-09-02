@@ -84,6 +84,7 @@ C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\IBatchAttribute.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\SharpBatchMiddleware.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\DependencyInjection\SharpBatchBuilderExtention.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\DependencyInjection\SharpBatchServiceCollectionExtention.cs
+C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\internals\ApplicationBatchManager.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\internals\AssemblyManager.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\internals\AssemblyModel.cs
 C:\Users\ivano\Source\Repos\SharpBatch2\src\SharpBatch\internals\BatchActionDescriptor.cs

@@ -10,7 +10,10 @@ namespace TestWebApplication
 
         public void method1()
         {
-
+            for(var i = 0;i<100;i++)
+            {
+                Console.WriteLine(" Giro giro tondo");
+            }
         }
 
         public void method2()
@@ -18,6 +21,17 @@ namespace TestWebApplication
 
         }
 
+        public string method3()
+        {
+            string result = "";
+
+            for (var i = 0; i < 100; i++)
+            {
+                result += $"Test {i} <br/> ";
+            }
+
+            return result;
+        }
 
     }
 }

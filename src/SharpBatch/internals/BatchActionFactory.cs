@@ -9,18 +9,19 @@ namespace SharpBatch.internals
 {
     public class BatchActionFactory : IBatchActionFactory
     {
-        IList<BatchActionDescriptor> _items;
+        IList<BatchActionDescriptor> _batchActions;
 
-        public BatchActionFactory(IServiceCollection service)
+        public BatchActionFactory(ApplicationBatchManager manager)
         {
-            var hostingService = (IHostingEnvironment)service.FirstOrDefault(t => t.ServiceType == typeof(IHostingEnvironment))?.ImplementationInstance;
-            _items = BatchActionDiscovery.discoveryBatchDescription(hostingService.ApplicationName);
+            _batchActions = manager.BatchActions;
         }
 
         public BatchActionDescriptor Search(string BatchName, string ActionName)
         {
-            var batchActionDescriptors = _items.Where(p => p.BatchName.Equals(BatchName, StringComparison.OrdinalIgnoreCase)
-                && p.ActionName.Equals(ActionName, StringComparison.OrdinalIgnoreCase) ).ToList();
+            var batchActionDescriptors = _batchActions.Where(p => 
+                p.BatchName.Equals(BatchName, StringComparison.OrdinalIgnoreCase)
+                && p.ActionName.Equals(ActionName, StringComparison.OrdinalIgnoreCase)
+            );
 
             if ( batchActionDescriptors.Count() > 1)
             {
@@ -34,7 +35,7 @@ namespace SharpBatch.internals
                 throw new Exception("No batch satisfy the search ");
             }
 
-            return null;
+            return batchActionDescriptors.First();
         }
     }
 }

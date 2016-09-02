@@ -24,6 +24,17 @@ namespace SharpBatch.internals
 
         internal static class CandidateToBatch
         {
+            private static string cleanBatchName(string name)
+            {
+                var cleanName = name;
+                if (cleanName.EndsWith("batch",StringComparison.OrdinalIgnoreCase))
+                {
+                    cleanName = cleanName.Substring(0, name.Length - "batch".Length);
+                }
+
+                return cleanName;
+            }
+
             public static IList<BatchActionDescriptor> getBatchActionDescription(TypeInfo typeInfo)
             {
                 IList<BatchActionDescriptor> response = new List<BatchActionDescriptor>();
@@ -37,6 +48,7 @@ namespace SharpBatch.internals
                             var batchActionDescriptor = new BatchActionDescriptor()
                             {
                                 Id = typeInfo.Name,
+                                BatchName = cleanBatchName(typeInfo.Name),
                                 BatchTypeInfo = typeInfo,
                                 ActionName = action.Name,
                                 ActionInfo = action
