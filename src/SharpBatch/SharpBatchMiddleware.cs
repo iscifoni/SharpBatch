@@ -46,7 +46,7 @@ namespace SharpBatch
                     context.Response.Body.Write(Encoding.UTF8.GetBytes(result.ToString()), 0, result.ToString().Length);
                 }
             }
-            else
+            else 
             {
                 await _next.Invoke(context);
             }

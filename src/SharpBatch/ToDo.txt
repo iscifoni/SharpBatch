@@ -1,12 +1,35 @@
-﻿1 - Assembly Manager
-elenca tutte le dll che refenziano il progetto
+﻿1 - Assembly Manager ==== FATTO ====
+elenca tutte le dll che refenziano il progetto 
 
-2 - BatchManager
+2 - BatchManager ==== FTTO =====
 Cerca e carica nei serivce tutti i batch presenti nelle librerie che individua l' assemblyManager
 
 3 - BatchInvoker
-Si occupa di avviare i batch che sono stati caricati nel service
+Si occupa di avviare i batch che sono stati caricati nel service sia syn che async
 
-4 - Batch middleware
+4 - Batch middleware ==== FATTO ====
 Middleware per l'intercettazione delle chiamate
 
+5 - Utilizzo di Attribute
+Individuare gli attributi
+
+6 - Individuazinoe di una pipeline di esecuzione ottimale
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------------
+Interfaccia TRAKING
+Metodi
+ - Start
+ - Stop
+ - Exception
+ - Message
+
+ Dati da tracciare 
+ guid			identificativo esecuzione
+ timestamp		timestamp del traking
+ messaggio		messaggio del traking
+ node			nome del nodo dove gira il batch
