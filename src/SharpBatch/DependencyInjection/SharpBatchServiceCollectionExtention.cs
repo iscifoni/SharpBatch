@@ -14,11 +14,11 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSharpBatch(this IServiceCollection services)
         {
             //Manager
-            services.AddSingleton(typeof(ApplicationBatchManager));
+            //services.AddSingleton(typeof(ApplicationBatchManager));
 
             //Discovering batch
             var batchActionManager = getBatchAction(services);
-            services.AddSingleton(typeof(ApplicationBatchManager), batchActionManager);
+            services.TryAddSingleton<ApplicationBatchManager>(batchActionManager);
 
             //batch Factory
             services.AddSingleton<IBatchActionFactory, BatchActionFactory>();

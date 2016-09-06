@@ -8,12 +8,15 @@ namespace TestWebApplication
     public class BaseTestBatch
     {
 
-        public void method1()
+        public string method1()
         {
+            var response = "";
             for(var i = 0;i<100;i++)
             {
-                Console.WriteLine(" Giro giro tondo");
+                response += " Giro giro tondo";
             }
+
+            return response;
         }
 
         public void method2()

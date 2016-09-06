@@ -39,6 +39,11 @@ namespace SharpBatch.internals
             {
                 IList<BatchActionDescriptor> response = new List<BatchActionDescriptor>();
 
+                if (!(typeInfo.BaseType is object) && typeInfo.BaseType != null)
+                {
+                    response = getBatchActionDescription(typeInfo.BaseType.GetTypeInfo() );
+                }
+
                 if (isBatch(typeInfo))
                 {
                     foreach(var action in typeInfo.DeclaredMethods)
@@ -53,7 +58,6 @@ namespace SharpBatch.internals
                                 ActionName = action.Name,
                                 ActionInfo = action
                             };
-
                             response.Add(batchActionDescriptor);
                         }
                     }
@@ -63,6 +67,11 @@ namespace SharpBatch.internals
 
             public static bool isBatch(TypeInfo typeInfo)
             {
+                if (!typeInfo.IsClass)
+                {
+                    return false;
+                }
+
                 if (typeInfo.Name.EndsWith("Batch", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
@@ -78,9 +87,11 @@ namespace SharpBatch.internals
 
             public static bool isMethod(MethodInfo methodInfo)
             {
-                if (methodInfo.IsPublic)
+                if (methodInfo.IsPrivate || 
+                    methodInfo.IsAbstract ||
+                    methodInfo.IsConstructor )
                 {
-                    return true;
+                    return false;
                 }
 
                 if (methodInfo.GetCustomAttributes<BatchActionAttribute>(true).Count() > 0)
@@ -88,7 +99,7 @@ namespace SharpBatch.internals
                     return true;
                 }
 
-                return false;
+                return true;
             }
         }
 
