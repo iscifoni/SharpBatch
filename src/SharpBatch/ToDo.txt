@@ -18,7 +18,7 @@ Individuare gli attributi
 
 -----------------------------------------------------------------------------------------------------------
 Context invoker aggiungere collection di parameter presi dal query string
-
+aggiungere guid di esecuzione
 
 ------------------------------------------------------------------------------------------------------------
 Interfaccia TRAKING

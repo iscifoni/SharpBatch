@@ -13,7 +13,7 @@ namespace TestWebApplication
             var response = "";
             for(var i = 0;i<100;i++)
             {
-                response += " Giro giro tondo";
+                response += " Giro giro tondo<br>";
             }
 
             return response;

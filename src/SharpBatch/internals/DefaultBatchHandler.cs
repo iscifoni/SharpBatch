@@ -9,14 +9,14 @@ namespace SharpBatch.internals
 {
     public class DefaultBatchHandler : IBatchHandler
     {
+        private readonly PathString batchStringIdentifier = new PathString("/batch/exec");
         
 
         public async Task<object> InvokeAsync(HttpContext context)
         {
             var batchInvoker = (IBatchInvoker)context.RequestServices.GetService(typeof(IBatchInvoker));
             PathString batchCallPath;
-            //to do patternize it
-            if (context.Request.Path.StartsWithSegments(new PathString("/batch/exec"), out batchCallPath))
+            if (context.Request.Path.StartsWithSegments(batchStringIdentifier, out batchCallPath))
             {
                 var batchCallPathVector = batchCallPath.Value.Split('/');
                 if (batchCallPathVector.Length == 3)
@@ -25,10 +25,17 @@ namespace SharpBatch.internals
                     contextInvoker.BatchName = batchCallPathVector[1];
                     contextInvoker.ActionName = batchCallPathVector[2];
 
-                    await batchInvoker.InvokeAsync(contextInvoker);
+                    var task = Task.Run(()=>
+                        {
+                            var response = batchInvoker.InvokeAsync(contextInvoker);
+                        }
+                    );
+                    
+                    return true;
                 }
             }
-            return null;
+
+            return false;
         }
     }
 }
