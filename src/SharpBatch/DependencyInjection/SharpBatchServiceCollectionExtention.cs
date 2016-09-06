@@ -17,6 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var batchActionManager = getBatchAction(services);
             services.TryAddSingleton<ApplicationBatchManager>(batchActionManager);
 
+            //invoker
+            services.TryAddSingleton<IBatchInvoker, DefaultBatchInvoker>();
+            services.TryAddSingleton<IBatchHandler, DefaultBatchHandler>();
+
             //batch Factory
             services.AddSingleton<IBatchActionFactory, BatchActionFactory>();
 

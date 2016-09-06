@@ -16,7 +16,7 @@ namespace SharpBatch.internals
             
             foreach(var assembly in assemblyList)
             {
-                var batchActionDescriptions = defaultActionDescriptionProvider.actionDescription(assembly.DefinedTypes);
+                var batchActionDescriptions = DefaultActionDescriptionProvider.actionDescription(assembly.DefinedTypes);
                 result.AddRange(batchActionDescriptions);
             }
 

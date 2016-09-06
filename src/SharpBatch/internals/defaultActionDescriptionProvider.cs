@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public static class defaultActionDescriptionProvider
+    public static class DefaultActionDescriptionProvider
     {
         public static IEnumerable<BatchActionDescriptor> actionDescription(IEnumerable<TypeInfo> types)
         {

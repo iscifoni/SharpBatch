@@ -13,40 +13,29 @@ namespace SharpBatch
     {
         RequestDelegate _next;
         ILoggerFactory _loggerFactory;
-        IBatchActionFactory _batchActionFactory;
+        IBatchHandler _batchHandler;
 
         public SharpBatchMiddleware(
             RequestDelegate next,
             ILoggerFactory loggerFactory,
-            IBatchActionFactory batchActionFactory
+            IBatchHandler batchHandler
             )
         {
             _next = next;
             _loggerFactory = loggerFactory;
-            _batchActionFactory = batchActionFactory;
+            _batchHandler = batchHandler;
         }
 
 
         public async Task Invoke(HttpContext context)
         {
             PathString batchCallPath;
-            //to do patternize it
+            //to do patternize it using StringPath from config
             if (context.Request.Path.StartsWithSegments(new PathString("/batch/exec"), out batchCallPath))
             {
-                var batchCallPathVector = batchCallPath.Value.Split('/');
-                if (batchCallPathVector.Length == 3)
-                {
-                    var actionToExecute = _batchActionFactory.Search(batchCallPathVector[1], batchCallPathVector[2]);
-                    object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
-                    var result = actionToExecute.ActionInfo.Invoke(targhet, null);
-                    if (result == null)
-                    {
-                        result = string.Empty;
-                    }
-                    context.Response.Body.Write(Encoding.UTF8.GetBytes(result.ToString()), 0, result.ToString().Length);
-                }
+                await _batchHandler.InvokeAsync(context);
             }
-            else 
+            else if (_next  != null )
             {
                 await _next.Invoke(context);
             }
