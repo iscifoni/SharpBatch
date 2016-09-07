@@ -36,3 +36,6 @@ nuget.exe
 node_modules
 *launchSettings.json
 *.orig
+/src/SharpBatch/obj/Release/netstandard1.6
+/test/LinkedAssemblyTest/obj/Release/netstandard1.6
+/test/TestWebApplication/obj/Release/netcoreapp1.0

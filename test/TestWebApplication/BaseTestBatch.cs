@@ -8,10 +8,10 @@ namespace TestWebApplication
     public class BaseTestBatch
     {
 
-        public string method1()
+        public string Method1()
         {
             var response = "";
-            for(var i = 0;i<100;i++)
+            for(var i = 0;i<10;i++)
             {
                 response += " Giro giro tondo<br>";
             }
@@ -19,16 +19,16 @@ namespace TestWebApplication
             return response;
         }
 
-        public void method2()
+        public void Method2()
         {
 
         }
 
-        public string method3()
+        public string Method3()
         {
             string result = "";
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 10; i++)
             {
                 result += $"Test {i} <br/> ";
             }
