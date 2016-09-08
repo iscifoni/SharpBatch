@@ -8,14 +8,20 @@ namespace SharpBatch.internals
 {
     public class ContextInvoker
     {
+        public BatchParameterDictionary Parameters { get; } = new BatchParameterDictionary();
+
         public static ContextInvoker Create(HttpContext context)
         {
-            return new ContextInvoker()
+
+            var contextInvoker = new ContextInvoker()
             {
                 RequestServices = context.RequestServices,
                 Request = context.Request,
                 Response = context.Response
             };
+
+            contextInvoker.Parameters.AddFromQueryString(context.Request.QueryString);
+            return contextInvoker;
         }
 
         public IServiceProvider RequestServices { get; private set; }

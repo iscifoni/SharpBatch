@@ -31,9 +31,9 @@ namespace SharpBatch.internals
                     contextInvoker.ActionName = batchCallPathVector[2];
 
                     var cancellationToken = new CancellationToken();
-                    var task = Task.Run(async () =>
+                    var task = await Task.Run(() =>
                         {
-                            var response =  _batchInvoker.InvokeAsync(contextInvoker);
+                            return _batchInvoker.InvokeAsync(contextInvoker);
                         }, cancellationToken);
 
                     return task;

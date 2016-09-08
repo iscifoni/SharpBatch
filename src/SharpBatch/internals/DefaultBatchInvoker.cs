@@ -17,6 +17,9 @@ namespace SharpBatch.internals
             var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
 
             var parameters = getInvokeParameters(actionToExecute);
+            var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
+            parameters = parameterBinding.Bind();
+
             object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
 
             var result = actionToExecute.ActionInfo.Invoke(targhet, parameters);
@@ -38,12 +41,27 @@ namespace SharpBatch.internals
             var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
 
             var parameters = getInvokeParameters(actionToExecute);
+            var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
+            parameters = parameterBinding.Bind();
+
             object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
 
             var result = await Task.Run(()=> actionToExecute.ActionInfo.Invoke(targhet, parameters));
-            if ( isAsyncMethod(actionToExecute.ActionInfo))
-            {
+            var response=(object)null;
 
+            if (result is Task)
+            {
+                var task = result as Task;
+                await task;
+
+                var responseType = result.GetType();
+                var taskTType = responseType.GetGenericArguments()[0];
+                var resultProperty = typeof(Task<>).MakeGenericType(taskTType).GetProperty("Result");
+                response = resultProperty.GetValue(task);
+            }
+            else
+            {
+                response = result;
             }
             
             return result;
@@ -53,12 +71,6 @@ namespace SharpBatch.internals
         {
             var response = new Task(null);
             return response;
-        }
-
-        private bool isAsyncMethod(MethodInfo method)
-        {
-            var attribute = method.GetCustomAttribute<AsyncStateMachineAttribute>();
-            return attribute == null;
         }
 
         private object[] getInvokeParameters(BatchActionDescriptor actionDescription)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public class batchConfigurationDictionary : IDictionary<string, object>
+    public class BatchParameterDictionary : IDictionary<string, object>
     {
         //to do: check performance to use vector instead of list.
         IList<KeyValuePair<string, object>> _items = new List<KeyValuePair<string, object>>();
@@ -86,7 +87,8 @@ namespace SharpBatch.internals
             {
                 itemValue = _items.Where(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).First().Value;
                 found = true;
-            }catch
+            }
+            catch
             {
                 itemValue = null;
                 found = false;
@@ -100,16 +102,28 @@ namespace SharpBatch.internals
             throw new NotImplementedException();
         }
 
-        public bool AddOrUpdate(string key, object value)
+
+        public bool AddFromQueryString(QueryString queryString)
         {
-            bool result = false;
-            if ( ContainsKey(key))
+            return AddFromQueryString(queryString.Value.Substring(1));
+        }
+
+        //ToDo manage the right return value
+        public bool AddFromQueryString(string queryString)
+        {
+            if (!string.IsNullOrEmpty(queryString))
             {
-                Remove(key);
-                result = true;
+                var stringsVector = queryString.Split('&');
+
+                for (var i = 0; i < stringsVector.Length; i++)
+                {
+                    var itemString = stringsVector[i];
+                    var itemVector = itemString.Split('=');
+
+                    Add(itemVector[0], System.Net.WebUtility.UrlDecode(itemVector[1]));
+                }
             }
-            Add(key, value);
-            return result;
+            return true;
         }
     }
 }
