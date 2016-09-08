@@ -5,7 +5,7 @@ elenca tutte le dll che refenziano il progetto
 Cerca e carica nei serivce tutti i batch presenti nelle librerie che individua l' assemblyManager
 
 3 - BatchInvoker
-Si occupa di avviare i batch che sono stati caricati nel service sia syn che async
+Si occupa di avviare i batch che sono stati caricati nel service sia sync che async
 
 4 - Batch middleware ==== FATTO ====
 Middleware per l'intercettazione delle chiamate
@@ -19,7 +19,15 @@ Individuare gli attributi
 -----------------------------------------------------------------------------------------------------------
 Context invoker aggiungere collection di parameter presi dal query string
 aggiungere guid di esecuzione
+implementare state machine per esecuzione della pipeline
+------------------------------------------------------------------------------------------------------------
+5 - Implementare Attribute per 
 
+mutableConfiguration
+immutableConfiguratione
+BatchChaine
+BatchResponseManager Tofile ToTracking
+BatchExceptionCatch
 ------------------------------------------------------------------------------------------------------------
 Interfaccia TRAKING
 Metodi

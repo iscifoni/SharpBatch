@@ -9,6 +9,6 @@ namespace SharpBatch.internals
     public interface IBatchInvoker
     {
         Task<object> InvokeAsync(ContextInvoker context);
-
+        object Invoke(ContextInvoker context);
     }
 }

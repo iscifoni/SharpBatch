@@ -4,17 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace SharpBatch.internals
 {
     public class DefaultBatchInvoker : IBatchInvoker
     {
-        public async Task<object> InvokeAsync(ContextInvoker context)
+        public object Invoke(ContextInvoker context)
         {
             var batchActionFactory = (IBatchActionFactory)context.RequestServices.GetService(typeof(IBatchActionFactory));
             var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
 
-            var parameters = await getInvokeParameters(actionToExecute);
+            var parameters = getInvokeParameters(actionToExecute);
             object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
 
             var result = actionToExecute.ActionInfo.Invoke(targhet, parameters);
@@ -29,7 +31,37 @@ namespace SharpBatch.internals
             return null;
         }
 
-        private async Task<object[]> getInvokeParameters(BatchActionDescriptor actionDescription)
+        public async Task<object> InvokeAsync(ContextInvoker context)
+        {
+
+            var batchActionFactory = (IBatchActionFactory)context.RequestServices.GetService(typeof(IBatchActionFactory));
+            var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
+
+            var parameters = getInvokeParameters(actionToExecute);
+            object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
+
+            var result = await Task.Run(()=> actionToExecute.ActionInfo.Invoke(targhet, parameters));
+            if ( isAsyncMethod(actionToExecute.ActionInfo))
+            {
+
+            }
+            
+            return result;
+        }
+
+        private Task checkStatus(bool isComplete)
+        {
+            var response = new Task(null);
+            return response;
+        }
+
+        private bool isAsyncMethod(MethodInfo method)
+        {
+            var attribute = method.GetCustomAttribute<AsyncStateMachineAttribute>();
+            return attribute == null;
+        }
+
+        private object[] getInvokeParameters(BatchActionDescriptor actionDescription)
         {
             IList<object> parameterResult = new List<object>();
             var parametersInfo = actionDescription.ActionInfo.GetParameters();
@@ -44,5 +76,9 @@ namespace SharpBatch.internals
 
             return null;
         }
+
+        
+
+
     }
 }

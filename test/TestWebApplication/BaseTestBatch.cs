@@ -8,10 +8,10 @@ namespace TestWebApplication
     public class BaseTestBatch
     {
 
-        public string Method1()
+        public async Task<string> Method1()
         {
             var response = "";
-            for(var i = 0;i<10;i++)
+            for(var i = 0;i<1000;i++)
             {
                 response += " Giro giro tondo<br>";
             }

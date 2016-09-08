@@ -26,7 +26,6 @@ namespace SharpBatch
             _batchHandler = batchHandler;
         }
 
-
         public async Task Invoke(HttpContext context)
         {
             PathString batchCallPath;

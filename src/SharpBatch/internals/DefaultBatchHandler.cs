@@ -4,19 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Text;
+using System.Threading;
 
 namespace SharpBatch.internals
 {
     public class DefaultBatchHandler : IBatchHandler
     {
-        private readonly PathString batchStringIdentifier = new PathString("/batch/exec");
+        IBatchInvoker _batchInvoker;
+        private readonly PathString _batchStringIdentifier = new PathString("/batch/exec");
         
+        public DefaultBatchHandler(IBatchInvoker batchInvoker)
+        {
+            _batchInvoker = batchInvoker;
+        }
 
         public async Task<object> InvokeAsync(HttpContext context)
         {
-            var batchInvoker = (IBatchInvoker)context.RequestServices.GetService(typeof(IBatchInvoker));
             PathString batchCallPath;
-            if (context.Request.Path.StartsWithSegments(batchStringIdentifier, out batchCallPath))
+            if (context.Request.Path.StartsWithSegments(_batchStringIdentifier, out batchCallPath))
             {
                 var batchCallPathVector = batchCallPath.Value.Split('/');
                 if (batchCallPathVector.Length == 3)
@@ -25,17 +30,17 @@ namespace SharpBatch.internals
                     contextInvoker.BatchName = batchCallPathVector[1];
                     contextInvoker.ActionName = batchCallPathVector[2];
 
-                    var task = Task.Run(()=>
+                    var cancellationToken = new CancellationToken();
+                    var task = Task.Run(async () =>
                         {
-                            var response = batchInvoker.InvokeAsync(contextInvoker);
-                        }
-                    );
-                    
-                    return true;
+                            var response =  _batchInvoker.InvokeAsync(contextInvoker);
+                        }, cancellationToken);
+
+                    return task;
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }
