@@ -42,3 +42,7 @@ node_modules
 /src/SharpBatch.JSonSerializer/obj/Debug/netstandard1.6
 */obj/*
 */bin/*
+/src/SharpBatch/obj/Debug/netstandard1.6
+/src/SharpBatch.Abstraction/obj/Debug/netstandard1.6
+/test/LinkedAssemblyTest/obj/Debug/netstandard1.6
+/test/TestWebApplication/obj/Debug/netcoreapp1.0
