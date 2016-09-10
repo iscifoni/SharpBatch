@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using SharpBatch.Traking.Abstraction;
 
 namespace SharpBatch.internals
 {
-    public interface IBatchInvoker
+    internal interface ISharpBatchTrakingFactory
     {
-        Task<object> InvokeAsync(ContextInvoker context);
+        ISharpBatchTraking getTrakingProvider();
     }
 }

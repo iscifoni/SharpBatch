@@ -30,6 +30,6 @@ namespace SharpBatch.internals
 
         public string BatchName { get; set; }
         public string ActionName { get; set; }
-
+        public BatchActionDescriptor ActionDescriptor { get; set; }
     }
 }

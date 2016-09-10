@@ -21,8 +21,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0-*",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-*",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "LinkedAssemblyTest": "1.0.0-*",
     "SharpBatch": "1.0.0-*",
-    "LinkedAssemblyTest": "1.0.0-*"
+    "SharpBatch.Abstraction": "1.0.0-*",
+    "SharpBatch.Traking.Memory": "1.0.0-*"
   },
 
   "tools": {

@@ -26,8 +26,6 @@ namespace SharpBatch.internals
             for(var i= 0; i< methodParameters.Length;i++)
             {
                 var item = methodParameters[i];
-
-                
                 var parameterValue = _parameters[item.Name];
 
                 if(item.ParameterType.Namespace.Equals("System", StringComparison.OrdinalIgnoreCase))
@@ -40,6 +38,7 @@ namespace SharpBatch.internals
                     result[i] = genericMethod.Invoke(null, new object[] { (string)parameterValue });
                 }
             }
+
             return result;
         }
     }

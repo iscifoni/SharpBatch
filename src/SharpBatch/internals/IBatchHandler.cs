@@ -8,6 +8,6 @@ namespace SharpBatch.internals
 {
     public interface IBatchHandler
     {
-        Task<object> InvokeAsync(HttpContext context);
+        Task InvokeAsync(HttpContext context);
     }
 }

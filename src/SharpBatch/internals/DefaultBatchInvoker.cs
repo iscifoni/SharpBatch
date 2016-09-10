@@ -6,15 +6,15 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace SharpBatch.internals
 {
     public class DefaultBatchInvoker : IBatchInvoker
     {
-        public object Invoke(ContextInvoker context)
+        public async Task<object> InvokeAsync(ContextInvoker context)
         {
-            var batchActionFactory = (IBatchActionFactory)context.RequestServices.GetService(typeof(IBatchActionFactory));
-            var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
+            var actionToExecute = context.ActionDescriptor;
 
             var parameters = getInvokeParameters(actionToExecute);
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
@@ -23,31 +23,7 @@ namespace SharpBatch.internals
             object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
 
             var result = actionToExecute.ActionInfo.Invoke(targhet, parameters);
-
-            if (result == null)
-            {
-                result = string.Empty;
-            }
-
-            context.Response.Body.Write(Encoding.UTF8.GetBytes(result.ToString()), 0, result.ToString().Length);
-
-            return null;
-        }
-
-        public async Task<object> InvokeAsync(ContextInvoker context)
-        {
-
-            var batchActionFactory = (IBatchActionFactory)context.RequestServices.GetService(typeof(IBatchActionFactory));
-            var actionToExecute = batchActionFactory.Search(context.BatchName, context.ActionName);
-
-            var parameters = getInvokeParameters(actionToExecute);
-            var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
-            parameters = parameterBinding.Bind();
-
-            object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
-
-            var result = await Task.Run(()=> actionToExecute.ActionInfo.Invoke(targhet, parameters));
-            var response=(object)null;
+            var response = (object)null;
 
             if (result is Task)
             {
@@ -63,8 +39,15 @@ namespace SharpBatch.internals
             {
                 response = result;
             }
-            
-            return result;
+
+            var serializedResult = "";
+            //If result not null i serialize it 
+            if (result != null)
+            {
+                serializedResult = JSonSerializer.JSonModelSerializer.Serialize(response);
+            }
+            return serializedResult;
+
         }
 
         private Task checkStatus(bool isComplete)

@@ -60,6 +60,13 @@ namespace TestWebApplication
 
         public string Method5(int Id, string last, DateTime birthDate)
         {
+            string response="";
+
+            for (var i = 0; i < 10000; i++)
+            {
+                response += " Giro giro tondo<br>";
+            }
+
             return $"{Id} - {last} - {birthDate}";
         }
 

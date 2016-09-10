@@ -35,6 +35,7 @@ Metodi
  - Stop
  - Exception
  - Message
+ - Ping
 
  Dati da tracciare 
  guid			identificativo esecuzione

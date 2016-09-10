@@ -20,9 +20,13 @@ namespace Microsoft.Extensions.DependencyInjection
             //invoker
             services.TryAddSingleton<IBatchInvoker, DefaultBatchInvoker>();
             services.TryAddSingleton<IBatchHandler, DefaultBatchHandler>();
+            services.TryAddScoped<IBatchInvokerProvider, DefaultBatchInvokerProvider>();
 
             //batch Factory
             services.AddSingleton<IBatchActionFactory, BatchActionFactory>();
+            
+            //Traking
+            services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFacory>();
 
             return services;
         }
