@@ -46,3 +46,5 @@ node_modules
 /src/SharpBatch.Abstraction/obj/Debug/netstandard1.6
 /test/LinkedAssemblyTest/obj/Debug/netstandard1.6
 /test/TestWebApplication/obj/Debug/netcoreapp1.0
+/src/SharpBatch.Traking.Abstraction/obj/Debug/netstandard1.6
+/src/SharpBatch.Traking.Memory/obj/Debug/netstandard1.6
