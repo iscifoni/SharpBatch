@@ -8,24 +8,54 @@ namespace SharpBatch.Traking.Memory
 {
     public class TrakingMemory:ISharpBatchTraking
     {
-        public Task<BatchTrakingModel> GetStatus(Guid SessionId)
+        private Dictionary<Guid, BatchTrakingModel> _traks = new Dictionary<Guid, BatchTrakingModel>();
+
+        public async Task<BatchTrakingModel> GetStatus(Guid sessionId)
         {
-            throw new NotImplementedException();
+            BatchTrakingModel response = await Task.Run(() =>
+            {
+                return _traks[sessionId];
+            });
+
+            return response;
         }
 
         public async Task PingAsync(Guid sessionId)
         {
-            //throw new NotImplementedException();
+            await Task.Run(() => Ping(sessionId));
+        }
+
+        private void Ping(Guid sessionId)
+        {
+            BatchTrakingModel traking;
+            _traks.TryGetValue(sessionId, out traking);
+            traking.Pings.Add(DateTime.Now);
         }
 
         public async Task StartAsync(Guid sessionId)
         {
-            //throw new NotImplementedException();
+            await Task.Run(() => Start(sessionId));
+        }
+
+        private void Start(Guid sessionId)
+        {
+            _traks.Add(sessionId, new BatchTrakingModel()
+            {
+                SessionId = sessionId,
+                StartDate = DateTime.Now
+            });
         }
 
         public async Task StopAsync(Guid sessionId)
         {
-            //throw new NotImplementedException();
+            await Task.Run(() => Stop(sessionId));
+        }
+
+        private void Stop(Guid sessionId)
+        {
+            BatchTrakingModel traking;
+            _traks.TryGetValue(sessionId, out traking);
+            traking.EndDate = DateTime.Now;
         }
     }
 }

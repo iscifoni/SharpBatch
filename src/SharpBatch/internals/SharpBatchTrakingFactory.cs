@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SharpBatch.Traking.Abstraction;
+using SharpBatch.Traking.Memory;
 
 
 namespace SharpBatch.internals
 {
-    internal class SharpBatchTrakingFacory:ISharpBatchTrakingFactory
+    internal class SharpBatchTrakingFactory:ISharpBatchTrakingFactory
     {
         ISharpBatchTraking _sharpBatchTraking;
-        public SharpBatchTrakingFacory(IServiceProvider serviceProvider)
+        public SharpBatchTrakingFactory(IServiceProvider serviceProvider)
         {
             var sharpBatchTrakingService = (ISharpBatchTraking)serviceProvider.GetService(typeof(ISharpBatchTraking));
             if (sharpBatchTrakingService == null)
             {
-                _sharpBatchTraking = new TrakingNone();
+                _sharpBatchTraking = new TrakingMemory();
             }
             else
             {

@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<SystemActionProvider>();
 
             //Traking
-            services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFacory>();
+            services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFactory>();
 
             return services;
         }
