@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public class BatchActionAttribute: Attribute, IBatchAttribute
+    public class BatchActionAttribute : BatchConfigAttribute
     {
+        public BatchActionAttribute(string actionValue)
+            :base(BatchConfigurationFieldName.BatchActionName, actionValue)
+        {
+
+        }
     }
 }

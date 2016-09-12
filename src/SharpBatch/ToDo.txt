@@ -44,8 +44,3 @@ Metodi
  node			nome del nodo dove gira il batch
 
  --------------------------------------------------------------------------------------------------------------
-
-
- Handler : invoca con una chiamata async il invoker e restituisce una risposta di avviato
-  -> Invoker avvia il batch e gestisce la pipeline
-    ->
