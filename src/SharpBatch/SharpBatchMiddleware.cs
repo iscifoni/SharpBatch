@@ -30,7 +30,7 @@ namespace SharpBatch
         {
             PathString batchCallPath;
             //to do patternize it using StringPath from config
-            if (context.Request.Path.StartsWithSegments(new PathString("/batch/exec"), out batchCallPath))
+            if (context.Request.Path.StartsWithSegments(new PathString("/batch"), out batchCallPath))
             {
                 await _batchHandler.InvokeAsync(context);
             }

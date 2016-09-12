@@ -8,7 +8,11 @@ namespace SharpBatch.Traking.Memory
 {
     public class TrakingMemory:ISharpBatchTraking
     {
-        
+        public Task<BatchTrakingModel> GetStatus(Guid SessionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task PingAsync(Guid sessionId)
         {
             //throw new NotImplementedException();

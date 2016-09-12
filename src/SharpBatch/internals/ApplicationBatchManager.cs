@@ -8,7 +8,6 @@ namespace SharpBatch.internals
     public class ApplicationBatchManager
     {
         public IList<BatchActionDescriptor> BatchActions { get; } = new List<BatchActionDescriptor>();
-
-
+        
     }
 }

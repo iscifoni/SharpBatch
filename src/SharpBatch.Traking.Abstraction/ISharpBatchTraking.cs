@@ -10,5 +10,6 @@ namespace SharpBatch.Traking.Abstraction
         Task PingAsync(Guid sessionId);
         Task StartAsync(Guid sessionId);
         Task StopAsync(Guid sessionId);
+        Task<BatchTrakingModel> GetStatus(Guid SessionId);
     }
 }

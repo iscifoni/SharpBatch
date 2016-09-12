@@ -16,17 +16,17 @@ namespace SharpBatch.internals
             set
             {
                 _id = value;
-                BatchConfiguration.Add(BatchConfigurationFieldEnum.BatchName.ToString(), _id);
+                BatchConfiguration.Add(BatchConfigurationFieldName.BatchName.ToString(), _id);
             }
         }
         public string BatchName {
             get
             {
-                return BatchConfiguration[BatchConfigurationFieldEnum.BatchName.ToString()].ToString();
+                return BatchConfiguration[BatchConfigurationFieldName.BatchName.ToString()].ToString();
             }
             set
             {
-                BatchConfiguration.AddOrUpdate(BatchConfigurationFieldEnum.BatchName.ToString(), value);
+                BatchConfiguration.AddOrUpdate(BatchConfigurationFieldName.BatchName.ToString(), value);
             }
         }
         public TypeInfo BatchTypeInfo { get; set; }

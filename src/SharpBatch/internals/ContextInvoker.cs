@@ -17,7 +17,8 @@ namespace SharpBatch.internals
             {
                 RequestServices = context.RequestServices,
                 Request = context.Request,
-                Response = context.Response
+                Response = context.Response,
+                SessionId = Guid.NewGuid()
             };
 
             contextInvoker.Parameters.AddFromQueryString(context.Request.QueryString);
@@ -31,5 +32,7 @@ namespace SharpBatch.internals
         public string BatchName { get; set; }
         public string ActionName { get; set; }
         public BatchActionDescriptor ActionDescriptor { get; set; }
+
+        public Guid SessionId { get; set; }
     }
 }

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using SharpBatch.internals;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SharpBatch.internals;
+using SharpBatch.Traking.Abstraction;
+
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -23,8 +25,10 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddScoped<IBatchInvokerProvider, DefaultBatchInvokerProvider>();
 
             //batch Factory
-            services.AddSingleton<IBatchActionFactory, BatchActionFactory>();
-            
+            services.TryAddSingleton<IBatchActionFactory, BatchActionFactory>();
+            services.TryAddSingleton<BatchActionProvider>();
+            services.TryAddSingleton<SystemActionProvider>();
+
             //Traking
             services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFacory>();
 

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    internal interface IBatchActionFactory
+    public interface IBatchActionProvider
     {
-        IBatchActionProvider getProvider(BatchUrlManager urlManager);
+        Task<string> InvokeAsync(BatchUrlManager urlManager, ContextInvoker context);
     }
 }

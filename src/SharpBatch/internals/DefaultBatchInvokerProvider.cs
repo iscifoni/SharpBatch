@@ -24,7 +24,7 @@ namespace SharpBatch.internals
         {
             var actionToExecute = context.ActionDescriptor;
 
-            var sessionId = new Guid();
+            var sessionId = context.SessionId;
 
             await _batchTraking.StartAsync(sessionId);
             var cancellationToken = new CancellationToken();

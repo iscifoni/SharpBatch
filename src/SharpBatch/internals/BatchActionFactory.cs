@@ -1,41 +1,32 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public class BatchActionFactory : IBatchActionFactory
+    internal class BatchActionFactory : IBatchActionFactory
     {
-        IList<BatchActionDescriptor> _batchActions;
+        IBatchActionProvider _actionProvider;
+        IBatchActionProvider _systemProvider;
 
-        public BatchActionFactory(ApplicationBatchManager manager)
+        public BatchActionFactory(BatchActionProvider actionProvider, SystemActionProvider systemActionProvider)
         {
-            _batchActions = manager.BatchActions;
+            _actionProvider = actionProvider;
+            _systemProvider = systemActionProvider;
         }
 
-        public BatchActionDescriptor Search(string BatchName, string ActionName)
+        public IBatchActionProvider getProvider(BatchUrlManager urlManager)
         {
-            var batchActionDescriptors = _batchActions.Where(p => 
-                p.BatchName.Equals(BatchName, StringComparison.OrdinalIgnoreCase)
-                && p.ActionName.Equals(ActionName, StringComparison.OrdinalIgnoreCase)
-            );
-
-            if ( batchActionDescriptors.Count() > 1)
+            switch ( urlManager.RequestCommand)
             {
-                //To do custom exception
-                throw new Exception("Too many batch satisfy the search ");
+                case BatchUrlManagerCommand.Exec:
+                    return _actionProvider;
+                case BatchUrlManagerCommand.Status:
+                    return _systemProvider;
+                default:
+                    throw new MissingFieldException($"Command {urlManager.RequestCommand.ToString()} not found");
             }
-
-            if ( batchActionDescriptors.Count() == 0 )
-            {
-                //To do custom exception
-                throw new Exception("No batch satisfy the search ");
-            }
-
-            return batchActionDescriptors.First();
         }
     }
 }
