@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public class BatchConfigAttribute : Attribute, IBatchConfigAttribute
+    public class BatchConfigAttribute : Attribute, IBatchConfigAttributeAsync
     {
         private string _name;
         private object _value;

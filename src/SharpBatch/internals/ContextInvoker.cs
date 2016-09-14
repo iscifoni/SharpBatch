@@ -21,7 +21,10 @@ namespace SharpBatch.internals
                 SessionId = Guid.NewGuid()
             };
 
-            contextInvoker.Parameters.AddFromQueryString(context.Request.QueryString);
+            if (context.Request.QueryString.HasValue)
+            {
+                contextInvoker.Parameters.AddFromQueryString(context.Request.QueryString);
+            }
             return contextInvoker;
         }
 

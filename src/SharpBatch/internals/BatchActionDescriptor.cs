@@ -11,7 +11,8 @@ namespace SharpBatch.internals
         private string _id;
         public batchConfigurationDictionary BatchConfiguration { get; } = new batchConfigurationDictionary();
 
-        public string Id {
+        public string Id
+        {
             get { return _id; }
             set
             {
@@ -19,7 +20,8 @@ namespace SharpBatch.internals
                 BatchConfiguration.Add(BatchConfigurationFieldName.BatchName.ToString(), _id);
             }
         }
-        public string BatchName {
+        public string BatchName
+        {
             get
             {
                 return BatchConfiguration[BatchConfigurationFieldName.BatchName.ToString()].ToString();
@@ -30,12 +32,23 @@ namespace SharpBatch.internals
             }
         }
         public TypeInfo BatchTypeInfo { get; set; }
-        public string ActionName { get; set; }
+        public string ActionName
+        {
+            get
+            {
+                return BatchConfiguration[BatchConfigurationFieldName.BatchActionName.ToString()].ToString();
+            }
+            set
+            {
+                BatchConfiguration.AddOrUpdate(BatchConfigurationFieldName.BatchActionName.ToString(), value);
+            }
+        }
         public MethodInfo ActionInfo { get; set; }
         public KeyValuePair<string, Type> Parameters { get; set; }
 
-        public IList<object> ConfigurationFilter { get; set; }
+        //Todo
         public IList<object> ExceptionFilter { get; set; }
 
+        public List<IBatchConfigAttributeAsync> ConfigureAttribute { get; set; } 
     }
 }

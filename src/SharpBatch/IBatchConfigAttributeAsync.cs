@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public interface IBatchConfigAttribute
+    public interface IBatchConfigAttributeAsync
     {
         Task onExecuting(BatchConfigContext context);
 

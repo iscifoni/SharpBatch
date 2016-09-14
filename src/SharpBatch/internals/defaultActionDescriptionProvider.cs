@@ -58,6 +58,13 @@ namespace SharpBatch.internals
                                 ActionName = action.Name,
                                 ActionInfo = action
                             };
+
+                            batchActionDescriptor.ConfigureAttribute = new List<IBatchConfigAttributeAsync>();
+                            batchActionDescriptor.ConfigureAttribute.AddRange(typeInfo.GetCustomAttributes<BatchConfigAttribute>(true));
+                            batchActionDescriptor.ConfigureAttribute.AddRange(action.GetCustomAttributes<BatchConfigAttribute>(true));
+
+                            executeConfigureAttribute(batchActionDescriptor);
+                            
                             response.Add(batchActionDescriptor);
                         }
                     }
@@ -100,6 +107,16 @@ namespace SharpBatch.internals
                 }
 
                 return true;
+            }
+
+            public static Task executeConfigureAttribute(BatchActionDescriptor action)
+            {
+                if (action.ConfigureAttribute.Count() > 0)
+                {
+                    var executor = new ConfigAttributeExecutor();
+                    return executor.execute(action);
+                }
+                return Task.CompletedTask;
             }
         }
 
