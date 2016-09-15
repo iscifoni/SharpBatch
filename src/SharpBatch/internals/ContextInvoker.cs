@@ -37,5 +37,7 @@ namespace SharpBatch.internals
         public BatchActionDescriptor ActionDescriptor { get; set; }
 
         public Guid SessionId { get; set; }
+
+        public IFeaturesCollection Features { get; } = new FeatureCollection();
     }
 }

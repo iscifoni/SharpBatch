@@ -51,7 +51,7 @@ namespace SharpBatch.internals
 
         public bool Contains(KeyValuePair<string, object> item)
         {
-            throw new NotImplementedException();
+            return ContainsKey(item.Key);
         }
 
         public bool ContainsKey(string key)

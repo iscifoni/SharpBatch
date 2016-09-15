@@ -12,5 +12,7 @@ namespace SharpBatch
     {
         public batchConfigurationDictionary BatchConfiguration { get; set; }
         public HttpRequest Request { get; set; }
+
+        public BatchActionDescriptor ActionDescriptor { get; set; }
     }
 }

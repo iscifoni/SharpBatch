@@ -16,12 +16,12 @@ namespace SharpBatch
             _value = value;
         }
 
-        public Task onExecuted(BatchConfigContext context)
+        public virtual Task onExecuted(BatchConfigContext context)
         {
             return Task.CompletedTask;
         }
 
-        public Task onExecuting(BatchConfigContext context)
+        public virtual Task onExecuting(BatchConfigContext context)
         {
             context.BatchConfiguration.AddOrUpdate(_name, _value);
             return Task.CompletedTask;

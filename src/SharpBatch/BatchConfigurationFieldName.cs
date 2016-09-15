@@ -10,5 +10,6 @@ namespace SharpBatch
         public static readonly string BatchName = "BatchName";
         public static readonly string BatchActionName = "BatchActionName";
         public static readonly string AsyncCall = "AsyncCall";
+        public static readonly string TimeOut = "TimeOut";
     }
 }

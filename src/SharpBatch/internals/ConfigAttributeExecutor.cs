@@ -7,24 +7,25 @@ namespace SharpBatch.internals
 {
     public class ConfigAttributeExecutor
     {
-        public async Task execute(BatchActionDescriptor action)
+        public void execute(ref BatchActionDescriptor action)
         {
             var invokeContext = new BatchConfigContext();
             invokeContext.BatchConfiguration = action.BatchConfiguration;
+            invokeContext.ActionDescriptor = action;
 
             for ( var i=0; i < action.ConfigureAttribute.Count;i++ )
             {
-                await invoke(action.ConfigureAttribute[i], invokeContext);
+                invoke(action.ConfigureAttribute[i], invokeContext);
             }
+
+            action = invokeContext.ActionDescriptor;
         }
 
-        private Task invoke(IBatchConfigAttributeAsync attribute, BatchConfigContext context)
+        private void invoke(IBatchConfigAttributeAsync attribute, BatchConfigContext context)
         {
-            attribute.onExecuted(context);
-
             attribute.onExecuting(context);
 
-            return Task.CompletedTask;
+            attribute.onExecuted(context);
         }
     }
 }
