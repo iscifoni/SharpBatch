@@ -16,6 +16,16 @@ namespace SharpBatch
     {
         private const string BaseBatch = "/batch";
 
+        public BatchUrlManager()
+        {
+        }
+
+        public BatchUrlManager(string BatchName, string BatchActionName)
+        {
+            isBatch = true;
+            RequestBatchAction = BatchActionName;
+            RequestBatchName = BatchName;
+        }
         public BatchUrlManager(PathString path)
         {
             PathString batchUrlDetail;

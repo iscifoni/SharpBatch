@@ -7,25 +7,34 @@ using Microsoft.AspNetCore.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SharpBatch.internals
 {
     public class DefaultBatchInvoker : IBatchInvoker
     {
+        private readonly Func<Type, ObjectFactory> _batchActivator =
+            (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
+
+
         public async Task<object> InvokeAsync(ContextInvoker context)
         {
             var actionToExecute = context.ActionDescriptor;
 
-            var parameters = getInvokeParameters(actionToExecute);
+            //Execute attribute onExecuting
+            
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
-            parameters = parameterBinding.Bind();
+            var parameters = parameterBinding.Bind();
 
-            object targhet = Activator.CreateInstance(actionToExecute.BatchTypeInfo.AsType());
 
-            var result = actionToExecute.ActionInfo.Invoke(targhet, parameters);
+            var executor = MethodExecutor.Create(actionToExecute.ActionInfo, actionToExecute.BatchTypeInfo);
+            var activator = new MethodActivator();
+            var activatorInstance = activator.CreateInstance<object>(context.RequestServices, actionToExecute.BatchTypeInfo.AsType());
+            var result = executor.Execute(activatorInstance, parameters);
+            
             var response = (object)null;
-
-            if (result is Task)
+            
+            if(actionToExecute.IsAsync)
             {
                 var task = result as Task;
                 await task;
@@ -55,24 +64,20 @@ namespace SharpBatch.internals
             var response = new Task(null);
             return response;
         }
-
-        private object[] getInvokeParameters(BatchActionDescriptor actionDescription)
-        {
-            IList<object> parameterResult = new List<object>();
-            var parametersInfo = actionDescription.ActionInfo.GetParameters();
-            for(var i = 0; i<parametersInfo.Length; i++)
-            {
-                var item = parametersInfo[i];
-                if (item.IsIn)
-                {
-                    parameterResult.Add(item);
-                }
-            }
-
-            return null;
-        }
-
         
+
+        /*
+         * macchina stati tutto async
+         * 
+         * Invoke attributeExecution onExecuting
+         * 
+         * invoke parameters
+         * 
+         * invoche action 
+         * 
+         * invoke attributeExecution OnExecuted
+         * 
+         */
 
 
     }

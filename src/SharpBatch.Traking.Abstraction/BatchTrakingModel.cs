@@ -13,5 +13,8 @@ namespace SharpBatch.Traking.Abstraction
         public List<DateTime> Pings { get; set; } = new List<DateTime>();
         public string State { get; set; }
         public List<string> Messages { get; set; } = new List<string>();
+        public List<Exception> Ex { get; set; }
+
+        public string MachinieName => System.Environment.MachineName;
     }
 }

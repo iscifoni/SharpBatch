@@ -11,5 +11,6 @@ namespace SharpBatch
             : base(BatchConfigurationFieldName.BatchName, value)
         {
         }
+
     }
 }

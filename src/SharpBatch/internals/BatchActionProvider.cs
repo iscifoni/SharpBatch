@@ -25,9 +25,7 @@ namespace SharpBatch.internals
             var batchActionDescriptor = Search(urlManager.RequestBatchName, urlManager.RequestBatchAction);
             context.ActionDescriptor = batchActionDescriptor;
 
-            var asyncCall = (bool)(batchActionDescriptor.BatchConfiguration["AsynCall"] ?? true);
-
-            if (asyncCall)
+            if (batchActionDescriptor.IsAsync)
             {
                 var response = _batchInvokerProvider.InvokeAsync(context);
                 return "Batch Started";

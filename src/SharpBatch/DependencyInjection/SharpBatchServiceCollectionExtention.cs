@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SharpBatch.internals;
+using SharpBatch;
 using SharpBatch.Traking.Abstraction;
 
 
@@ -32,6 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //Traking
             services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFactory>();
 
+            services.TryAddScoped<IBatchUtils, BatchUtils>();
             return services;
         }
 

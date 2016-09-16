@@ -9,5 +9,6 @@ namespace SharpBatch.internals
     public interface IBatchHandler
     {
         Task InvokeAsync(HttpContext context);
+        Task InvokeAsync(HttpContext context, BatchUrlManager urlManager);
     }
 }

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public interface IBatchConfigAttributeAsync
+    public interface IBatchExecutionAttribute
     {
         int Order { get; set; }
 
-        Task onExecuting(BatchConfigContext context);
+        void onExecuting(BatchExecutionContext context);
 
-        Task onExecuted(BatchConfigContext context);
+        void onExecuted(BatchExecutionContext context);
     }
 }

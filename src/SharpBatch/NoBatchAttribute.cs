@@ -17,5 +17,7 @@ namespace SharpBatch
             context.ActionDescriptor = null;
             return Task.CompletedTask;
         }
+
+        public new int Order { get; set; } = 60000;
     }
 }

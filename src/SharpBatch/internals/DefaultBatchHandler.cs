@@ -23,21 +23,30 @@ namespace SharpBatch.internals
 
             if ( urlManager.isBatch)
             {
-                var contextInvoker = ContextInvoker.Create(context);
-                contextInvoker.BatchName = urlManager.RequestBatchName;
-                contextInvoker.ActionName = urlManager.RequestBatchAction;
-                contextInvoker.ActionDescriptor = null;
-
-                var batchActionProvider = _batchActionFactory.getProvider(urlManager);
-                string response = await batchActionProvider.InvokeAsync(urlManager, contextInvoker);
-                response = $"{contextInvoker.SessionId.ToString()} - {response}";
-                await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes(response), 0, response.Length);
+                await InvokeAsync(context, urlManager);
             }
             else
             {
                 //ToDo manage batch not found
             }
+        }
 
+        public async Task InvokeAsync(HttpContext context, BatchUrlManager urlManager)
+        {
+            await InvokeAsync(context, urlManager, null);
+        }
+        public async Task InvokeAsync(HttpContext context, BatchUrlManager urlManager, Guid? parentSessionId)
+        {
+            var contextInvoker = ContextInvoker.Create(context);
+            contextInvoker.BatchName = urlManager.RequestBatchName;
+            contextInvoker.ActionName = urlManager.RequestBatchAction;
+            contextInvoker.ActionDescriptor = null;
+            contextInvoker.ParentSessionID = parentSessionId;
+
+            var batchActionProvider = _batchActionFactory.getProvider(urlManager);
+            string response = await batchActionProvider.InvokeAsync(urlManager, contextInvoker);
+            response = $"{contextInvoker.SessionId.ToString()} - {response}";
+            await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes(response), 0, response.Length);
         }
     }
 }

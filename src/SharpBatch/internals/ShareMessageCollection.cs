@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public class FeatureCollection : IFeaturesCollection
+    public class ShareMessageCollection : IShareMessageCollection
     {
         private KeyValuePair<Type, object>[] items = new KeyValuePair<Type, object>[0];
 
@@ -33,9 +33,9 @@ namespace SharpBatch.internals
             }
         }
 
-        public TFeature Get<TFeature>()
+        public TMessage Get<TMessage>()
         {
-            return (TFeature)this[typeof(TFeature)];
+            return (TMessage)this[typeof(TMessage)];
         }
 
         public IEnumerator<KeyValuePair<Type, object>> GetEnumerator()
@@ -47,9 +47,32 @@ namespace SharpBatch.internals
             }
         }
 
-        public void Set<TFeature>(TFeature instance)
+        public bool remove<TMessage>()
         {
-            this[typeof(TFeature)] = instance;
+            var newItems = new KeyValuePair<Type, object>[items.Length - 1];
+            var newIndex = 0;
+            var itemFound = false;
+
+            for(var i=0; i<items.Length;i++)
+            {
+                var item = items[i];
+                if (!item.Key.Equals(typeof(TMessage)))
+                {
+                    newItems[newIndex] = item;
+                    newIndex++;
+                }
+                else
+                {
+                    itemFound = true;
+                }
+            }
+
+            return itemFound;
+        }
+
+        public void Set<TMessage>(TMessage instance)
+        {
+            this[typeof(TMessage)] = instance;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

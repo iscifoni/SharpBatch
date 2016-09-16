@@ -49,6 +49,19 @@ namespace SharpBatch.internals
         //Todo
         public IList<object> ExceptionFilter { get; set; }
 
-        public List<IBatchConfigAttributeAsync> ConfigureAttribute { get; set; } 
+        public List<IBatchConfigAttributeAsync> ConfigureAttribute { get; set; }
+
+        public List<IBatchExecutionAttribute> ExecutionAttribute { get; set; }
+
+        public Type ReturnType
+        {
+            get{ return ActionInfo.ReturnType; }
+        }
+
+        public bool IsAsync
+        {
+            get { return typeof(Task).IsAssignableFrom(ReturnType); }
+        } 
+
     }
 }

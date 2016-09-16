@@ -16,6 +16,8 @@ namespace SharpBatch
             _value = value;
         }
 
+        public int Order { get; set; } = -15000;
+
         public virtual Task onExecuted(BatchConfigContext context)
         {
             return Task.CompletedTask;
