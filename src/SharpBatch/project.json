@@ -2,7 +2,6 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "System.Linq.Expressions": "4.1.0-*",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",
     "Microsoft.Extensions.DependencyModel": "1.0.1-*",
@@ -15,7 +14,9 @@
   "frameworks": {
     "net451": {},
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
     }
   }
 }
