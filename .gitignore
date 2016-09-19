@@ -53,3 +53,5 @@ node_modules
 /src/SharpBatch.JSonSerializer/obj/Debug/net451
 /src/SharpBatch.Abstraction/obj/Debug/net451
 /src/SharpBatch/obj/Debug/net451
+/test/LinkedAssembly/obj
+/test/WebApplication/obj

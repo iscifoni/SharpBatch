@@ -16,9 +16,9 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SharpBatch.Abstraction", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{25B6986D-1D73-4DF9-8721-A8DCE888D69E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestWebApplication", "test\TestWebApplication\TestWebApplication.xproj", "{662D37A8-20CA-4D93-B389-80F4B023935B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApplication", "test\WebApplication\WebApplication.xproj", "{662D37A8-20CA-4D93-B389-80F4B023935B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinkedAssemblyTest", "test\LinkedAssemblyTest\LinkedAssemblyTest.xproj", "{2CF06099-8A7E-481C-B6E1-B54615F4223E}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinkedAssembly", "test\LinkedAssembly\LinkedAssembly.xproj", "{2CF06099-8A7E-481C-B6E1-B54615F4223E}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SharpBatch.JSonSerializer", "src\SharpBatch.JSonSerializer\SharpBatch.JSonSerializer.xproj", "{17A0E7D9-160B-4188-8AE8-16C69441FE7F}"
 EndProject
