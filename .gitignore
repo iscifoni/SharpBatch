@@ -48,3 +48,8 @@ node_modules
 /test/TestWebApplication/obj/Debug/netcoreapp1.0
 /src/SharpBatch.Traking.Abstraction/obj/Debug/netstandard1.6
 /src/SharpBatch.Traking.Memory/obj/Debug/netstandard1.6
+/src/SharpBatch.Traking.Memory/obj/Debug/net451
+/src/SharpBatch.Traking.Abstraction/obj/Debug/net451
+/src/SharpBatch.JSonSerializer/obj/Debug/net451
+/src/SharpBatch.Abstraction/obj/Debug/net451
+/src/SharpBatch/obj/Debug/net451
