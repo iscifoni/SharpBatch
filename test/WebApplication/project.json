@@ -19,7 +19,6 @@
   },
 
   "tools": {
-    "BundlerMinifier.Core": "2.0.238",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-*"
   },
 
