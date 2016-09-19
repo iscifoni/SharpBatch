@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch.internals;
 
 namespace SharpBatch
 {
@@ -15,7 +16,7 @@ namespace SharpBatch
         public override Task onExecuting(BatchConfigContext context)
         {
             context.ActionDescriptor = null;
-            return Task.CompletedTask;
+            return TaskWrapper.CompletedTask;
         }
 
         public new int Order { get; set; } = 60000;

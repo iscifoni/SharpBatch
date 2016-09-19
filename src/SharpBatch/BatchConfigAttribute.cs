@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch.internals;
 
 namespace SharpBatch
 {
@@ -20,13 +21,13 @@ namespace SharpBatch
 
         public virtual Task onExecuted(BatchConfigContext context)
         {
-            return Task.CompletedTask;
+            return TaskWrapper.CompletedTask;
         }
 
         public virtual Task onExecuting(BatchConfigContext context)
         {
             context.BatchConfiguration.AddOrUpdate(_name, _value);
-            return Task.CompletedTask;
+            return TaskWrapper.CompletedTask;
         }
     }
 }

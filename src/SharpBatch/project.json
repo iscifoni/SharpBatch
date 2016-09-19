@@ -5,7 +5,7 @@
     "System.Linq.Expressions": "4.1.0-*",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",
-    "Microsoft.Extensions.DependencyModel": "1.0.1-beta-003206",
+    "Microsoft.Extensions.DependencyModel": "1.0.1-*",
     "NETStandard.Library": "1.6.0",
     "SharpBatch.JSonSerializer": "1.0.0-*",
     "SharpBatch.Traking.Abstraction": "1.0.0-*",
@@ -13,6 +13,7 @@
   },
 
   "frameworks": {
+    "net451": {},
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
