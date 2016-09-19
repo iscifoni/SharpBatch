@@ -27,11 +27,7 @@
     "net451": {},
     "netstandard1.6": {
       "dependencies": {
-        "NETStandard.Library": "1.6.0",
-        "Microsoft.NETCore.App": {
-          "version": "1.0.1-*",
-          "type": "platform"
-        }
+        "NETStandard.Library": "1.6.0"
       }
     }
   },
