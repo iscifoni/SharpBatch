@@ -16,6 +16,7 @@ REM Restore
 call dotnet restore
 if not "%errorlevel%"=="0" goto failure
 
+
 REM Build
 REM - Option 1: Run dotnet build for every source folder in the project
 REM   e.g. call dotnet build <path> --configuration %config%
