@@ -44,16 +44,22 @@ namespace SharpBatch
         }
 
         public IServiceProvider RequestServices { get; private set; }
+
         public HttpRequest Request { get; private set; }
+
         public HttpResponse Response { get; private set; }
 
         public string BatchName { get; set; }
+
         public string ActionName { get; set; }
+
         public BatchActionDescriptor ActionDescriptor { get; set; }
 
         public Guid SessionId { get; set; }
-        public Guid? ParentSessionID { get; set; }
-        public IShareMessageCollection ShareMessage { get; } = new ShareMessageCollection();
 
+        public Guid? ParentSessionID { get; set; }
+
+        public IShareMessageCollection ShareMessage { get; } = new ShareMessageCollection();
+        
     }
 }

@@ -19,8 +19,14 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Attribute used to configure batch parameter.
+    /// </summary>
     public interface IBatchConfigAttributeAsync
     {
+        /// <summary>
+        /// Execution order of attribute.
+        /// </summary>
         int Order { get; set; }
 
         Task onExecuting(BatchConfigContext context);

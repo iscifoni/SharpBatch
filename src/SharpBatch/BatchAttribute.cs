@@ -19,8 +19,15 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Attribute used to identify a batch class
+    /// </summary>
     public class BatchAttribute: BatchConfigAttribute
     {
+        /// <summary>
+        /// Initialize a new <see cref="BatchAttribute"/>.
+        /// </summary>
+        /// <param name="value">Batch name</param>
         public BatchAttribute(object value) 
             : base(BatchConfigurationFieldName.BatchName, value)
         {

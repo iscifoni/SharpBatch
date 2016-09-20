@@ -17,9 +17,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch.internals;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// the name of <see cref="batchConfigurationDictionary"/>.
+    /// </summary>
     public static class BatchConfigurationFieldName
     {
         public static readonly string BatchName = "BatchName";

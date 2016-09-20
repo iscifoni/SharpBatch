@@ -20,24 +20,33 @@ using SharpBatch.internals;
 
 namespace SharpBatch
 {
+    /// <inherirdoc/>
     public class BatchConfigAttribute : Attribute, IBatchConfigAttributeAsync
     {
         private string _name;
         private object _value;
 
+        /// <summary>
+        /// Initialize a new <see cref="BatchConfigAttribute"/>.
+        /// </summary>
+        /// <param name="name">Config parameter name</param>
+        /// <param name="value">Config parameter value</param>
         public BatchConfigAttribute(string name, object value)
         {
             _name = name;
             _value = value;
         }
 
+        /// <inheritdoc/>
         public int Order { get; set; } = -15000;
 
+        /// <inheritdoc/>
         public virtual Task onExecuted(BatchConfigContext context)
         {
             return TaskWrapper.CompletedTask;
         }
 
+        /// <inheritdoc/>
         public virtual Task onExecuting(BatchConfigContext context)
         {
             context.BatchConfiguration.AddOrUpdate(_name, _value);

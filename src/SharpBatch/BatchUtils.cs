@@ -21,16 +21,29 @@ using Microsoft.AspNetCore.Http;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Utility class to manage chield Batch start.
+    /// </summary>
     public class BatchUtils:IBatchUtils
     {
         private IBatchHandler _batchHandler;
 
+        /// <summary>
+        /// Initialize a new <see cref="BatchUtils"/>
+        /// </summary>
+        /// <param name="batchHandler"></param>
         public BatchUtils(IBatchHandler batchHandler )
         {
             _batchHandler = batchHandler;
         }
 
-        //Start nested Batch
+        /// <summary>
+        /// Start nested batch action.
+        /// </summary>
+        /// <param name="batchName">Batch name</param>
+        /// <param name="actionName">Action name</param>
+        /// <param name="context">Context</param>
+        /// <returns>Return a <see cref="Task"/></returns>
         public async Task startBatch(string batchName, string actionName, ContextInvoker context)
         {
             BatchUrlManager urlManager = new BatchUrlManager(batchName, actionName);

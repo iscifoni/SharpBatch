@@ -26,6 +26,9 @@ namespace SharpBatch
         Status
     }
 
+    /// <summary>
+    /// Dispatch a batch identified to a path request
+    /// </summary>
     public class BatchUrlManager
     {
         private const string BaseBatch = "/batch";
@@ -33,13 +36,21 @@ namespace SharpBatch
         public BatchUrlManager()
         {
         }
-
+        /// <summary>
+        /// Initialize a new <see cref="BatchUrlManager"/>. 
+        /// </summary>
+        /// <param name="BatchName">Batch name</param>
+        /// <param name="BatchActionName">Batch action name</param>
         public BatchUrlManager(string BatchName, string BatchActionName)
         {
             isBatch = true;
             RequestBatchAction = BatchActionName;
             RequestBatchName = BatchName;
         }
+        /// <summary>
+        /// Initialize a new <see cref="BatchUrlManager"/>
+        /// </summary>
+        /// <param name="path">Http request path</param>
         public BatchUrlManager(PathString path)
         {
             PathString batchUrlDetail;
@@ -66,9 +77,24 @@ namespace SharpBatch
             }
         }
 
+        /// <summary>
+        /// Identify if url managed identify a batch
+        /// </summary>
         public bool isBatch { get; private set; }
+
+        /// <summary>
+        /// Batch name identified
+        /// </summary>
         public string RequestBatchName { get; private set; }
+
+        /// <summary>
+        /// Batch action identified
+        /// </summary>
         public string RequestBatchAction { get; private set; }
+
+        /// <summary>
+        /// A <see cref="BatchUrlManagerCommand"/> 
+        /// </summary>
         public BatchUrlManagerCommand RequestCommand { get; private set; }
 
     }

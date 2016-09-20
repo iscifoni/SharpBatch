@@ -22,11 +22,23 @@ using SharpBatch.internals;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Context used on execution of <see cref="IBatchConfigAttributeAsync"/>
+    /// </summary>
     public class BatchConfigContext
     {
+        /// <summary>
+        /// The <see cref="batchConfigurationDictionary"/>.
+        /// </summary>
         public batchConfigurationDictionary BatchConfiguration { get; set; }
+        /// <summary>
+        /// The <see cref="HttpRequest"/>.
+        /// </summary>
         public HttpRequest Request { get; set; }
 
+        /// <summary>
+        /// The <see cref="BatchActionDescriptor"/>.
+        /// </summary>
         public BatchActionDescriptor ActionDescriptor { get; set; }
     }
 }

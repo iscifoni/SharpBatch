@@ -20,6 +20,9 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Attribute used to identify <see cref="ContextInvoker"/> setter property.
+    /// </summary>
     public class BatchContextAttribute:Attribute
     {
     }

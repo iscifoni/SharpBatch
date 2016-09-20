@@ -20,8 +20,18 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Utility class to manage chield Batch start.
+    /// </summary>
     public interface IBatchUtils
     {
+        /// <summary>
+        /// Start nested batch action.
+        /// </summary>
+        /// <param name="batchName">Batch name</param>
+        /// <param name="actionName">Action name</param>
+        /// <param name="context">Context</param>
+        /// <returns>Return a <see cref="Task"/></returns>
         Task startBatch(string batchName, string actionName, ContextInvoker context);
     }
 }

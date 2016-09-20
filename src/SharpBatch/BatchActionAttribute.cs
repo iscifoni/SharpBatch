@@ -19,10 +19,17 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Attribute used to identify a batch action method
+    /// </summary>
     public class BatchActionAttribute : BatchConfigAttribute
     {
-        public BatchActionAttribute(string actionValue)
-            :base(BatchConfigurationFieldName.BatchActionName, actionValue)
+        /// <summary>
+        /// Initialize a new <see cref="BatchActionAttribute"/>.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        public BatchActionAttribute(string actionName)
+            :base(BatchConfigurationFieldName.BatchActionName, actionName)
         {
 
         }
