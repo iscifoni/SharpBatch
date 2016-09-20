@@ -8,6 +8,6 @@ namespace SharpBatch
 {
     public interface IBatchUtils
     {
-        Task startBatch(string batchName, string actionName, HttpContext context);
+        Task startBatch(string batchName, string actionName, ContextInvoker context);
     }
 }

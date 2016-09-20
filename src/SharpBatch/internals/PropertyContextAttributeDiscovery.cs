@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public static class PropertyContextAttributeDiscovery
+    public  class PropertyContextAttributeDiscovery
     {
         private delegate PropertyInfo PropertyDiscovery(PropertyInfo[] properties);
 
-        private static PropertyDiscovery GetExecutor(PropertyInfo[] propertyInfo)
+        private PropertyDiscovery _executor;
+
+        public PropertyContextAttributeDiscovery(PropertyInfo[] propertyInfo)
+        {
+            _executor = GetExecutor(propertyInfo);
+        }
+
+        private PropertyDiscovery GetExecutor(PropertyInfo[] propertyInfo)
         {
             //return propertyInfo.Where(p => p.GetSetMethod().GetCustomAttribute(typeof(BatchContextAttribute)) != null).Select(m=>m);
             return (properties) => {
@@ -18,8 +25,7 @@ namespace SharpBatch.internals
 
                 foreach (var property in properties)
                 {
-                    var methodSet = property.GetSetMethod();
-                    var attribute = methodSet.GetCustomAttribute(typeof(BatchContextAttribute));
+                    var attribute = property.GetCustomAttribute<BatchContextAttribute>(false);
 
                     if (attribute != null)
                         return property;
@@ -27,6 +33,18 @@ namespace SharpBatch.internals
 
                 return contextFind;
             };
+        }
+
+        public PropertyInfo execute(PropertyInfo[] properties)
+        {
+            return _executor(properties);
+        }
+
+        public static PropertyContextAttributeDiscovery Create(PropertyInfo[] propertyInfo)
+        {
+            var executor = new PropertyContextAttributeDiscovery(propertyInfo);
+            //executor._executor = GetExecutor(propertyInfo);
+            return executor ;
         }
     }
 }

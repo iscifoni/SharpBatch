@@ -7,6 +7,6 @@ namespace SharpBatch.internals
 {
     public interface IPropertyInvoker
     {
-        Task invokeAsync(ContextInvoker context);
+        Task invokeAsync(object obj, ContextInvoker context);
     }
 }

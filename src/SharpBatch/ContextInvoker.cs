@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch.internals;
 
-namespace SharpBatch.internals
+namespace SharpBatch
 {
     public class ContextInvoker
     {

@@ -17,7 +17,7 @@ namespace SharpBatch
         }
 
         //Start nested Batch
-        public async Task startBatch(string batchName, string actionName, HttpContext context)
+        public async Task startBatch(string batchName, string actionName, ContextInvoker context)
         {
             BatchUrlManager urlManager = new BatchUrlManager(batchName, actionName);
             await _batchHandler.InvokeAsync(context, urlManager);

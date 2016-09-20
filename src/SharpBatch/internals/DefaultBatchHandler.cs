@@ -35,6 +35,8 @@ namespace SharpBatch.internals
         {
             await InvokeAsync(context, urlManager, null);
         }
+
+
         public async Task InvokeAsync(HttpContext context, BatchUrlManager urlManager, Guid? parentSessionId)
         {
             var contextInvoker = ContextInvoker.Create(context);
@@ -43,10 +45,28 @@ namespace SharpBatch.internals
             contextInvoker.ActionDescriptor = null;
             contextInvoker.ParentSessionID = parentSessionId;
 
+            await InvokeAsync(contextInvoker, urlManager, parentSessionId);
+        }
+
+        public async Task InvokeAsync(ContextInvoker context, BatchUrlManager urlManager)
+        {
+            var contextInvoker = context;
+            contextInvoker.BatchName = urlManager.RequestBatchName;
+            contextInvoker.ActionName = urlManager.RequestBatchAction;
+            contextInvoker.SessionId = Guid.NewGuid();
+            contextInvoker.ActionDescriptor = null;
+
+            await InvokeAsync(contextInvoker, urlManager, context.SessionId);
+
+        }
+
+        public async Task InvokeAsync(ContextInvoker context, BatchUrlManager urlManager, Guid? parentSessionId)
+        {
             var batchActionProvider = _batchActionFactory.getProvider(urlManager);
-            string response = await batchActionProvider.InvokeAsync(urlManager, contextInvoker);
-            response = $"{contextInvoker.SessionId.ToString()} - {response}";
+            string response = await batchActionProvider.InvokeAsync(urlManager, context);
+            response = $"{context.SessionId.ToString()} - {response}";
             await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes(response), 0, response.Length);
         }
+
     }
 }

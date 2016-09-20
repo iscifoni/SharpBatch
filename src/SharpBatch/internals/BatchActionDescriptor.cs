@@ -44,7 +44,7 @@ namespace SharpBatch.internals
             }
         }
         public MethodInfo ActionInfo { get; set; }
-        public PropertyInfo[] PropertyInfo { get; set; }
+        public PropertyInfo PropertyInfo { get; set; }
         public KeyValuePair<string, Type> Parameters { get; set; }
 
         //Todo

@@ -46,10 +46,12 @@ namespace SharpBatch.internals
 
                 if (isBatch(typeInfo))
                 {
+                    //Verify the Context Presence
+                    PropertyInfo[] properties = typeInfo.GetProperties();
+                    var propertyDiscovery = PropertyContextAttributeDiscovery.Create(properties);
+                    var propertyDiscovered = propertyDiscovery.execute(properties);
                     foreach(var action in typeInfo.DeclaredMethods)
                     {
-                        //Verify the Context Presence
-                        PropertyInfo[] properties = typeInfo.GetProperties();
                        
                         if (isMethod(action))
                         {
@@ -59,7 +61,8 @@ namespace SharpBatch.internals
                                 BatchName = cleanBatchName(typeInfo.Name),
                                 BatchTypeInfo = typeInfo,
                                 ActionName = action.Name,
-                                ActionInfo = action
+                                ActionInfo = action,
+                                PropertyInfo = propertyDiscovered
                             };
 
                             

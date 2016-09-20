@@ -15,10 +15,7 @@ namespace SharpBatch.internals
     {
         IPropertyInvoker _propertyInvoker;
         MethodActivator _activator;
-
-        //private readonly Func<Type, ObjectFactory> _batchActivator =
-        //    (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
-
+        
         public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator)
         {
             _propertyInvoker = propertyInvoker;
@@ -28,17 +25,20 @@ namespace SharpBatch.internals
         public async Task<object> InvokeAsync(ContextInvoker context)
         {
             var actionToExecute = context.ActionDescriptor;
+            var executor = MethodExecutor.Create(actionToExecute.ActionInfo, actionToExecute.BatchTypeInfo);
+            var activatorInstance = _activator.CreateInstance<object>(context.RequestServices, actionToExecute.BatchTypeInfo.AsType());
 
             //Check Propertyes to activate 
-
+            if (actionToExecute.PropertyInfo != null)
+            {
+                await _propertyInvoker.invokeAsync(activatorInstance, context);
+            }
 
             //Execute attribute onExecuting
-            
+
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
             var parameters = parameterBinding.Bind();
 
-            var executor = MethodExecutor.Create(actionToExecute.ActionInfo, actionToExecute.BatchTypeInfo);
-            var activatorInstance = _activator.CreateInstance<object>(context.RequestServices, actionToExecute.BatchTypeInfo.AsType());
             var result = executor.Execute(activatorInstance, parameters);
             
             var response = (object)null;
@@ -57,6 +57,12 @@ namespace SharpBatch.internals
             {
                 response = result;
             }
+
+            //Save response in ShareMessage
+            IResponseObject responseObject = new ResponseObject(response, context.SessionId);
+            context.ShareMessage.Set<IResponseObject>(responseObject);
+            
+            //executing attribute on executed
 
             var serializedResult = "";
             //If result not null i serialize it 

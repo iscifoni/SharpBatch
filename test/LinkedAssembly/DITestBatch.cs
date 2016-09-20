@@ -16,11 +16,11 @@ namespace LinkedAssemblyTest
 
         public async Task<string> method1()
         {
-            await _batchUtil.startBatch("Class1", "Class1Method1", null);
+            await _batchUtil.startBatch("Class1", "Class1Method1", prop);
             return "Fatto";
         }
 
         [BatchContext]
-        public string prop { get; set; }
+        public ContextInvoker prop { get; set; }
     }
 }

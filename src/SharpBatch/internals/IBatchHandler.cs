@@ -10,5 +10,7 @@ namespace SharpBatch.internals
     {
         Task InvokeAsync(HttpContext context);
         Task InvokeAsync(HttpContext context, BatchUrlManager urlManager);
+        Task InvokeAsync(ContextInvoker context, BatchUrlManager urlManager);
+        Task InvokeAsync(ContextInvoker context, BatchUrlManager urlManager, Guid? parentSessionId);
     }
 }
