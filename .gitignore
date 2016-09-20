@@ -55,3 +55,9 @@ node_modules
 /src/SharpBatch/obj/Debug/net451
 /test/LinkedAssembly/obj
 /test/WebApplication/obj
+/src/SharpBatch.Traking.Memory/obj/Release
+/src/SharpBatch.Traking.Abstraction/obj/Release
+/src/SharpBatch.JSonSerializer/obj/Release
+/src/SharpBatch.Abstraction/obj/Release
+/src/SharpBatch/obj/Release/net451
+*.log
