@@ -30,11 +30,14 @@ REM if not "%errorlevel%"=="0" goto failure
 
 REM Package
 mkdir %cd%\Artifacts
+
 call dotnet pack src\SharpBatch --configuration %config% %version% --output Artifacts
 if not "%errorlevel%"=="0" goto failure
-call dotnet pack srcSharpBatch.Traking.Abstraction--configuration %config% %version% --output Artifacts
+
+call dotnet pack src\SharpBatch.Traking.Abstraction--configuration %config% %version% --output Artifacts
 if not "%errorlevel%"=="0" goto failure
-call dotnet pack srcSharpBatch.Traking.Memory--configuration %config% %version% --output Artifacts
+
+call dotnet pack src\SharpBatch.Traking.Memory--configuration %config% %version% --output Artifacts
 if not "%errorlevel%"=="0" goto failure
 
 :success
