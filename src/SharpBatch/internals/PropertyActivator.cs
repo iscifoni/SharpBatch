@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SharpBatch
+namespace SharpBatch.internals
 {
-    public class MethodActivator
+    public class PropertyActivator
     {
         private readonly Func<Type, ObjectFactory> _createFactory =
             (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
-        
+
         public TInstance CreateInstance<TInstance>(
-            IServiceProvider serviceProvider,
-            Type implementationType)
+           IServiceProvider serviceProvider,
+           Type implementationType)
         {
             if (serviceProvider == null)
             {
@@ -28,6 +28,5 @@ namespace SharpBatch
             var createFactory = _createFactory(implementationType);
             return (TInstance)createFactory(serviceProvider, arguments: null);
         }
-
     }
 }

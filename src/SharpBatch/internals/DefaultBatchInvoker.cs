@@ -13,23 +13,32 @@ namespace SharpBatch.internals
 {
     public class DefaultBatchInvoker : IBatchInvoker
     {
-        private readonly Func<Type, ObjectFactory> _batchActivator =
-            (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
+        IPropertyInvoker _propertyInvoker;
+        MethodActivator _activator;
 
+        //private readonly Func<Type, ObjectFactory> _batchActivator =
+        //    (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
+
+        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator)
+        {
+            _propertyInvoker = propertyInvoker;
+            _activator = activator;
+        }
 
         public async Task<object> InvokeAsync(ContextInvoker context)
         {
             var actionToExecute = context.ActionDescriptor;
+
+            //Check Propertyes to activate 
+
 
             //Execute attribute onExecuting
             
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
             var parameters = parameterBinding.Bind();
 
-
             var executor = MethodExecutor.Create(actionToExecute.ActionInfo, actionToExecute.BatchTypeInfo);
-            var activator = new MethodActivator();
-            var activatorInstance = activator.CreateInstance<object>(context.RequestServices, actionToExecute.BatchTypeInfo.AsType());
+            var activatorInstance = _activator.CreateInstance<object>(context.RequestServices, actionToExecute.BatchTypeInfo.AsType());
             var result = executor.Execute(activatorInstance, parameters);
             
             var response = (object)null;

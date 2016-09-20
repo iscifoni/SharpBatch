@@ -23,8 +23,6 @@
   },
 
   "tools": {
-    "BundlerMinifier.Core": "2.0.238",
-    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-*",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-*"
   },
 
@@ -36,7 +34,12 @@
           "version": "1.0.0-*",
           "type": "platform"
         }
-      }
+      },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   },
 

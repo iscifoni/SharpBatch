@@ -24,6 +24,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IBatchInvoker, DefaultBatchInvoker>();
             services.TryAddSingleton<IBatchHandler, DefaultBatchHandler>();
             services.TryAddScoped<IBatchInvokerProvider, DefaultBatchInvokerProvider>();
+            services.TryAddScoped<IPropertyInvoker, DefaultPropertyInvoker>();
+            services.TryAddScoped<MethodActivator>();
+            services.TryAddScoped<PropertyActivator>();
 
             //batch Factory
             services.TryAddSingleton<IBatchActionFactory, BatchActionFactory>();

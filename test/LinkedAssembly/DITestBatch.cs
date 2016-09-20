@@ -19,5 +19,8 @@ namespace LinkedAssemblyTest
             await _batchUtil.startBatch("Class1", "Class1Method1", null);
             return "Fatto";
         }
+
+        [BatchContext]
+        public string prop { get; set; }
     }
 }
