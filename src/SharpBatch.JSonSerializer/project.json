@@ -1,4 +1,5 @@
 {
+  "description": "Serializer helper user from SharpBatch",
   "version": "1.0.0-Alpha1-*",
 
   "buildOptions": {
