@@ -20,6 +20,12 @@ namespace LinkedAssemblyTest
             return "Fatto";
         }
 
+        [ResponseToFile(FileName ="ResponseFile", SessionIdInFileName =true, TimeStampTocken =true)]
+        public string saveResponse()
+        {
+            return "Test to save";
+        }
+
         [BatchContext]
         public ContextInvoker prop { get; set; }
     }

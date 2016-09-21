@@ -30,7 +30,7 @@ namespace SharpBatch.internals
             
             foreach(var assembly in assemblyList)
             {
-                var batchActionDescriptions = DefaultActionDescriptionProvider.actionDescription(assembly.DefinedTypes);
+                var batchActionDescriptions = AssemblyDiscoveryActionDescription.actionDescription(assembly.DefinedTypes);
                 result.AddRange(batchActionDescriptions);
             }
 

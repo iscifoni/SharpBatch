@@ -88,16 +88,14 @@ namespace SharpBatch.internals
                 response = result;
             }
 
+            //Save response in ShareMessage
+            IResponseObject responseObject = new ResponseObject(response, context.SessionId);
+            context.ShareMessage.Set<IResponseObject>(responseObject);
+
             foreach (var executionAttribute in actionToExecute.ExecutionAttribute)
             {
                 executionAttribute.onExecuted(batchExecutionContext);
             }
-
-            //Save response in ShareMessage
-            IResponseObject responseObject = new ResponseObject(response, context.SessionId);
-            context.ShareMessage.Set<IResponseObject>(responseObject);
-            
-            //executing attribute on executed
 
             var serializedResult = "";
             //If result not null i serialize it 

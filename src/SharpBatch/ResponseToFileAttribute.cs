@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,49 +8,66 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public class ResponseToFileAttribute : Attribute, IBatchExecutionAttribute
+    public class ResponseToFileAttribute : BatchExecutionAttribute
     {
-        public string FileName { get; set; } = "Export.exp";
-
-        public string Path { get; set; } = "";
+        public string FileName { get; set; } = "Export";
+        public string FileExention { get; set; } = "exp";
+        public PathString Path { get; set; } = "";
 
         public bool TimeStampTocken { get; set; } = true;
 
         public bool SessionIdInFileName { get; set; } = true;
 
-        public int Order { get; set; } = 10000;
+        public override int Order { get; set; } = 10000;
 
-        public void onExecuted(BatchExecutionContext context)
+        public override void onExecuted(BatchExecutionContext context)
         {
-            byte[] content;
+            var encoder = new UTF8Encoding();
+            char[] content;
             var response = context.ShareMessage.Get<IResponseObject>();
             if ( typeof(byte[]).GetTypeInfo().IsAssignableFrom(response.Response.GetType()))
             {
-                content = (byte[])response.Response;
+                content = encoder.GetChars( (byte[])response.Response);
             }
             else if(typeof(string).GetTypeInfo().IsAssignableFrom(response.Response.GetType()))
             {
-                var encoder = new UTF8Encoding();
-                content = encoder.GetBytes((string)response.Response);
-            }else
+                content = ((string)response.Response).ToCharArray();
+            }else if (typeof(char[]).GetTypeInfo().IsAssignableFrom(response.Response.GetType()))
+            {
+                content = (char[])response.Response;
+            }
+            else
             {
                 throw new NotSupportedException("Response type not supported for ResponseToFileAttribute");
             }
 
-            string fileName= FileName;
+            string fullFileName = FileName;
             if (SessionIdInFileName)
             {
-                FileName += $"-{response.SessionId.ToString()}";
+                fullFileName += $"-{response.SessionId.ToString()}";
             }
 
             if (TimeStampTocken)
             {
-                FileName += $"-{DateTime.Now.ToString("YYYYMMDDHHmmssfff")}";
+                fullFileName += $"-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
+
+            if (!string.IsNullOrEmpty(FileExention))
+            {
+                fullFileName += FileExention;
+            }
+
+            var logFile = System.IO.File.Create(fullFileName);
+            using(var logWriter = new System.IO.StreamWriter(logFile))
+            {
+                var logTask = logWriter.WriteAsync(content);
+                logTask.Wait();
+                logWriter.Flush();
             }
 
         }
 
-        public void onExecuting(BatchExecutionContext context)
+        public override void onExecuting(BatchExecutionContext context)
         {
         }
     }

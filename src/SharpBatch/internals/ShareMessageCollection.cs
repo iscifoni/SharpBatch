@@ -33,7 +33,7 @@ namespace SharpBatch.internals
                     var item = items[i];
                     if (item.Key.Equals(key))
                     {
-                        return item;
+                        return item.Value;
                     }
                 }
                 return null;
@@ -42,7 +42,7 @@ namespace SharpBatch.internals
             {
                 KeyValuePair<Type, object>[] newItems = new KeyValuePair<Type, object>[items.Length + 1];
                 items.CopyTo(newItems, 0);
-                items[items.Length - 1] = new KeyValuePair<Type, object>(key ,value);
+                newItems[newItems.Length - 1] = new KeyValuePair<Type, object>(key ,value);
                 items = newItems;
             }
         }

@@ -21,14 +21,14 @@ namespace SharpBatch
 {
     public class BatchExecutionAttribute : Attribute, IBatchExecutionAttribute
     {
-        public int Order { get; set; }
+        public virtual int Order { get; set; }
 
-        public void onExecuted(BatchExecutionContext context)
+        public virtual void onExecuted(BatchExecutionContext context)
         {
             throw new NotImplementedException();
         }
 
-        public void onExecuting(BatchExecutionContext context)
+        public virtual void onExecuting(BatchExecutionContext context)
         {
             throw new NotImplementedException();
         }

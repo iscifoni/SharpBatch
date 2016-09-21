@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    public static class DefaultActionDescriptionProvider
+    public static class AssemblyDiscoveryActionDescription
     {
         public static IEnumerable<BatchActionDescriptor> actionDescription(IEnumerable<TypeInfo> types)
         {
@@ -84,12 +84,19 @@ namespace SharpBatch.internals
                             batchActionDescriptor.ConfigureAttribute.AddRange(typeInfo.GetCustomAttributes<BatchConfigAttribute>(true));
                             batchActionDescriptor.ConfigureAttribute.AddRange(action.GetCustomAttributes<BatchConfigAttribute>(true));
 
+                            batchActionDescriptor.ExecutionAttribute = new List<IBatchExecutionAttribute>();
+                            batchActionDescriptor.ExecutionAttribute.AddRange(typeInfo.GetCustomAttributes<BatchExecutionAttribute>(true));
+                            batchActionDescriptor.ExecutionAttribute.AddRange(action.GetCustomAttributes<BatchExecutionAttribute>(true));
+
                             executeConfigureAttribute(ref batchActionDescriptor);
 
                             if (batchActionDescriptor != null)
                             {
                                 response.Add(batchActionDescriptor);
                             }
+
+                           
+
                         }
                     }
                 }
