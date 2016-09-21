@@ -32,6 +32,16 @@ namespace SharpBatch.internals
         
         public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator)
         {
+            if (propertyInvoker == null)
+            {
+                throw new ArgumentNullException(nameof(propertyInvoker));
+            }
+
+            if (activator == null)
+            {
+                throw new ArgumentNullException(nameof(activator));
+            }
+
             _propertyInvoker = propertyInvoker;
             _activator = activator;
         }

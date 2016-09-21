@@ -28,6 +28,11 @@ namespace SharpBatch.internals
 
         public DefaultBatchHandler(IBatchActionFactory batchActionFactory)
         {
+            if (batchActionFactory == null)
+            {
+                throw new ArgumentNullException(nameof(batchActionFactory));
+            }
+
             _batchActionFactory = batchActionFactory;
         }
 

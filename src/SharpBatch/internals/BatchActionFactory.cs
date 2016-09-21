@@ -26,6 +26,16 @@ namespace SharpBatch.internals
 
         public BatchActionFactory(BatchActionProvider actionProvider, SystemActionProvider systemActionProvider)
         {
+            if (actionProvider == null)
+            {
+                throw new ArgumentNullException(nameof(actionProvider));
+            }
+
+            if (systemActionProvider == null)
+            {
+                throw new ArgumentNullException(nameof(systemActionProvider));
+            }
+
             _actionProvider = actionProvider;
             _systemProvider = systemActionProvider;
         }
@@ -39,7 +49,7 @@ namespace SharpBatch.internals
                 case BatchUrlManagerCommand.Status:
                     return _systemProvider;
                 default:
-                    throw new MissingFieldException($"Command {urlManager.RequestCommand.ToString()} not found");
+                    throw new ArgumentNullException($"Command {urlManager.RequestCommand.ToString()} not found");
             }
         }
     }

@@ -30,6 +30,16 @@ namespace SharpBatch.internals
         public BatchActionProvider(ApplicationBatchManager manager,
             IBatchInvokerProvider batchInvokerProvider)
         {
+            if (manager == null)
+            {
+                throw new ArgumentNullException(nameof(manager));
+            }
+
+            if ( batchInvokerProvider == null)
+            {
+                throw new ArgumentNullException(nameof(batchInvokerProvider));
+            }
+
             _batchActions = manager.BatchActions;
             _batchInvokerProvider = batchInvokerProvider;
         }

@@ -23,15 +23,15 @@ namespace SharpBatch
 {
     public class BatchExecutionContext
     {
-        BatchActionDescriptor ActionDescriptor { get; set; }
+        public BatchActionDescriptor ActionDescriptor { get; set; }
 
-        batchConfigurationDictionary Configuration { get; set; }
+        public batchConfigurationDictionary Configuration { get; set; }
 
-        HttpRequest Request { get; set; }
+        public HttpRequest Request { get; set; }
 
-        HttpResponse Response { get; set; }
+        public HttpResponse Response { get; set; }
 
-        IShareMessageCollection ShareMessage { get; set; }
+        public IShareMessageCollection ShareMessage { get; set; }
 
         public static BatchExecutionContext Create(ContextInvoker context)
         {

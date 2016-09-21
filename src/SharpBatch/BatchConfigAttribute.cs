@@ -33,6 +33,15 @@ namespace SharpBatch
         /// <param name="value">Config parameter value</param>
         public BatchConfigAttribute(string name, object value)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
             _name = name;
             _value = value;
         }

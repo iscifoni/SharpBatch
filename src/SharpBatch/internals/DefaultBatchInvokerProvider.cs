@@ -30,6 +30,16 @@ namespace SharpBatch.internals
             IBatchInvoker batchInvoker,
             ISharpBatchTrakingFactory batchTrakingFactory)
         {
+            if (batchInvoker== null)
+            {
+                throw new ArgumentNullException(nameof(batchInvoker));
+            }
+
+            if (batchTrakingFactory == null)
+            {
+                throw new ArgumentNullException(nameof(batchTrakingFactory));
+            }
+
             _batchInvoker = batchInvoker;
             _batchTraking = batchTrakingFactory.getTrakingProvider();
         }

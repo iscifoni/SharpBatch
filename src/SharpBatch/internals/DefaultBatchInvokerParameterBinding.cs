@@ -28,6 +28,16 @@ namespace SharpBatch.internals
 
         public DefaultBatchInvokerParameterBinding(BatchParameterDictionary parameters, MethodInfo methodInfo)
         {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (methodInfo == null)
+            {
+                throw new ArgumentNullException(nameof(methodInfo));
+            }
+
             _parameters = parameters;
             _methodInfo = methodInfo;
         }
