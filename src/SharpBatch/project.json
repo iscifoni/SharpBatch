@@ -1,6 +1,6 @@
 {
   "description": "Middleware to manage batch projects",
-  "version": "1.0.0-*",
+  "version": "1.0.0-Alpha1-*",
 
   "packOptions": {
     "repository": {
@@ -14,6 +14,7 @@
   },
   "buildOptions": {
     "warningsAsErrors": true,
+    "keyFile": "../../tools/SharpBatch.snk",
     "nowarn": [
       "CS1591"
     ],

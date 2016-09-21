@@ -48,7 +48,13 @@ namespace SharpBatch.internals
                 await _propertyInvoker.invokeAsync(activatorInstance, context);
             }
 
+            var batchExecutionContext = BatchExecutionContext.Create(context);
             //Execute attribute onExecuting
+
+            foreach(var executionAttribute in  actionToExecute.ExecutionAttribute)
+            {
+                executionAttribute.onExecuting(batchExecutionContext);
+            }
 
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
             var parameters = parameterBinding.Bind();
@@ -70,6 +76,11 @@ namespace SharpBatch.internals
             else
             {
                 response = result;
+            }
+
+            foreach (var executionAttribute in actionToExecute.ExecutionAttribute)
+            {
+                executionAttribute.onExecuted(batchExecutionContext);
             }
 
             //Save response in ShareMessage
@@ -102,7 +113,7 @@ namespace SharpBatch.internals
          * 
          * invoke parameters
          * 
-         * invoche action 
+         * invoke action 
          * 
          * invoke attributeExecution OnExecuted
          * 

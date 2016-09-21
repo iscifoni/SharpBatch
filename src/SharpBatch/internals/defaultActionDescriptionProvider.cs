@@ -64,9 +64,10 @@ namespace SharpBatch.internals
                     PropertyInfo[] properties = typeInfo.GetProperties();
                     var propertyDiscovery = PropertyContextAttributeDiscovery.Create(properties);
                     var propertyDiscovered = propertyDiscovery.execute(properties);
+
                     foreach(var action in typeInfo.DeclaredMethods)
                     {
-                       
+
                         if (isMethod(action))
                         {
                             var batchActionDescriptor = new BatchActionDescriptor()
@@ -79,7 +80,6 @@ namespace SharpBatch.internals
                                 PropertyInfo = propertyDiscovered
                             };
 
-                            
                             batchActionDescriptor.ConfigureAttribute = new List<IBatchConfigAttributeAsync>();
                             batchActionDescriptor.ConfigureAttribute.AddRange(typeInfo.GetCustomAttributes<BatchConfigAttribute>(true));
                             batchActionDescriptor.ConfigureAttribute.AddRange(action.GetCustomAttributes<BatchConfigAttribute>(true));

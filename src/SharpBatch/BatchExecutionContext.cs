@@ -23,7 +23,7 @@ namespace SharpBatch
 {
     public class BatchExecutionContext
     {
-        BatchActionDescriptor Action { get; set; }
+        BatchActionDescriptor ActionDescriptor { get; set; }
 
         batchConfigurationDictionary Configuration { get; set; }
 
@@ -33,6 +33,16 @@ namespace SharpBatch
 
         IShareMessageCollection ShareMessage { get; set; }
 
-        BatchUrlManager urlManager { get; set; }
+        public static BatchExecutionContext Create(ContextInvoker context)
+        {
+            var executionContext = new BatchExecutionContext();
+            executionContext.ActionDescriptor = context.ActionDescriptor;
+            //executionContext.Configuration = context.ActionDescriptor.BatchConfiguration;
+            executionContext.Request = context.Request;
+            executionContext.Response = context.Response;
+            executionContext.ShareMessage = context.ShareMessage;
+
+            return executionContext;
+        }
     }
 }

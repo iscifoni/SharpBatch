@@ -4,8 +4,8 @@ elenca tutte le dll che refenziano il progetto
 2 - BatchManager ==== FTTO =====
 Cerca e carica nei serivce tutti i batch presenti nelle librerie che individua l' assemblyManager
 
-3 - BatchInvoker
-Si occupa di avviare i batch che sono stati caricati nel service sia sync che async
+3 - BatchInvoker ==== FTTO =====
+Si occupa di avviare i batch che sono stati caricati nel service sia sync che async 
 
 4 - Batch middleware ==== FATTO ====
 Middleware per l'intercettazione delle chiamate
@@ -41,6 +41,9 @@ Metodi
  guid			identificativo esecuzione
  timestamp		timestamp del traking
  messaggio		messaggio del traking
- node			nome del nodo dove gira il batch
-
+ node			nome del nodo dove gira il batch	MachineName
  --------------------------------------------------------------------------------------------------------------
+ Implementare la collection di attribute del AttributeDescription in modo da utilizzare nella macchina stati il move next nelle esecuzione dei metodi degli attributi
+
+
+ Implementare una gestioneottimale di exception
