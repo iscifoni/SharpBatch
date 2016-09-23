@@ -35,7 +35,7 @@ namespace SharpBatch.internals
             }
             set
             {
-                throw new NotImplementedException();
+                Add((KeyValuePair<string, object>)value);
             }
         }
 
@@ -64,12 +64,19 @@ namespace SharpBatch.internals
 
         public bool Contains(KeyValuePair<string, object> item)
         {
-            throw new NotImplementedException();
+            return ContainsKey(item.Key);
         }
 
         public bool ContainsKey(string key)
         {
-            return _items.Any(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
+            foreach (var item  in _items)
+            {
+                if (item.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
@@ -98,8 +105,17 @@ namespace SharpBatch.internals
             object itemValue;
             try
             {
-                itemValue = _items.Where(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).First().Value;
-                found = true;
+                value = null;
+                foreach(var item in _items)
+                {
+                    if(item.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = item;
+                        return true;
+                    }
+                }
+                return false;
+
             }catch
             {
                 itemValue = null;

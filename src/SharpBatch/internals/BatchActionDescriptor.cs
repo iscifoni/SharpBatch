@@ -23,6 +23,9 @@ namespace SharpBatch.internals
     public class BatchActionDescriptor
     {
         private string _id;
+        private string _batchName;
+        private string _actionName;
+
         public batchConfigurationDictionary BatchConfiguration { get; } = new batchConfigurationDictionary();
 
         public string Id
@@ -31,18 +34,19 @@ namespace SharpBatch.internals
             set
             {
                 _id = value;
-                BatchConfiguration.Add(BatchConfigurationFieldName.BatchName.ToString(), _id);
+                BatchConfiguration.AddOrUpdate(BatchConfigurationFieldName.BatchName.ToString(), _id);
             }
         }
         public string BatchName
         {
             get
             {
-                return BatchConfiguration[BatchConfigurationFieldName.BatchName.ToString()].ToString();
+                return _batchName;
             }
             set
             {
                 BatchConfiguration.AddOrUpdate(BatchConfigurationFieldName.BatchName.ToString(), value);
+                _batchName = value;
             }
         }
         public TypeInfo BatchTypeInfo { get; set; }
@@ -50,11 +54,12 @@ namespace SharpBatch.internals
         {
             get
             {
-                return BatchConfiguration[BatchConfigurationFieldName.BatchActionName.ToString()].ToString();
+                return _actionName;
             }
             set
             {
                 BatchConfiguration.AddOrUpdate(BatchConfigurationFieldName.BatchActionName.ToString(), value);
+                _actionName = value;
             }
         }
         public MethodInfo ActionInfo { get; set; }

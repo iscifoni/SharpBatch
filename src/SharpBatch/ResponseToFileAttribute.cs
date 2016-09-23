@@ -25,6 +25,7 @@ namespace SharpBatch
             var encoder = new UTF8Encoding();
             char[] content;
             var response = context.ShareMessage.Get<IResponseObject>();
+
             if ( typeof(byte[]).GetTypeInfo().IsAssignableFrom(response.Response.GetType()))
             {
                 content = encoder.GetChars( (byte[])response.Response);
