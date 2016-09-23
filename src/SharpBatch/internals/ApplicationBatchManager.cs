@@ -23,5 +23,18 @@ namespace SharpBatch.internals
     {
         public IList<BatchActionDescriptor> BatchActions { get; } = new List<BatchActionDescriptor>();
         
+        public IEnumerable<BatchActionDescriptor> SearcByNameAndAction(string BatchName, string BatchAction)
+        {
+            for(var i=0;i<BatchActions.Count(); i++)
+            {
+                var item = BatchActions[i];
+
+                if (item.BatchName.Equals(BatchName, StringComparison.OrdinalIgnoreCase)
+                    && item.ActionName.Equals(BatchAction, StringComparison.OrdinalIgnoreCase) )
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 }

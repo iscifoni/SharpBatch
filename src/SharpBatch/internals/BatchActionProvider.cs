@@ -24,15 +24,15 @@ namespace SharpBatch.internals
 {
     public class BatchActionProvider : IBatchActionProvider
     {
-        IList<BatchActionDescriptor> _batchActions;
+        ApplicationBatchManager _applicationBatchManager;
         IBatchInvokerProvider _batchInvokerProvider;
 
-        public BatchActionProvider(ApplicationBatchManager manager,
+        public BatchActionProvider(ApplicationBatchManager applicationBatchManager,
             IBatchInvokerProvider batchInvokerProvider)
         {
-            if (manager == null)
+            if (applicationBatchManager == null)
             {
-                throw new ArgumentNullException(nameof(manager));
+                throw new ArgumentNullException(nameof(applicationBatchManager));
             }
 
             if ( batchInvokerProvider == null)
@@ -40,7 +40,7 @@ namespace SharpBatch.internals
                 throw new ArgumentNullException(nameof(batchInvokerProvider));
             }
 
-            _batchActions = manager.BatchActions;
+            _applicationBatchManager = applicationBatchManager;
             _batchInvokerProvider = batchInvokerProvider;
         }
 
@@ -63,10 +63,7 @@ namespace SharpBatch.internals
 
         private BatchActionDescriptor Search(string BatchName, string ActionName)
         {
-            var batchActionDescriptors = _batchActions.Where(p => 
-                p.BatchName.Equals(BatchName, StringComparison.OrdinalIgnoreCase)
-                && p.ActionName.Equals(ActionName, StringComparison.OrdinalIgnoreCase)
-            );
+            var batchActionDescriptors = _applicationBatchManager.SearcByNameAndAction(BatchName, ActionName);
 
             if ( batchActionDescriptors.Count() > 1)
             {
