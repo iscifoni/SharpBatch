@@ -27,7 +27,7 @@ if not "%errorlevel%"=="0" goto failure
 
 REM Unit tests
 cd test\SharpBatchTest
-call dotnet test --configuration %config%
+call dotnet test --configuration %config% -verbose
 cd ..\..\
 if not "%errorlevel%"=="0" goto failure
 
