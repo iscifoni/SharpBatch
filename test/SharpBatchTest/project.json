@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "dotnet-test-xunit": "2.2.0-*",
     "SharpBatch": "1.0.0-*",
     "xunit": "2.2.0-*",
     "Moq": "4.6.38-*"
