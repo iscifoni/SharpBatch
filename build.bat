@@ -26,7 +26,9 @@ REM call dotnet build --configuration %config%
 if not "%errorlevel%"=="0" goto failure
 
 REM Unit tests
-call dotnet test test\SharpBatchTest --configuration %config%
+cd test\SharpBatchTest
+call dotnet test --configuration %config%
+cd ..\..\
 if not "%errorlevel%"=="0" goto failure
 
 REM Package
