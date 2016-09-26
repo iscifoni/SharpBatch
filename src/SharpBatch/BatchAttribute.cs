@@ -33,5 +33,10 @@ namespace SharpBatch
         {
         }
 
+        public BatchAttribute()
+            :base(BatchConfigurationFieldName.BatchName, null)
+        {
+        }
+
     }
 }

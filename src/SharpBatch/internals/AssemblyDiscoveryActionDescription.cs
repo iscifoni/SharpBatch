@@ -49,13 +49,14 @@ namespace SharpBatch.internals
                 return cleanName;
             }
 
-            public static IList<BatchActionDescriptor> getBatchActionDescription(TypeInfo typeInfo)
+            public static IList<BatchActionDescriptor> getBatchActionDescription(TypeInfo typeInfo, string batchName = null)
             {
                 IList<BatchActionDescriptor> response = new List<BatchActionDescriptor>();
+                var batchNameToUse = batchName ?? cleanBatchName(typeInfo.Name);
 
-                if (!(typeInfo.BaseType is object) && typeInfo.BaseType != null)
+                if (typeInfo.BaseType != null && !(typeInfo.BaseType.GetType() == typeof(object)))
                 {
-                    response = getBatchActionDescription(typeInfo.BaseType.GetTypeInfo() );
+                    response = getBatchActionDescription(typeInfo.BaseType.GetTypeInfo(), batchNameToUse);
                 }
 
                 if (isBatch(typeInfo))
@@ -73,7 +74,7 @@ namespace SharpBatch.internals
                             var batchActionDescriptor = new BatchActionDescriptor()
                             {
                                 Id = typeInfo.Name,
-                                BatchName = cleanBatchName(typeInfo.Name),
+                                BatchName = batchNameToUse,
                                 BatchTypeInfo = typeInfo,
                                 ActionName = action.Name,
                                 ActionInfo = action,
@@ -92,11 +93,9 @@ namespace SharpBatch.internals
 
                             if (batchActionDescriptor != null)
                             {
+                                batchActionDescriptor.refreshBatchNameAndBatchAction();
                                 response.Add(batchActionDescriptor);
                             }
-
-                           
-
                         }
                     }
                 }

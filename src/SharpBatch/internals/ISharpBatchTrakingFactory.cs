@@ -20,7 +20,7 @@ using SharpBatch.Traking.Abstraction;
 
 namespace SharpBatch.internals
 {
-    internal interface ISharpBatchTrakingFactory
+    public interface ISharpBatchTrakingFactory
     {
         ISharpBatchTraking getTrakingProvider();
     }

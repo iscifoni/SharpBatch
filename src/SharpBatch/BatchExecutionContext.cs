@@ -23,6 +23,8 @@ namespace SharpBatch
 {
     public class BatchExecutionContext
     {
+        public Guid SessionId { get; set; }
+
         public BatchActionDescriptor ActionDescriptor { get; set; }
 
         public batchConfigurationDictionary Configuration { get; set; }
@@ -33,6 +35,8 @@ namespace SharpBatch
 
         public IShareMessageCollection ShareMessage { get; set; }
 
+        public IServiceProvider RequestServices { get; set; }
+
         public static BatchExecutionContext Create(ContextInvoker context)
         {
             var executionContext = new BatchExecutionContext();
@@ -41,6 +45,8 @@ namespace SharpBatch
             executionContext.Request = context.Request;
             executionContext.Response = context.Response;
             executionContext.ShareMessage = context.ShareMessage;
+            executionContext.RequestServices = context.RequestServices;
+            executionContext.SessionId = context.SessionId;
 
             return executionContext;
         }

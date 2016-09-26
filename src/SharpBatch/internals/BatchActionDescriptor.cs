@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using SharpBatch;
 
 namespace SharpBatch.internals
 {
@@ -83,5 +84,15 @@ namespace SharpBatch.internals
             get { return typeof(Task).IsAssignableFrom(ReturnType); }
         } 
 
+        public void refreshBatchNameAndBatchAction()
+        {
+            object newActionName;
+            object newBatchName;
+            BatchConfiguration.TryGetValue(BatchConfigurationFieldName.BatchName, out newBatchName);
+            BatchConfiguration.TryGetValue(BatchConfigurationFieldName.BatchActionName, out newActionName);
+
+            BatchName = (string)((KeyValuePair<string, object>)newBatchName).Value;
+            ActionName = (string)((KeyValuePair<string, object>)newActionName).Value;
+        }
     }
 }

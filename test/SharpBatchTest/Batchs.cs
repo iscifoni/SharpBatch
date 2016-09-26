@@ -16,19 +16,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch;
 
-namespace SharpBatch.Traking.Abstraction
+namespace SharpBatchTest
 {
-    public class BatchTrakingModel
+    public class Batchs
     {
-        public Guid SessionId { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public List<DateTime> Pings { get; set; } = new List<DateTime>();
-        public string State { get; set; }
-        public List<string> Messages { get; set; } = new List<string>();
-        public List<Exception> Ex { get; set; }
-
-        public string MachineName => System.Environment.MachineName;
     }
+
+    public class SimplePOCOBatch
+    {
+        public string method1()
+        {
+            return "method1";
+        }
+
+        public int method2()
+        {
+            return 123;
+        }
+    }
+
+    public class InferitFromSimplePOCO : SimplePOCOBatch { }
+
+    [Batch()]
+    public class BatchFromAttribute
+    {
+        public string method1()
+        {
+            return "method1";
+        }
+
+        public int method2()
+        {
+            return 123;
+        }
+    }
+
+    public class InheritFromBatchAttribute : BatchFromAttribute { }
 }

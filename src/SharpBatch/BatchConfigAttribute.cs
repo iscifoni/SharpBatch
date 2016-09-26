@@ -31,6 +31,7 @@ namespace SharpBatch
         /// </summary>
         /// <param name="name">Config parameter name</param>
         /// <param name="value">Config parameter value</param>
+        /// <remarks>If the value parameters is null, the configuration will ignore.</remarks>
         public BatchConfigAttribute(string name, object value)
         {
             if (name == null)
@@ -38,10 +39,6 @@ namespace SharpBatch
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
             _name = name;
             _value = value;
         }
@@ -58,7 +55,10 @@ namespace SharpBatch
         /// <inheritdoc/>
         public virtual Task onExecuting(BatchConfigContext context)
         {
-            context.BatchConfiguration.AddOrUpdate(_name, _value);
+            if (_value != null)
+            {
+                context.BatchConfiguration.AddOrUpdate(_name, _value);
+            }
             return TaskWrapper.CompletedTask;
         }
     }

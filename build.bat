@@ -26,8 +26,8 @@ REM call dotnet build --configuration %config%
 if not "%errorlevel%"=="0" goto failure
 
 REM Unit tests
-REM call dotnet test tests\MyLibrary.Tests --configuration %config%
-REM if not "%errorlevel%"=="0" goto failure
+call dotnet test test\SharpBatchTest --configuration %config%
+if not "%errorlevel%"=="0" goto failure
 
 REM Package
 mkdir %cd%\Artifacts

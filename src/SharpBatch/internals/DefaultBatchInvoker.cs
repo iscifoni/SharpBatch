@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using SharpBatch.Traking.Abstraction;
 
 namespace SharpBatch.internals
 {
@@ -29,8 +30,9 @@ namespace SharpBatch.internals
     {
         IPropertyInvoker _propertyInvoker;
         MethodActivator _activator;
+        ISharpBatchTraking _sharpBatchTraking;
         
-        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator)
+        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator, ISharpBatchTrakingFactory trakingFactory )
         {
             if (propertyInvoker == null)
             {
@@ -42,8 +44,14 @@ namespace SharpBatch.internals
                 throw new ArgumentNullException(nameof(activator));
             }
 
+            if(trakingFactory == null)
+            {
+                throw new ArgumentNullException(nameof(trakingFactory));
+            }
+
             _propertyInvoker = propertyInvoker;
             _activator = activator;
+            _sharpBatchTraking = trakingFactory.getTrakingProvider();
         }
 
         public async Task<object> InvokeAsync(ContextInvoker context)
@@ -72,25 +80,41 @@ namespace SharpBatch.internals
             var result = executor.Execute(activatorInstance, parameters);
             
             var response = (object)null;
-            
-            if(actionToExecute.IsAsync)
-            {
-                var task = result as Task;
-                await task;
 
-                var responseType = result.GetType();
-                var taskTType = responseType.GetGenericArguments()[0];
-                var resultProperty = typeof(Task<>).MakeGenericType(taskTType).GetProperty("Result");
-                response = resultProperty.GetValue(task);
-            }
-            else
+            try
             {
-                response = result;
-            }
+                if (actionToExecute.IsAsync)
+                {
+                    var task = result as Task;
+                    await task;
 
-            //Save response in ShareMessage
-            IResponseObject responseObject = new ResponseObject(response, context.SessionId);
-            context.ShareMessage.Set<IResponseObject>(responseObject);
+                    var responseType = result.GetType();
+                    var taskTType = responseType.GetGenericArguments()[0];
+                    var resultProperty = typeof(Task<>).MakeGenericType(taskTType).GetProperty("Result");
+                    response = resultProperty.GetValue(task);
+                }
+                else
+                {
+                    response = result;
+                }
+
+                //Save response in ShareMessage
+                IResponseObject responseObject = new ResponseObject(response, context.SessionId);
+                context.ShareMessage.Set<IResponseObject>(responseObject);
+            }catch(Exception ex)
+            {
+                IResponseObject responseObject = new ResponseObject(ex, context.SessionId);
+                context.ShareMessage.Set<IResponseObject>(responseObject);
+
+                //
+                var exceptionAttribute = actionToExecute.ExecutionAttribute.OfType<ExceptionAttribute>();
+                foreach(var item in exceptionAttribute)
+                {
+                    item.onExecuting(batchExecutionContext);
+
+                    item.onExecuted(batchExecutionContext);
+                } 
+            }
 
             foreach (var executionAttribute in actionToExecute.ExecutionAttribute)
             {
@@ -104,7 +128,6 @@ namespace SharpBatch.internals
                 serializedResult = JSonSerializer.JSonModelSerializer.Serialize(response);
             }
             return serializedResult;
-
         }
 
         private Task checkStatus(bool isComplete)
@@ -112,21 +135,6 @@ namespace SharpBatch.internals
             var response = new Task(null);
             return response;
         }
-        
-
-        /*
-         * macchina stati tutto async
-         * 
-         * Invoke attributeExecution onExecuting
-         * 
-         * invoke parameters
-         * 
-         * invoke action 
-         * 
-         * invoke attributeExecution OnExecuted
-         * 
-         */
-
 
     }
 }

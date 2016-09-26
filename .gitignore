@@ -61,3 +61,4 @@ node_modules
 /src/SharpBatch.Abstraction/obj/Release
 /src/SharpBatch/obj/Release/net451
 *.log
+/test/SharpBatchTest/obj/Debug

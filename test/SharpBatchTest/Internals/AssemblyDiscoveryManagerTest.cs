@@ -15,22 +15,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using SharpBatch.internals;
+using Xunit;
 
-namespace SharpBatch
+namespace SharpBatchTest.Internals
 {
-    public class BatchException:Exception
+    public class AssemblyDiscoveryManagerTest
     {
-        public BatchException()
+        [Fact]
+        public void AssemblyDiscoveryManagerTest_enlistDependencies()
         {
-        }
+            //Arrange
+            var currentAssemblyName = typeof(AssemblyDiscoveryManagerTest).GetTypeInfo().Assembly.GetName().Name;
+            var assemblies = AssemblyDiscoveryManager.EnlistAssemblyDependencies( currentAssemblyName );
 
-        public BatchException(string message):base(message)
-        {
-        }
+            //Act
+            var xunitAssembly = assemblies.Where(p => string.Equals(p.GetName().Name, typeof(FactAttribute).GetTypeInfo().Assembly.GetName().Name ));
 
-        public BatchException(string message, Exception exception):base(message, exception)
-        {
+            //Assert
+            Assert.NotNull(xunitAssembly);
+
         }
     }
 }
