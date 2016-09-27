@@ -134,7 +134,7 @@ namespace SharpBatchTest.Internals
             BatchActionProvider batchActionProvider = new BatchActionProvider(applicationBatchManager.Object, batchInvokerProvider.Object);
 
             var response = await Assert.ThrowsAsync<Exception>(() => batchActionProvider.InvokeAsync(batchUrlManager.Object, context));
-            Assert.Equal("No batch satisfy the search ", response.Message);
+            Assert.Equal("No batch satisfy the search", response.Message);
 
         }
     }
