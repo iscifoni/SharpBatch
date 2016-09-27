@@ -20,16 +20,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace SharpBatch
 {
-    public enum BatchUrlManagerCommand
-    {
-        Exec,
-        Status
-    }
-
     /// <summary>
     /// Dispatch a batch identified to a path request
     /// </summary>
-    public class BatchUrlManager
+    public class BatchUrlManager : IBatchUrlManager
     {
         private const string BaseBatch = "/batch";
 

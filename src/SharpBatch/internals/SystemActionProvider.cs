@@ -20,7 +20,7 @@ using SharpBatch.Traking.Abstraction;
 
 namespace SharpBatch.internals
 {
-    internal class SystemActionProvider : IBatchActionProvider
+    public class SystemActionProvider : IBatchActionProvider
     {
         private ISharpBatchTraking _trakingProvider;
         public SystemActionProvider(ISharpBatchTrakingFactory trakingFactory)
@@ -28,7 +28,7 @@ namespace SharpBatch.internals
             _trakingProvider = trakingFactory.getTrakingProvider();
         }
 
-        public async Task<string> InvokeAsync(BatchUrlManager urlManager, ContextInvoker context)
+        public async Task<string> InvokeAsync(IBatchUrlManager urlManager, ContextInvoker context)
         {
             switch (urlManager.RequestCommand)
                 {

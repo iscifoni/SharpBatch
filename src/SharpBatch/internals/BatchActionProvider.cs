@@ -24,10 +24,10 @@ namespace SharpBatch.internals
 {
     public class BatchActionProvider : IBatchActionProvider
     {
-        ApplicationBatchManager _applicationBatchManager;
+        IApplicationBatchManager _applicationBatchManager;
         IBatchInvokerProvider _batchInvokerProvider;
 
-        public BatchActionProvider(ApplicationBatchManager applicationBatchManager,
+        public BatchActionProvider(IApplicationBatchManager applicationBatchManager,
             IBatchInvokerProvider batchInvokerProvider)
         {
             if (applicationBatchManager == null)
@@ -44,20 +44,26 @@ namespace SharpBatch.internals
             _batchInvokerProvider = batchInvokerProvider;
         }
 
-        public async Task<string> InvokeAsync(BatchUrlManager urlManager, ContextInvoker context)
+        public async Task<string> InvokeAsync(IBatchUrlManager urlManager, ContextInvoker context)
         {
-            var batchActionDescriptor = Search(urlManager.RequestBatchName, urlManager.RequestBatchAction);
-            context.ActionDescriptor = batchActionDescriptor;
+            try
+            {
+                var batchActionDescriptor = Search(urlManager.RequestBatchName, urlManager.RequestBatchAction);
+                context.ActionDescriptor = batchActionDescriptor;
 
-            if (batchActionDescriptor.IsAsync)
+                if (batchActionDescriptor.IsAsync)
+                {
+                    var response = _batchInvokerProvider.InvokeAsync(context);
+                    return "Batch Started";
+                }
+                else
+                {
+                    var response = await _batchInvokerProvider.InvokeAsync(context) as string;
+                    return response.ToString();
+                }
+            }catch(Exception ex)
             {
-                var response = _batchInvokerProvider.InvokeAsync(context);
-                return "Batch Started";
-            }
-            else
-            {
-                var response = await _batchInvokerProvider.InvokeAsync(context) as string;
-                return response.ToString();
+                throw ex;
             }
         }
 
@@ -68,13 +74,13 @@ namespace SharpBatch.internals
             if ( batchActionDescriptors.Count() > 1)
             {
                 //To do custom exception
-                throw new Exception("Too many batch satisfy the search ");
+                throw new Exception("Too many batch satisfy the search");
             }
 
             if ( batchActionDescriptors.Count() == 0 )
             {
                 //To do custom exception
-                throw new Exception("No batch satisfy the search ");
+                throw new Exception("No batch satisfy the search");
             }
 
             return batchActionDescriptors.First();

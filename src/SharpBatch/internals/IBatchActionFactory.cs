@@ -19,8 +19,8 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    internal interface IBatchActionFactory
+    public  interface IBatchActionFactory
     {
-        IBatchActionProvider getProvider(BatchUrlManager urlManager);
+        IBatchActionProvider getProvider(IBatchUrlManager urlManager);
     }
 }

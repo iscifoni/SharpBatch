@@ -21,7 +21,7 @@ using SharpBatch.Traking.Abstraction;
 
 namespace SharpBatch.internals
 {
-    internal class DefaultBatchInvokerProvider:IBatchInvokerProvider
+    public class DefaultBatchInvokerProvider:IBatchInvokerProvider
     {
         private IBatchInvoker _batchInvoker;
         private ISharpBatchTraking _batchTraking;

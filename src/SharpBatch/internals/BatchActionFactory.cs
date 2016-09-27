@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch.internals
 {
-    internal class BatchActionFactory : IBatchActionFactory
+    public class BatchActionFactory : IBatchActionFactory
     {
         IBatchActionProvider _actionProvider;
         IBatchActionProvider _systemProvider;
@@ -40,7 +40,7 @@ namespace SharpBatch.internals
             _systemProvider = systemActionProvider;
         }
 
-        public IBatchActionProvider getProvider(BatchUrlManager urlManager)
+        public IBatchActionProvider getProvider(IBatchUrlManager urlManager)
         {
             switch ( urlManager.RequestCommand)
             {

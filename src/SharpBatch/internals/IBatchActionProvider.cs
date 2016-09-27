@@ -21,6 +21,6 @@ namespace SharpBatch.internals
 {
     public interface IBatchActionProvider
     {
-        Task<string> InvokeAsync(BatchUrlManager urlManager, ContextInvoker context);
+        Task<string> InvokeAsync(IBatchUrlManager urlManager, ContextInvoker context);
     }
 }

@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             //Discovering batch
             var batchActionManager = getBatchAction(services);
-            services.TryAddSingleton<ApplicationBatchManager>(batchActionManager);
+            services.TryAddSingleton<IApplicationBatchManager>(batchActionManager);
 
             //invoker
             services.TryAddSingleton<IBatchInvoker, DefaultBatchInvoker>();
@@ -53,10 +53,10 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        private static ApplicationBatchManager getBatchAction(IServiceCollection service)
+        private static IApplicationBatchManager getBatchAction(IServiceCollection service)
         {
             var hostingService = (IHostingEnvironment)service.FirstOrDefault(t => t.ServiceType == typeof(IHostingEnvironment))?.ImplementationInstance;
-            var manager = (ApplicationBatchManager)service.FirstOrDefault(t => t.ServiceType == typeof(ApplicationBatchManager))?.ImplementationInstance;
+            var manager = (IApplicationBatchManager)service.FirstOrDefault(t => t.ServiceType == typeof(IApplicationBatchManager))?.ImplementationInstance;
 
             if (manager == null)
             {

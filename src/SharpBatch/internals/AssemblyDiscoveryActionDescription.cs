@@ -109,6 +109,11 @@ namespace SharpBatch.internals
                     return false;
                 }
 
+                if (!typeInfo.IsPublic)
+                {
+                    return false;
+                }
+
                 if (typeInfo.Name.EndsWith("Batch", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
@@ -118,6 +123,8 @@ namespace SharpBatch.internals
                 {
                     return true;
                 }
+
+                
 
                 return false;
             }

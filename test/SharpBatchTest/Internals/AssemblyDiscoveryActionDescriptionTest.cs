@@ -24,8 +24,6 @@ namespace SharpBatchTest.Internals
 {
     public class AssemblyDiscoveryActionDescriptionTest
     {
-       
-
 
         [Fact]
         public void AssemblyDiscoveryActionDescriptionTest_actionDescription_SiplePOCO()
