@@ -24,49 +24,7 @@ namespace SharpBatchTest.Internals
             //assert
             Assert.NotNull(response);
             Assert.NotEmpty(response);
-            Assert.Equal(8, response.Count());
-            Assert.Collection(response,
-                (p) => {
-                    Assert.Equal(p.BatchName, "SimplePOCO");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
-                },
-                (p) => {
-                    Assert.Equal(p.BatchName, "SimplePOCO");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
-                },
-                 (p) => {
-                     Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
-                     Assert.Equal(p.ActionName, "method1");
-                     Assert.Equal(p.ReturnType, typeof(string));
-                 },
-                (p) => {
-                    Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
-                },
-                (p) => {
-                    Assert.Equal(p.BatchName, "BatchFromAttribute");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
-                },
-                (p) => {
-                    Assert.Equal(p.BatchName, "BatchFromAttribute");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
-                },
-                (p) => {
-                    Assert.Equal(p.BatchName, "InheritFromBatchAttribute");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
-                },
-                (p) => {
-                    Assert.Equal(p.BatchName, "InheritFromBatchAttribute");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
-                }
-            );
+            Assert.Equal(11, response.Count());
         }
         
     }

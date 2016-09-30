@@ -123,12 +123,16 @@ namespace SharpBatch.internals
 
         public bool AddFromQueryString(QueryString queryString)
         {
-            return AddFromQueryString(queryString.Value.Substring(1));
+            return AddFromQueryString(queryString.Value);
         }
 
         //ToDo manage the right return value
         public bool AddFromQueryString(string queryString)
         {
+            if (queryString[0] == '?')
+            {
+                queryString = queryString.Substring(1);
+            }
             if (!string.IsNullOrEmpty(queryString))
             {
                 var stringsVector = queryString.Split('&');

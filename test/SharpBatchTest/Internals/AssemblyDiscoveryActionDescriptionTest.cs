@@ -38,7 +38,7 @@ namespace SharpBatchTest.Internals
             //assert
             Assert.NotNull(response);
             Assert.NotEmpty(response);
-            Assert.Equal(2, response.Count());
+            Assert.Equal(3, response.Count());
             Assert.Collection(response,
                 (p) => {
                     Assert.Equal(p.BatchName, "SimplePOCO");
@@ -49,6 +49,11 @@ namespace SharpBatchTest.Internals
                     Assert.Equal(p.BatchName, "SimplePOCO");
                     Assert.Equal(p.ActionName, "method2");
                     Assert.Equal(p.ReturnType, typeof(int));
+                },
+                (p) => {
+                    Assert.Equal(p.BatchName, "SimplePOCO");
+                    Assert.Equal(p.ActionName, "method3");
+                    Assert.Equal(p.ReturnType, typeof(string));
                 }
             );
         }
@@ -66,7 +71,7 @@ namespace SharpBatchTest.Internals
             //assert
             Assert.NotNull(response);
             Assert.NotEmpty(response);
-            Assert.Equal(2, response.Count());
+            Assert.Equal(3, response.Count());
             Assert.Collection(response,
                 (p) => {
                     Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
@@ -77,6 +82,11 @@ namespace SharpBatchTest.Internals
                     Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
                     Assert.Equal(p.ActionName, "method2");
                     Assert.Equal(p.ReturnType, typeof(int));
+                },
+                (p) => {
+                    Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
+                    Assert.Equal(p.ActionName, "method3");
+                    Assert.Equal(p.ReturnType, typeof(string));
                 }
             );
         }

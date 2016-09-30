@@ -21,7 +21,7 @@ using SharpBatch.JSonSerializer;
 
 namespace SharpBatch.internals
 {
-    internal class DefaultBatchInvokerParameterBinding
+    public class DefaultBatchInvokerParameterBinding
     {
         private BatchParameterDictionary _parameters;
         private MethodInfo _methodInfo;

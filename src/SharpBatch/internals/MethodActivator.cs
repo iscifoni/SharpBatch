@@ -25,7 +25,7 @@ namespace SharpBatch.internals
         private readonly Func<Type, ObjectFactory> _createFactory =
             (type) => ActivatorUtilities.CreateFactory(type, Type.EmptyTypes);
         
-        public TInstance CreateInstance<TInstance>(
+        public virtual TInstance CreateInstance<TInstance>(
             IServiceProvider serviceProvider,
             Type implementationType)
         {

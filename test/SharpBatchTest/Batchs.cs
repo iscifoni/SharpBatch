@@ -35,6 +35,11 @@ namespace SharpBatchTest
         {
             return 123;
         }
+
+        public string method3(string param1)
+        {
+            return param1;
+        }
     }
 
     public class InferitFromSimplePOCO : SimplePOCOBatch { }
