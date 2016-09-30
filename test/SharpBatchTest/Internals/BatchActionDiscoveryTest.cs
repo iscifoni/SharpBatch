@@ -24,7 +24,7 @@ namespace SharpBatchTest.Internals
             //assert
             Assert.NotNull(response);
             Assert.NotEmpty(response);
-            Assert.Equal(11, response.Count());
+            Assert.Equal(13, response.Count());
         }
         
     }

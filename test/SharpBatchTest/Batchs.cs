@@ -68,4 +68,20 @@ namespace SharpBatchTest
             return "method1";
         }
     }
+
+    public class SimplePOCOPropertyBatch
+    {
+        [BatchContext]
+        public ContextInvoker context { get; set; }
+    }
+
+    public class SimplePOCOContructorParamsBatch
+    {
+        SimplePOCOBatch _simplePocoBatch;
+        public SimplePOCOContructorParamsBatch(SimplePOCOBatch simplePocoBatch)
+        {
+            _simplePocoBatch = simplePocoBatch;
+        }
+    }
+
 }
