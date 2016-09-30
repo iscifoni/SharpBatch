@@ -62,13 +62,21 @@ namespace SharpBatch.internals
         public static IEnumerable<Assembly> EnlistAssemblyDependencies(string assemblyName)
         {
             var currentAssembly = Assembly.Load(new AssemblyName(assemblyName));
+            IEnumerable<Assembly> notSystemAssembly = null;
 
             var dependencyContext =  DependencyContext.Load(currentAssembly);
-            var notSystemLibrary = assemblyResolver.removeSystemAssembly(dependencyContext);
+            if (dependencyContext != null)
+            {
+                var notSystemLibrary = assemblyResolver.removeSystemAssembly(dependencyContext);
 
-            var notSystemAssembly = notSystemLibrary
-                        .SelectMany(library => library.GetDefaultAssemblyNames(dependencyContext))
-                        .Select(Assembly.Load);
+                notSystemAssembly = notSystemLibrary
+                            .SelectMany(library => library.GetDefaultAssemblyNames(dependencyContext))
+                            .Select(Assembly.Load);
+            }
+            else
+            {
+                notSystemAssembly = new[] { currentAssembly };
+            }
 
             return notSystemAssembly; 
         }
