@@ -75,12 +75,16 @@ namespace SharpBatch.internals
 
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            foreach(var item in _items)
+            {
+                array[arrayIndex++] = item;
+            }
+            
         }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _items.GetEnumerator();
         }
 
         public bool Remove(KeyValuePair<string, object> item)
@@ -113,7 +117,7 @@ namespace SharpBatch.internals
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
 
@@ -140,4 +144,5 @@ namespace SharpBatch.internals
             return true;
         }
     }
+
 }

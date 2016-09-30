@@ -22,7 +22,7 @@ using System.Threading;
 
 namespace SharpBatch.internals
 {
-    internal class DefaultBatchHandler : IBatchHandler
+    public class DefaultBatchHandler : IBatchHandler
     {
         IBatchActionFactory _batchActionFactory;
 

@@ -54,4 +54,13 @@ namespace SharpBatchTest
     }
 
     public class InheritFromBatchAttribute : BatchFromAttribute { }
+
+    [Batch("BatchName")]
+    public class SimplePOCOConfgigurationAttributeBatch
+    {
+        public string method1()
+        {
+            return "method1";
+        }
+    }
 }
