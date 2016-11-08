@@ -1,0 +1,3 @@
+Type;Method;Mode;Platform;Jit;Toolchain;Runtime;GcMode;LaunchCount;WarmupCount;TargetCount;Affinity;Median;StdDev;Scaled;Scaled-SD;Gen 0;Gen 1;Gen 2;Bytes Allocated/Op
+batchConfigurationDictionaryBenchmark;batchConfigurationDictionary;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;1.3216 us;0.1016 us;1.00;0.00;3,417.00;-;-;280.81
+batchConfigurationDictionaryBenchmark;batchConfigurationDictionaryRefactoring;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;1.2220 us;0.0964 us;0.95;0.10;3,218.12;-;-;264.44

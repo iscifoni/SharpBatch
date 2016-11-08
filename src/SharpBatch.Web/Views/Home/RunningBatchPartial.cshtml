@@ -1,0 +1,10 @@
+﻿@model List<SharpBatch.Traking.Abstraction.BatchTrakingModel>
+@{
+    foreach(var item in Model)
+    {
+        <div>@item.BatchName</div>
+        <div>@item.StartDate</div>
+        <div>@item.MachineName</div>
+        <div>@item.State.ToString()</div>
+    }
+}

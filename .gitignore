@@ -63,3 +63,5 @@ node_modules
 *.log
 /test/SharpBatchTest/obj/Debug
 /test/SharpBatchTest/obj/release
+/src/SharpBatch.Web/obj/Debug
+/test/SharpBatchBenchmark/obj

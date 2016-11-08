@@ -33,7 +33,7 @@ namespace SharpBatch.internals
             switch (urlManager.RequestCommand)
                 {
                 case BatchUrlManagerCommand.Status:
-                    var batchStaus = await _trakingProvider.GetStatus(new Guid(context.Parameters["sessionid"].ToString()));
+                    var batchStaus = await _trakingProvider.GetStatusAsync(new Guid(context.Parameters["sessionid"].ToString()));
                     var result = JSonSerializer.JSonModelSerializer.Serialize(batchStaus);
                     return result;
                 default:

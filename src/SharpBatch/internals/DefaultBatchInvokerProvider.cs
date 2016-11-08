@@ -50,7 +50,7 @@ namespace SharpBatch.internals
 
             var sessionId = context.SessionId;
 
-            await _batchTraking.StartAsync(sessionId);
+            await _batchTraking.StartAsync(actionToExecute.BatchName, sessionId);
             var cancellationToken = new CancellationToken();
             Task<object> task = Task.Run(async () =>
             {

@@ -1,9 +1,10 @@
 {
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "System.Collections.Immutable": "1.2.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0-*",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0-*",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0-*",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0-*",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0-*",
     "Microsoft.Extensions.Configuration.Json": "1.1.0-*",
     "Microsoft.Extensions.Logging": "1.1.0-*",
@@ -15,6 +16,7 @@
     "SharpBatch": "1.0.0-*",
     "SharpBatch.Abstraction": "1.0.0-*",
     "SharpBatch.Traking.Memory": "1.0.0-*",
+    "SharpBatch.Web": "1.0.0-*",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0-*"
   },
 
@@ -24,10 +26,10 @@
 
   "frameworks": {
     "net451": {},
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "dependencies": {
         "Microsoft.NETCore.App": {
-          "version": "1.0.0-*",
+          "version": "1.1.0-*",
           "type": "platform"
         }
       }

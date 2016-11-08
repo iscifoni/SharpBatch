@@ -1,0 +1,7 @@
+{
+	"name": "asp.net",
+	"private": true,
+  "dependencies": {
+    "adminlte": "2.3.8"
+  }
+}

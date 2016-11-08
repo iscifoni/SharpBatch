@@ -22,8 +22,12 @@ namespace SharpBatch.Traking.Abstraction
     public interface ISharpBatchTraking
     {
         Task PingAsync(Guid sessionId);
-        Task StartAsync(Guid sessionId);
+        Task StartAsync(string BatchName, Guid sessionId);
         Task StopAsync(Guid sessionId);
-        Task<BatchTrakingModel> GetStatus(Guid SessionId);
+        Task<BatchTrakingModel> GetStatusAsync(Guid SessionId);
+
+        List<BatchTrakingModel> GetRunning();
+        List<BatchTrakingModel> GetErrors();
+        List<BatchTrakingModel> GetDataOfBatchName(string batchName);
     }
 }

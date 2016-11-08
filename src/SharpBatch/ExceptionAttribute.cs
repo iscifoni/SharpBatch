@@ -18,9 +18,10 @@ namespace SharpBatch
         {
             var batchTraking = (ISharpBatchTraking)context.RequestServices.GetService(typeof(ISharpBatchTraking));
             var responseObject = context.ShareMessage.Get<IResponseObject>();
-            var trakingModel = batchTraking.GetStatus(context.SessionId)?.Result ;
+            var trakingModel = batchTraking.GetStatusAsync(context.SessionId)?.Result ;
 
             trakingModel.Ex.Add(responseObject.Response as Exception);
+            trakingModel.State = StatusEnum.Error;
 
         }
     }
