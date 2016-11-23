@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "System.Collections.Immutable": "1.2.0",
+    "System.Collections.Immutable": "1.3.0-*",
     "Microsoft.AspNetCore.Mvc": "1.1.0-*",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0-*",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0-*",
@@ -16,7 +16,6 @@
     "SharpBatch": "1.0.0-*",
     "SharpBatch.Abstraction": "1.0.0-*",
     "SharpBatch.Traking.Memory": "1.0.0-*",
-    "SharpBatch.Web": "1.0.0-*",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0-*"
   },
 

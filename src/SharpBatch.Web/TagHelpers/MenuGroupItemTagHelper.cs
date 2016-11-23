@@ -9,16 +9,16 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
 {
-    [HtmlTargetElement("sbmenugroup", Attributes = NameAttributeName)]
-    [HtmlTargetElement("sbmenugroup", Attributes = LabelAttributeName)]
-    [HtmlTargetElement("sbmenugroup", Attributes = UrlAttributeName)]
-    [HtmlTargetElement("sbmenugroup", Attributes = IconAttributeName)]
-    public class MenuGroupItem:TagHelper
+    [HtmlTargetElement("div", Attributes = NameAttributeName)]
+    [HtmlTargetElement("div", Attributes = LabelAttributeName)]
+    [HtmlTargetElement("div", Attributes = UrlAttributeName)]
+    [HtmlTargetElement("div", Attributes = IconAttributeName)]
+    public class MenuGroupItemTagHelper:TagHelper
     {
-        private const string NameAttributeName = "sb-group-name";
-        private const string LabelAttributeName = "sb-group-label";
-        private const string UrlAttributeName = "sb-group-url";
-        private const string IconAttributeName = "sb-group-icon";
+        private const string NameAttributeName = "sb-menu-group-name";
+        private const string LabelAttributeName = "sb-menu-group-label";
+        private const string UrlAttributeName = "sb-menu-group-url";
+        private const string IconAttributeName = "sb-menu-group-icon";
 
         
         //0 url

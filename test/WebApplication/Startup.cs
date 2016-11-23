@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using SharpBatch.DependencyInjection;
 using SharpBatch.Traking.Abstraction;
 using SharpBatch.Traking.Memory;
-using SharpBatch.Web;
 using LinkedAssemblyTest;
 
 
@@ -39,13 +38,10 @@ namespace TestWebApplication
             // Setup a bit more localization.
             services.AddTransient<ISharpBatchTraking, TrakingMemory>();
 
-            var embeddedProvider = new EmbeddedFileProvider(typeof(SharpBatchWebModel).GetTypeInfo().Assembly);
-
             // Add framework services.
             services.AddSharpBatch();
-            services
-                .AddMvc()
-                .AddRazorOptions(options => options.FileProviders.Add(embeddedProvider));
+            services.AddMvc();
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
