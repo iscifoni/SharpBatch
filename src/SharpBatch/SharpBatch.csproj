@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <Description>Middleware to manage batch projects</Description>
+    <VersionPrefix>1.0.0</VersionPrefix>
+	<VersionSuffix>Alpha</VersionSuffix>  
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>SharpBatch</AssemblyName>
+    <PackageId>SharpBatch</PackageId>
+    <PackageTags>batch;sharpbatch</PackageTags>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpBatch.JSonSerializer\SharpBatch.JSonSerializer.csproj" />
+    <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Traking.Abstraction.csproj" />
+    <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Traking.Memory.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.0-preview3-25814" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0-preview3-25814" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0-preview3-25413-01" />
+  </ItemGroup>
+</Project>
