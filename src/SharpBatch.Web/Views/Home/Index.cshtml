@@ -1,27 +1,46 @@
 ﻿
 <div class="row">
     <!-- Small boxes (Stat box) -->
-    <div sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-bag" sb-smallbox-url="">
+    <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-stats-bars" sb-smallbox-url="">
         <h3>150</h3>
         <p>New Orders</p>
-    </div>
+    </SmallBox>
+    <SmallBox sb-smallbox-bgcolor="bg-green" sb-smallbox-icon="ion-bag" sb-smallbox-url="">
+        <h3>53<sup style="font-size: 20px">%</sup></h3>
+        <p>Bounce rate</p>
+    </SmallBox>
 </div>
+
 <div class="row">
-    <div sb-infobox-bgcolor="bg-aqua" sb-infobox-icon="fa-envelope-o">
-        <span class="info-box-text">Messages</span>
+    <InfoBox sb-infobox-bgcolor="bg-aqua" sb-infobox-icon="fa-envelope-o">
+        <InfoBoxText>Messages</InfoBoxText>
         <span class="info-box-number">123,4</span>
-    </div>
+    </InfoBox>
 </div>
 
-    <div class="callout callout-info">
-        <h4>Tip!</h4>
-        <p>
-            Add the layout-boxed class to the body tag to get this layout. The boxed layout is helpful when working on
-            large screens because it prevents the site from stretching very wide.
-        </p>
+<div class="row">
+    <div class="col-md-6">
+        <Box>
+            <BoxHeader>
+                <BoxTitle>Application Box</BoxTitle>
+            </BoxHeader>
+            <BoxBody>
+                lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem
+                lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem
+                lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem lorem ipso dorem
+            </BoxBody>
+        </Box>
     </div>
-
+</div>
 <div class="callout callout-info">
+    <h4>Tip!</h4>
+    <p>
+        Add the layout-boxed class to the body tag to get this layout. The boxed layout is helpful when working on
+        large screens because it prevents the site from stretching very wide.
+    </p>
+</div>
+
+<div class="callout callout-danger">
     <h4>Tip!</h4>
     <p>
         Add the layout-boxed class to the body tag to get this layout. The boxed layout is helpful when working on

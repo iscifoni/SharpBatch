@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
 {
-    [HtmlTargetElement("div", Attributes = BgColorAttributeName)]
-    [HtmlTargetElement("div", Attributes = IconAttributeName)]
-    [HtmlTargetElement("div", Attributes = UrlAttributeName)]
+    [HtmlTargetElement("SmallBox", Attributes = BgColorAttributeName)]
+    [HtmlTargetElement("SmallBox", Attributes = IconAttributeName)]
+    [HtmlTargetElement("SmallBox", Attributes = UrlAttributeName)]
     public class SmallBoxTagHelper:TagHelper
     {
         private const string BgColorAttributeName = "sb-smallbox-bgcolor";

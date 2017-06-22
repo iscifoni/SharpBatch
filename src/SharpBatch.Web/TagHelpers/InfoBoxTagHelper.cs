@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
 {
-    [HtmlTargetElement("div", Attributes = BgColorAttributeName)]
-    [HtmlTargetElement("div", Attributes = IconAttributeName)]
+    [HtmlTargetElement("InfoBox", Attributes = BgColorAttributeName)]
+    [HtmlTargetElement("InfoBox", Attributes = IconAttributeName)]
     public class InfoBoxTagHelper : TagHelper
     {
         private const string BgColorAttributeName = "sb-infobox-bgcolor";
