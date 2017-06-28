@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
@@ -27,9 +30,13 @@ namespace SharpBatch.Web.TagHelpers
 
             var content = await output.GetChildContentAsync();
 
-            var htmlResponse = string.Format(boxContent, content.GetContent());
+            var tagBuilder = new TagBuilder("div");
+            tagBuilder.InnerHtml.SetHtmlContent(content);
+            tagBuilder.AddCssClass("box-title");
 
-            output.Content.SetHtmlContent(htmlResponse);
+            output.Content.SetHtmlContent(tagBuilder.InnerHtml);
+            output.MergeAttributes(tagBuilder);
+            output.TagName = tagBuilder.TagName;
         }
     }
 }

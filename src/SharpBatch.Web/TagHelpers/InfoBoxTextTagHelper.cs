@@ -27,6 +27,7 @@ namespace SharpBatch.Web.TagHelpers
 
             var htmlResponse = string.Format(boxContent, content.GetContent());
 
+            output.TagName = "div";
             output.Content.SetHtmlContent(htmlResponse);
         }
     }
