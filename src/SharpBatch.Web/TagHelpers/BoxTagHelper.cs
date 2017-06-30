@@ -29,13 +29,21 @@ namespace SharpBatch.Web.TagHelpers
 
             var content = await output.GetChildContentAsync();
 
-            var tagBuilder = new TagBuilder("div");
-            tagBuilder.InnerHtml.SetHtmlContent(content);
-            tagBuilder.AddCssClass("box");
+            output.Content.SetHtmlContent(content);
+            //output.MergeAttributes(tagBuilder);
+            if (!output.Attributes.ContainsName("class"))
+            {
+                output.Attributes.Add("class", "box");
+            }
+            else
+            {
+                var found = output.Attributes.TryGetAttribute("class", out var classAttribute);
 
-            output.Content.SetHtmlContent(tagBuilder.InnerHtml);
-            output.MergeAttributes(tagBuilder);
-            output.TagName = tagBuilder.TagName;
+                TagHelperAttribute newClassAttribute = new TagHelperAttribute("class", classAttribute.Value + " box");
+                output.Attributes.SetAttribute(newClassAttribute);
+            }
+
+            output.TagName = "div";
         }
     }
 }

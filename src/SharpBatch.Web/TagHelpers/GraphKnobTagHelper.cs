@@ -9,13 +9,16 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
 {
-    [HtmlTargetElement("GraphKnob", Attributes = ValueName)]
-    [HtmlTargetElement("GraphKnob", Attributes = HeightName)]
-    [HtmlTargetElement("GraphKnob", Attributes = WidthName)]
-    [HtmlTargetElement("GraphKnob", Attributes = TitleName)]
-    [HtmlTargetElement("GraphKnob", Attributes = SkinName)]
-    [HtmlTargetElement("GraphKnob", Attributes = ThicknessName)]
-    [HtmlTargetElement("GraphKnob", Attributes = FgColorName)]
+    [HtmlTargetElement("GraphKnob")]
+    [HtmlTargetElement(Attributes = ValueName)]
+    [HtmlTargetElement(Attributes = HeightName)]
+    [HtmlTargetElement(Attributes = WidthName)]
+    [HtmlTargetElement(Attributes = TitleName)]
+    [HtmlTargetElement(Attributes = SkinName)]
+    [HtmlTargetElement(Attributes = ThicknessName)]
+    [HtmlTargetElement(Attributes = FgColorName)]
+    [HtmlTargetElement(Attributes = AngleArcName)]
+    [HtmlTargetElement(Attributes = AngleOffsetName)]
     public class GraphKnobTagHelper:TagHelper
     {
         private const string ValueName = "sb-Knob-Value";
@@ -25,6 +28,14 @@ namespace SharpBatch.Web.TagHelpers
         private const string SkinName = "sb-Knob-Skin";
         private const string ThicknessName = "sb-Knob-Thickness";
         private const string FgColorName = "sb-Knob-fgColor";
+        private const string AngleArcName = "sb-knob-angleArc";
+        private const string AngleOffsetName = "sb-knob-angleOffset";
+
+        [HtmlAttributeName(AngleArcName)]
+        public string AngleArc { get; set; }
+
+        [HtmlAttributeName(AngleOffsetName)]
+        public string AngleOffset { get; set; }
 
         [HtmlAttributeName(ValueName)]
         public string Value { get; set; }
@@ -96,6 +107,17 @@ namespace SharpBatch.Web.TagHelpers
             {
                 tagBuilder.Attributes.Add("data-fgColor", FgColor);
             }
+
+            if (!string.IsNullOrEmpty(AngleArc))
+            {
+                tagBuilder.Attributes.Add("data-angleArc", AngleArc);
+            }
+
+            if (!string.IsNullOrEmpty(AngleOffset))
+            {
+                tagBuilder.Attributes.Add("data-angleOffset", AngleOffset);
+            }
+
 
             tagBuilder.Attributes.Add("data-readonly", "true");
             
