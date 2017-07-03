@@ -8,15 +8,14 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>SharpBatch.Traking.Memory</AssemblyName>
+    <AssemblyName>SharpBatch.Tracking.Memory</AssemblyName>
     <PackageId>SharpBatch.Traking.Memory</PackageId>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Traking.Abstraction.csproj" />
+    <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>

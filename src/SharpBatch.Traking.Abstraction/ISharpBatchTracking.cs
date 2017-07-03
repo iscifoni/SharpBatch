@@ -17,19 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SharpBatch.Traking.Abstraction
+namespace SharpBatch.Tracking.Abstraction
 {
-    public class BatchTrakingModel
+    public interface ISharpBatchTracking
     {
-        public string BatchName { get; set; }
-        public Guid SessionId { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public List<DateTime> Pings { get; set; } = new List<DateTime>();
-        public StatusEnum State { get; set; }
-        public List<string> Messages { get; set; } = new List<string>();
-        public List<Exception> Ex { get; set; }
+        Task PingAsync(Guid sessionId);
+        Task StartAsync(string BatchName, Guid sessionId);
+        Task StopAsync(Guid sessionId);
+        Task<BatchTrackingModel> GetStatusAsync(Guid SessionId);
 
-        public string MachineName => System.Environment.MachineName;
+        List<BatchTrackingModel> GetRunning();
+        List<BatchTrackingModel> GetErrors();
+        List<BatchTrackingModel> GetDataOfBatchName(string batchName);
     }
 }

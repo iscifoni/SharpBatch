@@ -21,7 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SharpBatch.internals;
 using SharpBatch;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<SystemActionProvider>();
 
             //Traking
-            services.TryAddSingleton<ISharpBatchTrakingFactory, SharpBatchTrakingFactory>();
+            services.TryAddSingleton<ISharpBatchTrackingFactory, SharpBatchTrackingFactory>();
 
             services.TryAddScoped<IBatchUtils, BatchUtils>();
             return services;

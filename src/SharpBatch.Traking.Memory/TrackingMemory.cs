@@ -16,15 +16,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
-namespace SharpBatch.Traking.Memory
+namespace SharpBatch.Tracking.Memory
 {
-    public class TrakingMemory:ISharpBatchTraking
+    public class TrackingMemory:ISharpBatchTracking
     {
-        private Dictionary<Guid, BatchTrakingModel> _traks = new Dictionary<Guid, BatchTrakingModel>();
+        private Dictionary<Guid, BatchTrackingModel> _traks = new Dictionary<Guid, BatchTrackingModel>();
 
-        public Task<BatchTrakingModel> GetStatusAsync(Guid sessionId)
+        public Task<BatchTrackingModel> GetStatusAsync(Guid sessionId)
         {
             return Task.Run(() =>
              {
@@ -39,7 +39,7 @@ namespace SharpBatch.Traking.Memory
 
         private void Ping(Guid sessionId)
         {
-            BatchTrakingModel traking;
+            BatchTrackingModel traking;
             _traks.TryGetValue(sessionId, out traking);
             traking.Pings.Add(DateTime.Now);
             traking.State = StatusEnum.Running;
@@ -52,7 +52,7 @@ namespace SharpBatch.Traking.Memory
 
         private void Start(string batchName, Guid sessionId)
         {
-            _traks.Add(sessionId, new BatchTrakingModel()
+            _traks.Add(sessionId, new BatchTrackingModel()
             {
                 BatchName = batchName,
                 SessionId = sessionId,
@@ -68,37 +68,37 @@ namespace SharpBatch.Traking.Memory
 
         private void Stop(Guid sessionId)
         {
-            BatchTrakingModel traking;
+            BatchTrackingModel traking;
             _traks.TryGetValue(sessionId, out traking);
             traking.EndDate = DateTime.Now;
             traking.State = StatusEnum.Stopped;
         }
 
-        public List<BatchTrakingModel> GetRunning()
+        public List<BatchTrackingModel> GetRunning()
         {
             return _traks
                 .Where(p => p.Value.State == StatusEnum.Running)
                 .OrderByDescending(o => o.Value.StartDate)
                 .Select(m => m.Value)
-                .ToList<BatchTrakingModel>();
+                .ToList<BatchTrackingModel>();
         }
 
-        public List<BatchTrakingModel> GetErrors()
+        public List<BatchTrackingModel> GetErrors()
         {
             return _traks
                 .Where(p=>p.Value.State == StatusEnum.Error)
                 .OrderByDescending(o=>o.Value.StartDate)
                 .Select(m=>m.Value)
-                .ToList<BatchTrakingModel>() ;
+                .ToList<BatchTrackingModel>() ;
         }
 
-        public List<BatchTrakingModel> GetDataOfBatchName(string batchName)
+        public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
         {
             return _traks
                 .Where(p => p.Value.BatchName.Equals(batchName, StringComparison.OrdinalIgnoreCase))
                 .OrderByDescending(o => o.Value.StartDate)
                 .Select(m => m.Value)
-                .ToList<BatchTrakingModel>();
+                .ToList<BatchTrackingModel>();
         }
 
     }

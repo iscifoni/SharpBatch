@@ -11,8 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using SharpBatch.Traking.Abstraction;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Abstraction;
+using SharpBatch.Tracking.Memory;
 
 
 namespace SharpBatch.Web
@@ -28,7 +28,7 @@ namespace SharpBatch.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.TryAddSingleton<ISharpBatchTraking, TrakingMemory>();
+            services.TryAddSingleton<ISharpBatchTracking, TrackingMemory>();
             //var embeddedProvider = new EmbeddedFileProvider(typeof(Model).GetTypeInfo().Assembly);
             services.AddMvc();
                 //.AddRazorOptions(options => options.FileProviders.Add(embeddedProvider));

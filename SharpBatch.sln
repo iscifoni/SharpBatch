@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26606.0
+VisualStudioVersion = 15.0.26608.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{89031800-C001-447A-A3D7-8EDE594C2A9E}"
 EndProject
@@ -12,9 +12,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Abstraction", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.JSonSerializer", "src\SharpBatch.JSonSerializer\SharpBatch.JSonSerializer.csproj", "{24510CB6-FBC5-42B2-AAEB-217391563FD6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Traking.Abstraction", "src\SharpBatch.Traking.Abstraction\SharpBatch.Traking.Abstraction.csproj", "{CBD7AB80-0D38-42FD-949F-B3C959C710F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Abstraction", "src\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj", "{CBD7AB80-0D38-42FD-949F-B3C959C710F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Traking.Memory", "src\SharpBatch.Traking.Memory\SharpBatch.Traking.Memory.csproj", "{B42D6FC1-A683-40D0-BEC2-D60ACEC50CAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Memory", "src\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj", "{B42D6FC1-A683-40D0-BEC2-D60ACEC50CAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Web", "src\SharpBatch.Web\SharpBatch.Web.csproj", "{980BFBF2-CD2D-47FF-9AE7-070BDA6E5FAC}"
 EndProject

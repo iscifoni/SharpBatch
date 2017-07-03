@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
     <ProjectReference Include="..\LinkedAssembly\LinkedAssembly.csproj" />
     <ProjectReference Include="..\..\src\SharpBatch\SharpBatch.csproj" />
     <ProjectReference Include="..\..\src\SharpBatch.Abstraction\SharpBatch.Abstraction.csproj" />
-    <ProjectReference Include="..\..\src\SharpBatch.Traking.Memory\SharpBatch.Traking.Memory.csproj" />
   </ItemGroup>
 
   <ItemGroup>

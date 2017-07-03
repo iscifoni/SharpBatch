@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch
 {
@@ -16,7 +16,7 @@ namespace SharpBatch
 
         public void onExecuting(BatchExecutionContext context)
         {
-            var batchTraking = (ISharpBatchTraking)context.RequestServices.GetService(typeof(ISharpBatchTraking));
+            var batchTraking = (ISharpBatchTracking)context.RequestServices.GetService(typeof(ISharpBatchTracking));
             var responseObject = context.ShareMessage.Get<IResponseObject>();
             var trakingModel = batchTraking.GetStatusAsync(context.SessionId)?.Result ;
 

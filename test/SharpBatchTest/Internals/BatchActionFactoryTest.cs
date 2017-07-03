@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Memory;
 using Xunit;
 
 namespace SharpBatchTest.Internals
@@ -18,9 +18,9 @@ namespace SharpBatchTest.Internals
         public void BatchActionFactoryTest_getProvider(BatchUrlManagerCommand command)
         {
             //Arrange
-            var sharpBatchTrakingFactory = new Mock<ISharpBatchTrakingFactory>(MockBehavior.Strict);
+            var sharpBatchTrakingFactory = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
             sharpBatchTrakingFactory.Setup((s) => s.getTrakingProvider())
-                .Returns(new TrakingMemory())
+                .Returns(new TrackingMemory())
                 .Verifiable();
 
             IPropertyInvoker propertyInvoker = new DefaultPropertyInvoker();

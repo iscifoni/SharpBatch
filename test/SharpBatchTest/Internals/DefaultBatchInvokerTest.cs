@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Memory;
 using Xunit;
 
 namespace SharpBatchTest.Internals
@@ -24,8 +24,8 @@ namespace SharpBatchTest.Internals
             //methodActivator.Setup((s) => s.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>()))
             var methodActivator = new MethodActivator();
 
-            var isharpBatchTrackingActivator = new Mock<ISharpBatchTrakingFactory>(MockBehavior.Strict);
-            isharpBatchTrackingActivator.Setup((s) => s.getTrakingProvider()).Returns(new TrakingMemory()).Verifiable();
+            var isharpBatchTrackingActivator = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
+            isharpBatchTrackingActivator.Setup((s) => s.getTrakingProvider()).Returns(new TrackingMemory()).Verifiable();
 
             DefaultBatchInvoker defaultBatchInvoker = new DefaultBatchInvoker(
                 propertyInvoker.Object, 

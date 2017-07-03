@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Memory;
 using Xunit;
 
 namespace SharpBatchTest.Internals

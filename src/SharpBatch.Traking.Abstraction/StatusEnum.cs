@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SharpBatch.Traking.Abstraction
+namespace SharpBatch.Tracking.Abstraction
 {
     public enum StatusEnum
     {

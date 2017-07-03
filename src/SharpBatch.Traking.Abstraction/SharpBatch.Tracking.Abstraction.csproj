@@ -7,7 +7,7 @@
 	  <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>SharpBatch.Traking.Abstraction</AssemblyName>
+    <AssemblyName>SharpBatch.Tracking.Abstraction</AssemblyName>
     <PackageId>SharpBatch.Traking.Abstraction</PackageId>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

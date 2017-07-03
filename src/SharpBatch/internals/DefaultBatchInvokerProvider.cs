@@ -17,18 +17,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch.internals
 {
     public class DefaultBatchInvokerProvider:IBatchInvokerProvider
     {
         private IBatchInvoker _batchInvoker;
-        private ISharpBatchTraking _batchTraking;
+        private ISharpBatchTracking _batchTraking;
 
         public DefaultBatchInvokerProvider(
             IBatchInvoker batchInvoker,
-            ISharpBatchTrakingFactory batchTrakingFactory)
+            ISharpBatchTrackingFactory batchTrakingFactory)
         {
             if (batchInvoker== null)
             {

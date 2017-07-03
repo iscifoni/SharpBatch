@@ -16,21 +16,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SharpBatch.Traking.Abstraction;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Abstraction;
+using SharpBatch.Tracking.Memory;
 
 
 namespace SharpBatch.internals
 {
-    internal class SharpBatchTrakingFactory:ISharpBatchTrakingFactory
+    internal class SharpBatchTrackingFactory:ISharpBatchTrackingFactory
     {
-        ISharpBatchTraking _sharpBatchTraking;
-        public SharpBatchTrakingFactory(IServiceProvider serviceProvider)
+        ISharpBatchTracking _sharpBatchTraking;
+        public SharpBatchTrackingFactory(IServiceProvider serviceProvider)
         {
-            var sharpBatchTrakingService = (ISharpBatchTraking)serviceProvider.GetService(typeof(ISharpBatchTraking));
+            var sharpBatchTrakingService = (ISharpBatchTracking)serviceProvider.GetService(typeof(ISharpBatchTracking));
             if (sharpBatchTrakingService == null)
             {
-                _sharpBatchTraking = new TrakingMemory();
+                _sharpBatchTraking = new TrackingMemory();
             }
             else
             {
@@ -38,7 +38,7 @@ namespace SharpBatch.internals
             }
         }
 
-        public ISharpBatchTraking getTrakingProvider()
+        public ISharpBatchTracking getTrakingProvider()
         {
             return _sharpBatchTraking;
         }

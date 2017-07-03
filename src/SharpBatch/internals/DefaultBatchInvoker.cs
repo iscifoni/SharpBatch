@@ -22,7 +22,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch.internals
 {
@@ -30,9 +30,9 @@ namespace SharpBatch.internals
     {
         IPropertyInvoker _propertyInvoker;
         MethodActivator _activator;
-        ISharpBatchTraking _sharpBatchTraking;
+        ISharpBatchTracking _sharpBatchTraking;
         
-        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator, ISharpBatchTrakingFactory trakingFactory )
+        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator, ISharpBatchTrackingFactory trakingFactory )
         {
             if (propertyInvoker == null)
             {

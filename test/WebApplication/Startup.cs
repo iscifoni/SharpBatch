@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using SharpBatch.DependencyInjection;
-using SharpBatch.Traking.Abstraction;
-using SharpBatch.Traking.Memory;
+using SharpBatch.Tracking.Abstraction;
+using SharpBatch.Tracking.Memory;
 using LinkedAssemblyTest;
 
 
@@ -36,7 +36,7 @@ namespace TestWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             // Setup a bit more localization.
-            services.AddTransient<ISharpBatchTraking, TrakingMemory>();
+            services.AddTransient<ISharpBatchTracking, TrackingMemory>();
 
             // Add framework services.
             services.AddSharpBatch();

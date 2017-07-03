@@ -16,14 +16,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SharpBatch.Traking.Abstraction;
+using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch.internals
 {
     public class SystemActionProvider : IBatchActionProvider
     {
-        private ISharpBatchTraking _trakingProvider;
-        public SystemActionProvider(ISharpBatchTrakingFactory trakingFactory)
+        private ISharpBatchTracking _trakingProvider;
+        public SystemActionProvider(ISharpBatchTrackingFactory trakingFactory)
         {
             _trakingProvider = trakingFactory.getTrakingProvider();
         }
