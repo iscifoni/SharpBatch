@@ -58,7 +58,7 @@ namespace SharpBatch.Web.TagHelpers
                 badgeTagBuilder.AddCssClass($"badge {BadgeColor??string.Empty}");
                 badgeTagBuilder.InnerHtml.SetContent(BadgeValue);
 
-                tagBuilder.InnerHtml.AppendHtml(badgeTagBuilder.InnerHtml);
+                tagBuilder.InnerHtml.AppendHtml(badgeTagBuilder);
             }
 
             if (!string.IsNullOrEmpty(Img))
@@ -66,7 +66,7 @@ namespace SharpBatch.Web.TagHelpers
                 var imgTagBuilder = new TagBuilder("i");
                 imgTagBuilder.AddCssClass($"fa {Img}");
 
-                tagBuilder.InnerHtml.AppendHtml(imgTagBuilder.InnerHtml);
+                tagBuilder.InnerHtml.AppendHtml(imgTagBuilder);
             }
 
             if (!string.IsNullOrEmpty(Label))
