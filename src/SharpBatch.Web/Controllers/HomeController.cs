@@ -24,10 +24,6 @@ namespace SharpBatch.Web.Controllers
             return View();
         }
 
-        public IActionResult RunningBatchPartial()
-        {
-            var model = _trackingProvider.GetRunning();
-            return PartialView(model);
-        }
+       
     }
 }

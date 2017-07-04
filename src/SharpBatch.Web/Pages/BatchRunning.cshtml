@@ -1,6 +1,8 @@
-﻿@model List<SharpBatch.Traking.Abstraction.BatchTrakingModel>
+﻿@page
+@inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+
 @{
-    foreach(var item in Model)
+    foreach (var item in trackingProvider.GetRunning())
     {
         <div>@item.BatchName</div>
         <div>@item.StartDate</div>

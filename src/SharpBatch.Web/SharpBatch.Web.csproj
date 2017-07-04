@@ -10,7 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="**\*.cshtml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Views\Home\Index.cshtml" />
+    <EmbeddedResource Include="Views\Shared\_Layout.cshtml" />
+    <EmbeddedResource Include="Views\Tracking\RunningBatchPartial.cshtml" />
+    <EmbeddedResource Include="Views\_ViewImports.cshtml" />
+    <EmbeddedResource Include="Views\_ViewStart.cshtml" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -31,7 +35,10 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\" />
-    <Folder Include="Views\Tracking\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Tracking\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

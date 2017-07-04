@@ -9,17 +9,23 @@ namespace SharpBatch.Web.Controllers
 {
     public class TrackingController:Controller
     {
-        ISharpBatchTracking _sharpBatchTraking;
+        ISharpBatchTracking _trackingProvider;
 
-        public TrackingController(ISharpBatchTracking sharpBatchTraking)
+        public TrackingController(ISharpBatchTracking trackingProvider)
         {
-            _sharpBatchTraking = sharpBatchTraking; 
+            _trackingProvider = trackingProvider; 
         }   
 
         [HttpGet]
-        public IActionResult getRunningBatch()
+        public IActionResult Index()
         {
-            return View(_sharpBatchTraking.GetRunning());
+            return View();
+        }
+
+        public IActionResult RunningBatchPartial()
+        {
+            var model = _trackingProvider.GetRunning();
+            return PartialView(model);
         }
     }
 }
