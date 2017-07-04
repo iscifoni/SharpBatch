@@ -27,7 +27,9 @@ namespace SharpBatch.Tracking.Abstraction
         Task<BatchTrackingModel> GetStatusAsync(Guid SessionId);
 
         List<BatchTrackingModel> GetRunning();
+        int GetRunningCount();
         List<BatchTrackingModel> GetErrors();
+        int GetErrorsCount();
         List<BatchTrackingModel> GetDataOfBatchName(string batchName);
     }
 }

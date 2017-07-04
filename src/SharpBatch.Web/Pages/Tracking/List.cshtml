@@ -1,0 +1,54 @@
+﻿@page "{status?}"
+@using SharpBatch.Tracking.Abstraction
+@inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+@functions{ 
+    [FromRoute]
+    public SharpBatch.Tracking.Abstraction.StatusEnum status { get; set; }
+}
+@{ 
+    List<SharpBatch.Tracking.Abstraction.BatchTrackingModel> data=new List<SharpBatch.Tracking.Abstraction.BatchTrackingModel>();
+    //var status = (string)ViewContext.RouteData.Values["status"];
+
+    switch(status)
+    {
+        case StatusEnum.Running :
+            data = trackingProvider.GetRunning();
+            break;
+        case StatusEnum.Error:
+            data = trackingProvider.GetErrors();
+            break;
+        case StatusEnum.Stopped:
+        case StatusEnum.Started:
+            break;
+
+    }
+}
+
+<Box>
+    @*<BoxHeader>
+        <BoxTitle>@status.ToString() Batch Tracking list</BoxTitle>
+    </BoxHeader>*@
+    <BoxBody>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Batch Name</th>
+                        <th>Start</th>
+                        <th>Machine Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in data)
+            {
+                        <tr>
+                            <td>@item.BatchName</td>
+                            <td>@item.StartDate</td>
+                            <td>@item.MachineName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </BoxBody>
+</Box>
