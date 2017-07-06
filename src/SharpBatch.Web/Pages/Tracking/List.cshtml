@@ -1,28 +1,35 @@
 ﻿@page "{status?}"
 @using SharpBatch.Tracking.Abstraction
 @inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+
+
 @functions{ 
     [FromRoute]
-    public SharpBatch.Tracking.Abstraction.StatusEnum status { get; set; }
-}
-@{ 
-    List<SharpBatch.Tracking.Abstraction.BatchTrackingModel> data=new List<SharpBatch.Tracking.Abstraction.BatchTrackingModel>();
-    //var status = (string)ViewContext.RouteData.Values["status"];
+    public StatusEnum status { get; set; }
 
-    switch(status)
+    [BindProperty]
+    public List<BatchTrackingModel> Data { get; set; }
+
+    public IActionResult OnGet()
     {
-        case StatusEnum.Running :
-            data = trackingProvider.GetRunning();
-            break;
-        case StatusEnum.Error:
-            data = trackingProvider.GetErrors();
-            break;
-        case StatusEnum.Stopped:
-        case StatusEnum.Started:
-            break;
+        switch (status)
+        {
+            case StatusEnum.Running:
+                Data = trackingProvider.GetRunning();
+                break;
+            case StatusEnum.Error:
+                Data = trackingProvider.GetErrors();
+                break;
+            case StatusEnum.Stopped:
+            case StatusEnum.Started:
+                break;
 
+        }
+
+        return Page();
     }
 }
+
 
 <Box>
     @*<BoxHeader>
@@ -39,8 +46,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in data)
-            {
+                    @foreach (var item in Data)
+                    {
                         <tr>
                             <td>@item.BatchName</td>
                             <td>@item.StartDate</td>
