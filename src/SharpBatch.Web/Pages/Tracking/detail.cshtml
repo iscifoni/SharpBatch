@@ -1,0 +1,167 @@
+﻿@page "{BatchName}"
+@using SharpBatch.Tracking.Abstraction
+@inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+
+@functions{
+
+    [FromRoute]
+    public string BatchName { get; set; }
+
+    [BindProperty]
+    public List<BatchTrackingModel> BatchList { get; set; }
+
+    public IActionResult OnGet()
+    {
+        BatchList = trackingProvider.GetDataOfBatchName(BatchName);
+
+        BatchList = new List<BatchTrackingModel>();
+        BatchList.Add(new BatchTrackingModel()
+        {
+            BatchName = "Batch1",
+            StartDate = DateTime.Now,
+            EndDate = null,
+            SessionId = Guid.NewGuid(),
+            State = StatusEnum.Running,
+            Pings = new List<DateTime>()
+                    {
+                        new DateTime(2017, 07, 01, 12, 00, 00),
+                        new DateTime(2017, 07, 01, 12, 00, 10),
+                        new DateTime(2017, 07, 01, 12, 00, 20),
+                        new DateTime(2017, 07, 01, 12, 00, 30),
+                        new DateTime(2017, 07, 01, 12, 00, 40),
+                        new DateTime(2017, 07, 01, 12, 00, 50),
+                        new DateTime(2017, 07, 01, 12, 01, 00),
+                        new DateTime(2017, 07, 01, 12, 01, 10),
+                        new DateTime(2017, 07, 01, 12, 01, 20),
+                        new DateTime(2017, 07, 01, 12, 01, 30),
+                    }
+
+        });
+
+        BatchList.Add(new BatchTrackingModel()
+        {
+            BatchName = "Batch1",
+            StartDate = DateTime.Now,
+            EndDate = null,
+            SessionId = Guid.NewGuid(),
+            State = StatusEnum.Stopped,
+            Pings = new List<DateTime>()
+                    {
+                        new DateTime(2017, 07, 01, 12, 00, 00),
+                        new DateTime(2017, 07, 01, 12, 00, 10),
+                        new DateTime(2017, 07, 01, 12, 00, 20),
+                        new DateTime(2017, 07, 01, 12, 00, 30),
+                        new DateTime(2017, 07, 01, 12, 00, 40),
+                        new DateTime(2017, 07, 01, 12, 00, 50),
+                        new DateTime(2017, 07, 01, 12, 01, 00),
+                        new DateTime(2017, 07, 01, 12, 01, 10),
+                        new DateTime(2017, 07, 01, 12, 01, 20),
+                        new DateTime(2017, 07, 01, 12, 01, 30),
+                    },
+            Messages = new List<string>()
+            {
+                "Message 1 some thimeMessage 1 some thimeMessage 1 some thimeMessage 1 some thimeMessage 1 some thimeMessage 1 some thimeMessage 1 some thimeMessage 1 some thime",
+                "Message 2 mote times Message 2 mote times Message 2 mote times Message 2 mote times Message 2 mote times Message 2 mote times Message 2 mote times Message 2 mote times "
+            }
+        });
+
+        BatchList.Add(new BatchTrackingModel()
+        {
+            BatchName = "Batch1",
+            StartDate = DateTime.Now,
+            EndDate = null,
+            SessionId = Guid.NewGuid(),
+            State = StatusEnum.Stopped,
+            Pings = new List<DateTime>()
+                    {
+                        new DateTime(2017, 07, 01, 12, 00, 00),
+                        new DateTime(2017, 07, 01, 12, 00, 10),
+                        new DateTime(2017, 07, 01, 12, 00, 20),
+                        new DateTime(2017, 07, 01, 12, 00, 30),
+                        new DateTime(2017, 07, 01, 12, 00, 40),
+                        new DateTime(2017, 07, 01, 12, 00, 50),
+                        new DateTime(2017, 07, 01, 12, 01, 00),
+                        new DateTime(2017, 07, 01, 12, 01, 10),
+                        new DateTime(2017, 07, 01, 12, 01, 20),
+                        new DateTime(2017, 07, 01, 12, 01, 30),
+                    },
+            Ex = new List<Exception>()
+            {
+                new Exception("Error 1"),
+                new Exception("Error 2")
+            }
+        });
+        return Page();
+
+    }
+}
+
+@section Title{ 
+     Tracking detail <small>@BatchName</small>
+}
+
+<Box >
+    <BoxBody>
+        @foreach (var item in BatchList)
+        {
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-2"><b>BatchName :</b></div>
+                    <div class="col-sm-4">@item.BatchName</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><b>Session ID :</b></div>
+                    <div class="col-sm-8">@item.SessionId</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><b>StartDate :</b></div>
+                    <div class="col-sm-4">@item.StartDate</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><b>EndDate :</b></div>
+                    <div class="col-sm-4">@item.EndDate</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><b>Pings :</b></div>
+                    <div class="col-sm-4">
+                    @if (item.Pings != null)
+                    {
+                        foreach (var itmPing in item.Pings.OrderByDescending(p=> p).Take(5) )
+                        {
+                        <text>@itmPing.ToString("HH:mm:ss")</text><br/>
+                        }
+                    }</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><b>State :</b></div>
+                    <div class="col-sm-4">@item.State.ToString()</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10"><b>Messages :</b><br />
+                    @if (item.Messages != null)
+                    {
+                        foreach (var itmMsg in item.Messages)
+                        {
+                            <text>@itmMsg</text><br />
+                        }
+                    }</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10"><b>Exception :</b><br>
+                    @if (item.Ex != null)
+                    {
+                        foreach (var itmEx in item.Ex)
+                        {
+                        <text>@itmEx.ToString()</text><br />
+                        }
+                    }</div>
+                </div>
+                
+            </div>
+        </div>
+        <hr />
+        
+        }
+    </BoxBody>
+</Box>

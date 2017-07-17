@@ -111,7 +111,38 @@ namespace SharpBatch.Tracking.Memory
                 .ToList<BatchTrackingModel>();
         }
 
+        public Task AddExAsync(Guid sessionId, Exception ex)
+        {
+            return Task.Run(() => AddEx(sessionId, ex));
+        }
 
-       
+        private void AddEx(Guid sessionId, Exception ex)
+        {
+            BatchTrackingModel traking;
+            _traks.TryGetValue(sessionId, out traking);
+            if ( traking.Ex == null)
+            {
+                traking.Ex = new List<Exception>();
+            }
+
+            traking.Ex.Add(ex);
+        }
+
+        public Task AddMessageAsync(Guid sessionId, string Message)
+        {
+            return Task.Run(() => AddMessage(sessionId, Message));
+        }
+
+        private void AddMessage(Guid sessionId, string Message)
+        {
+            BatchTrackingModel traking;
+            _traks.TryGetValue(sessionId, out traking);
+            if (traking.Messages == null)
+            {
+                traking.Messages = new List<string>();
+            }
+
+            traking.Messages.Add(Message);
+        }
     }
 }

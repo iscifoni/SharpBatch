@@ -21,7 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview3-26006" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-rtm-26339" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.0-preview2-final" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
@@ -34,14 +38,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewComponents\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Tracking\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharpBatch.Tracking.DB\SharpBatch.Tracking.DB.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
   </ItemGroup>

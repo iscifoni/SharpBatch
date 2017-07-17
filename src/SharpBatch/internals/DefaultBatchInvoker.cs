@@ -105,6 +105,7 @@ namespace SharpBatch.internals
             {
                 IResponseObject responseObject = new ResponseObject(ex, context.SessionId);
                 context.ShareMessage.Set<IResponseObject>(responseObject);
+                await _sharpBatchTraking.AddExAsync(context.SessionId, ex);
 
                 //
                 var exceptionAttribute = actionToExecute.ExecutionAttribute.OfType<ExceptionAttribute>();

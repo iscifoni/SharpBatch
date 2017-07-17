@@ -310,7 +310,6 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-               
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <div sb-menu="true">
                     <div sb-menu-header-label="MAIN NAVIGATION"></div>
@@ -328,13 +327,13 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Dashboard
-                    <small>Control panel</small>
+                    @RenderSection("Title", required: false)
+                    @*Dashboard
+                    <small>Control panel</small>*@
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
+
+                @await Component.InvokeAsync("Breadcrumb")
+                <vc:Breadcrumb></vc:Breadcrumb>
             </section>
             <!-- Main content -->
             <section class="content">
