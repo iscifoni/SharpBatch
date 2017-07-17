@@ -4,17 +4,12 @@
 
   <PropertyGroup>
     <Product>SharpBatch</Product>
-	  <Description>Middleware to manage batch projects</Description>
-	  <RepositoryUrl>git://github.com/iscifoni/SharpBatch</RepositoryUrl>
+	<RepositoryUrl>git://github.com/iscifoni/SharpBatch</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)SharpBatch.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
     <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
-    <PackageReference Include="NETStandard.Library.NETFramework" Version="$(NETStandardLibraryNETFrameworkVersion)" />
-  </ItemGroup>
 
 </Project>
