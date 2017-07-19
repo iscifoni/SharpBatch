@@ -3,7 +3,7 @@
     <DependencyModelVersion>2.0.0-*</DependencyModelVersion>
     <NETStandardLibraryNETFrameworkVersion>2.0.0-*</NETStandardLibraryNETFrameworkVersion>
     <RoslynVersion>2.3.0-beta1</RoslynVersion>
-    <RuntimeFrameworkVersion Condition="'$(TargetFramework)'=='netcoreapp2.0'">2.0.0-*</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
 
   </PropertyGroup>
 </Project>
