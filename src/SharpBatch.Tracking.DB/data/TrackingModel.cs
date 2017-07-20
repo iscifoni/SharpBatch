@@ -27,13 +27,31 @@ namespace SharpBatch.Tracking.DB.data
 
         public static explicit operator BatchTrackingModel(TrackingModel trackingModel)
         {
+            List<Exception> exList = null;
+            if (trackingModel.Ex != null)
+            {
+                exList = trackingModel.Ex.Select(p => Newtonsoft.Json.JsonConvert.DeserializeObject<Exception>(p.Exception)).ToList<Exception>();
+            }
+
+            List<string> messageList = null;
+            if (trackingModel.Messages != null)
+            {
+                messageList = trackingModel.Messages.Select(p => p.Message).ToList<string>();
+            }
+
+            List<DateTime> pingList = null;
+            if (trackingModel.Pings != null)
+            {
+                pingList = trackingModel.Pings.Select(p => p.PingData).ToList<DateTime>();
+            }
+
             BatchTrackingModel batchTrackingModel = new BatchTrackingModel()
             {
                 BatchName = trackingModel.BatchName,
                 EndDate = trackingModel.EndDate,
-                Ex = trackingModel.Ex.Select(p => Newtonsoft.Json.JsonConvert.DeserializeObject<Exception>(p.Exception)).ToList<Exception>(),
-                Messages = trackingModel.Messages.Select(p => p.Message).ToList<string>(),
-                Pings = trackingModel.Pings.Select(p => p.PingData).ToList<DateTime>(),
+                Ex = exList ,
+                Messages = messageList,
+                Pings = pingList,
                 SessionId = trackingModel.SessionId,
                 StartDate = trackingModel.StartDate,
                 State = (StatusEnum)Enum.Parse(typeof(StatusEnum), trackingModel.State)
@@ -44,13 +62,31 @@ namespace SharpBatch.Tracking.DB.data
 
         public static explicit operator TrackingModel(BatchTrackingModel batchTrackingModel)
         {
+            List<ExceptionModel> exList = null;
+            if (batchTrackingModel.Ex != null)
+            {
+                exList = batchTrackingModel.Ex.Select(p => new ExceptionModel() { Exception = JsonConvert.SerializeObject(p) }).ToList<ExceptionModel>();
+            }
+
+            List<MessagesModel> messageList = null;
+            if(batchTrackingModel.Messages != null)
+            {
+                messageList = batchTrackingModel.Messages.Select(p => new MessagesModel() { Message = p }).ToList<MessagesModel>();
+            }
+
+            List<PingsModel> pingList = null;
+            if(batchTrackingModel.Pings != null)
+            {
+                pingList = batchTrackingModel.Pings.Select(p => new PingsModel() { PingData = p }).ToList<PingsModel>();
+            }
+
             TrackingModel trackingModel = new TrackingModel()
             {
                 BatchName = batchTrackingModel.BatchName,
                 EndDate = batchTrackingModel.EndDate,
-                Ex = batchTrackingModel.Ex.Select(p => new ExceptionModel() { Exception = JsonConvert.SerializeObject(p) }).ToList<ExceptionModel>(),
-                Messages = batchTrackingModel.Messages.Select(p => new MessagesModel() { Message = p }).ToList<MessagesModel>(),
-                Pings = batchTrackingModel.Pings.Select(p => new PingsModel() { PingData = p }).ToList<PingsModel>(),
+                Ex = exList,
+                Messages = messageList,
+                Pings = pingList,
                 SessionId = batchTrackingModel.SessionId,
                 StartDate = batchTrackingModel.StartDate,
                 State = batchTrackingModel.State.ToString()

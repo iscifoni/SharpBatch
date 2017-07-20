@@ -33,5 +33,6 @@ namespace SharpBatch.Tracking.Abstraction
         List<BatchTrackingModel> GetErrors();
         int GetErrorsCount();
         List<BatchTrackingModel> GetDataOfBatchName(string batchName);
+        List<BatchTrackingModel> GetAll();
     }
 }

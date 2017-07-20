@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SharpBatch.Tracking.Abstraction;
 using SharpBatch.Tracking.DB.data;
 
@@ -11,9 +12,11 @@ namespace SharpBatch.Tracking.DB
     public class TrackingDb : ISharpBatchTracking
     {
         private TrackingContext _trackingContext;
-        public TrackingDb(TrackingContext trackingContext)
+        private ILogger<TrackingDb> _logger;
+        public TrackingDb(TrackingContext trackingContext, ILogger<TrackingDb> logger)
         {
             _trackingContext = trackingContext;
+            _logger = logger;
         }
 
         public Task AddExAsync(Guid sessionId, Exception ex)
@@ -49,10 +52,21 @@ namespace SharpBatch.Tracking.DB
             });
         }
 
+        public List<BatchTrackingModel> GetAll()
+        {
+            return _trackingContext.Trackings
+                .Select(p => (BatchTrackingModel)p)
+                .ToList<BatchTrackingModel>();
+        }
+
         public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
         {
-            var trackings = _trackingContext.Trackings.Where(p => p.BatchName.Equals(batchName, StringComparison.OrdinalIgnoreCase)).ToList();
-            return null;
+            var trackings = _trackingContext
+                                .Trackings
+                                .Where(p => p.BatchName.Equals(batchName, StringComparison.OrdinalIgnoreCase))
+                                .Select(m=>(BatchTrackingModel)m)
+                                .ToList<BatchTrackingModel>();
+            return trackings;
         }
 
         public List<BatchTrackingModel> GetErrors()
@@ -92,6 +106,11 @@ namespace SharpBatch.Tracking.DB
                 try
                 {
                     var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
+                    if(tracking.Pings == null)
+                    {
+                        tracking.Pings = new List<PingsModel>();
+                    }
+
                     tracking.Pings.Add(new PingsModel()
                     {
                         PingData = DateTime.Now,
@@ -99,9 +118,9 @@ namespace SharpBatch.Tracking.DB
                     });
 
                     _trackingContext.SaveChanges();
-                }catch
+                }catch(Exception ex)
                 {
-                    //nop
+                    _logger.LogError(ex, "PyngAsync error:");
                 }
             });
         }
@@ -110,14 +129,23 @@ namespace SharpBatch.Tracking.DB
         {
             return Task.Run(() =>
             {
-                TrackingModel model = new TrackingModel()
+                try
                 {
-                    BatchName = BatchName,
-                    MachineName = System.Environment.MachineName,
-                    SessionId = sessionId,
-                    StartDate = DateTime.Now,
-                    State = StatusEnum.Running.ToString()                    
-                };
+                    TrackingModel model = new TrackingModel()
+                    {
+                        BatchName = BatchName,
+                        MachineName = System.Environment.MachineName,
+                        SessionId = sessionId,
+                        StartDate = DateTime.Now,
+                        State = StatusEnum.Running.ToString()
+                    };
+
+                    _trackingContext.Trackings.Add(model);
+                    _trackingContext.SaveChanges();
+                }catch(Exception ex)
+                {
+                    _logger.LogError(ex, "StartAsync error:");
+                }
             });
         }
 
@@ -132,9 +160,9 @@ namespace SharpBatch.Tracking.DB
 
                     _trackingContext.SaveChanges();
                 }
-                catch
+                catch(Exception ex)
                 {
-                    //nop
+                    _logger.LogError(ex, "StopAsync error:");
                 }
             });
         }

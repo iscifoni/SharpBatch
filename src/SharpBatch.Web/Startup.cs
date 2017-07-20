@@ -29,7 +29,7 @@ namespace SharpBatch.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSharpBatchTrackingDB(Configuration.GetConnectionString("DefaultConnection"));
-            services.TryAddSingleton<ISharpBatchTracking, TrackingMemory>();
+            //services.TryAddSingleton<ISharpBatchTracking, TrackingMemory>();
             //var embeddedProvider = new EmbeddedFileProvider(typeof(Model).GetTypeInfo().Assembly);
             services.AddMvc();
                 //.AddRazorOptions(options => options.FileProviders.Add(embeddedProvider));

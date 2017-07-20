@@ -144,5 +144,13 @@ namespace SharpBatch.Tracking.Memory
 
             traking.Messages.Add(Message);
         }
+
+        public List<BatchTrackingModel> GetAll()
+        {
+            return _traks
+                .OrderByDescending(o => o.Value.StartDate)
+                .Select(m => m.Value)
+                .ToList<BatchTrackingModel>();
+        }
     }
 }

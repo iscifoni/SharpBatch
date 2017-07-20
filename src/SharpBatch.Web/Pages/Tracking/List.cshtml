@@ -5,7 +5,7 @@
 
 @functions{ 
     [FromRoute]
-    public StatusEnum status { get; set; }
+    public StatusEnum? status { get; set; }
 
     [BindProperty]
     public List<BatchTrackingModel> Data { get; set; }
@@ -23,39 +23,62 @@
             case StatusEnum.Stopped:
             case StatusEnum.Started:
                 break;
-
+            default:
+                Data = trackingProvider.GetAll();
+                break;
         }
 
         return Page();
     }
 }
 
+@section Title{ 
+    Tracking List
+}
 
-<Box>
-    @*<BoxHeader>
-        <BoxTitle>@status.ToString() Batch Tracking list</BoxTitle>
-    </BoxHeader>*@
-    <BoxBody>
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Batch Name</th>
-                        <th>Start</th>
-                        <th>Machine Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Data)
-                    {
-                        <tr>
-                            <td>@item.BatchName</td>
-                            <td>@item.StartDate</td>
-                            <td>@item.MachineName</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </BoxBody>
-</Box>
+<div class="row">
+    <div class="col-md-8">
+        <Box>
+            @*<BoxHeader>
+                    <BoxTitle>@status.ToString() Batch Tracking list</BoxTitle>
+                </BoxHeader>*@
+            <BoxBody>
+                <div class="row">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Batch Name</th>
+                                <th>Session ID</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Machine Name</th>
+                                @{ 
+                                    if (status == null)
+                                    {
+                                        <th>Status</th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Data)
+                            {
+                                <tr>
+                                    <td><a asp-page="./detail" asp-route-BatchName="@item.BatchName" >@item.BatchName</a></td>
+                                    <td>@item.SessionId</td>
+                                    <td>@item.StartDate</td>
+                                    <td>@item.EndDate</td>
+                                    <td>@item.MachineName</td>
+                                    @if(status == null)
+                                    {
+                                        <td>@item.State.ToString()</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </BoxBody>
+        </Box>
+    </div>
+</div>
