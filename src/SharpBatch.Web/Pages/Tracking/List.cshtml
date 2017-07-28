@@ -12,28 +12,30 @@
 
     public IActionResult OnGet()
     {
-        switch (status)
+        if (status.HasValue)
         {
-            case StatusEnum.Running:
-                Data = trackingProvider.GetRunning();
-                break;
-            case StatusEnum.Error:
-                Data = trackingProvider.GetErrors();
-                break;
-            case StatusEnum.Stopped:
-            case StatusEnum.Started:
-                break;
-            default:
-                Data = trackingProvider.GetAll();
-                break;
+            Data = trackingProvider.GetByStatus(status.Value);
+        }
+        else
+        {
+            Data = trackingProvider.GetAll();
         }
 
         return Page();
     }
 }
 
-@section Title{ 
-    Tracking List
+@section Title{
+    @{
+        if (status == StatusEnum.Stopped)
+        {
+            <text>Completed</text>
+        }
+        else
+        {
+            <text>@status.ToString()</text>
+    }
+} Tracking List
 }
 
 <div class="row">
@@ -52,17 +54,17 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Machine Name</th>
-                                @{ 
-                                    if (status == null)
-                                    {
+                                @{
+        if (status == null)
+        {
                                         <th>Status</th>
                                     }
-                                }
+    }
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Data)
-                            {
+    {
                                 <tr>
                                     <td><a asp-page="./detail" asp-route-BatchName="@item.BatchName" >@item.BatchName</a></td>
                                     <td>@item.SessionId</td>

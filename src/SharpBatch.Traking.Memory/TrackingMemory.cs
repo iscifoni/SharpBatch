@@ -76,30 +76,22 @@ namespace SharpBatch.Tracking.Memory
 
         public List<BatchTrackingModel> GetRunning()
         {
-            return _traks
-                .Where(p => p.Value.State == StatusEnum.Running)
-                .OrderByDescending(o => o.Value.StartDate)
-                .Select(m => m.Value)
-                .ToList<BatchTrackingModel>();
+            return GetByStatus(StatusEnum.Running);
         }
 
         public int GetRunningCount()
         {
-            return _traks.Count(p => p.Value.State == StatusEnum.Running);
+            return GetByStatusCount(StatusEnum.Running);
         }
 
         public List<BatchTrackingModel> GetErrors()
         {
-            return _traks
-                .Where(p=>p.Value.State == StatusEnum.Error)
-                .OrderByDescending(o=>o.Value.StartDate)
-                .Select(m=>m.Value)
-                .ToList<BatchTrackingModel>() ;
+            return GetByStatus(StatusEnum.Error);
         }
 
         public int GetErrorsCount()
         {
-            return _traks.Count(p => p.Value.State == StatusEnum.Error);
+            return GetByStatusCount(StatusEnum.Error);
         }
 
         public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
@@ -151,6 +143,19 @@ namespace SharpBatch.Tracking.Memory
                 .OrderByDescending(o => o.Value.StartDate)
                 .Select(m => m.Value)
                 .ToList<BatchTrackingModel>();
+        }
+
+        public List<BatchTrackingModel> GetByStatus(StatusEnum status)
+        {
+            return _traks.Where(p => p.Value.State == status)
+                    .OrderByDescending(o => o.Value.StartDate)
+                    .Select(m => m.Value)
+                    .ToList<BatchTrackingModel>();
+        }
+
+        public int GetByStatusCount(StatusEnum status)
+        {
+            return _traks.Count(p => p.Value.State == status);
         }
     }
 }

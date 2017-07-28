@@ -32,6 +32,8 @@ namespace SharpBatch.Tracking.Abstraction
         int GetRunningCount();
         List<BatchTrackingModel> GetErrors();
         int GetErrorsCount();
+        List<BatchTrackingModel> GetByStatus(StatusEnum status);
+        int GetByStatusCount(StatusEnum status);
         List<BatchTrackingModel> GetDataOfBatchName(string batchName);
         List<BatchTrackingModel> GetAll();
     }

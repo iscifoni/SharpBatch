@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace SharpBatch.Web.TagHelpers
@@ -21,6 +22,9 @@ namespace SharpBatch.Web.TagHelpers
         [HtmlAttributeName(UrlAttributeName)]
         public string Url { get; set; }
 
+        [ViewContext]
+        public ViewContext ViewContext { get; set; }
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
 
@@ -33,9 +37,15 @@ namespace SharpBatch.Web.TagHelpers
             {
                 throw new ArgumentNullException(nameof(output));
             }
+            
+            var tagBuilder = new TagBuilder("li");
 
-
-            output.Content.AppendFormat(htmlContent, Url, Label);
+            if (this.ViewContext.HttpContext.Request.Path.ToString().Contains(Url))
+            {
+                tagBuilder.AddCssClass("active");
+            }
+            tagBuilder.InnerHtml.AppendHtml(string.Format(htmlContent, Url, Label));
+            output.Content.AppendHtml(tagBuilder);
             output.TagName = "li";
 
         }

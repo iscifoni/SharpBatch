@@ -59,6 +59,11 @@ namespace SharpBatch.Tracking.DB
                 .ToList<BatchTrackingModel>();
         }
 
+        public int GetByStatusCount(StatusEnum status)
+        {
+            return _trackingContext.Trackings.Where(p => p.State == status.ToString()).Count();
+        }
+
         public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
         {
             var trackings = _trackingContext
@@ -76,7 +81,7 @@ namespace SharpBatch.Tracking.DB
 
         public int GetErrorsCount()
         {
-            return GetNumByStatus(StatusEnum.Error);
+            return GetByStatusCount(StatusEnum.Error);
         }
 
         public List<BatchTrackingModel> GetRunning()
@@ -86,7 +91,7 @@ namespace SharpBatch.Tracking.DB
 
         public int GetRunningCount()
         {
-            return GetNumByStatus(StatusEnum.Running);
+            return GetByStatusCount(StatusEnum.Running);
         }
 
         public Task<BatchTrackingModel> GetStatusAsync(Guid SessionId)
@@ -157,6 +162,14 @@ namespace SharpBatch.Tracking.DB
                 {
                     var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
                     tracking.EndDate = DateTime.Now;
+                    if (tracking.Ex != null && tracking.Ex.Count() > 0)
+                    {
+                        tracking.State = StatusEnum.Error.ToString();
+                    }
+                    else
+                    {
+                        tracking.State = StatusEnum.Stopped.ToString();
+                    }
 
                     _trackingContext.SaveChanges();
                 }
@@ -167,18 +180,13 @@ namespace SharpBatch.Tracking.DB
             });
         }
 
-        private List<BatchTrackingModel> GetByStatus(StatusEnum status)
+        public List<BatchTrackingModel> GetByStatus(StatusEnum status)
         {
             return _trackingContext.Trackings
                 .Where(p => p.State == status.ToString())
                 .Select(p => (BatchTrackingModel)p)
                 .ToList<BatchTrackingModel>();
         }
-
-        private int GetNumByStatus(StatusEnum status)
-        {
-            return _trackingContext.Trackings.Where(p => p.State == status.ToString()).Count();
-        }
-
+        
     }
 }

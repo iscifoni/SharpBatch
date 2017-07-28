@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using SharpBatch.Tracking.Abstraction;
 using SharpBatch.Tracking.Memory;
+using SharpBatch.Web.Internals;
 
 
 namespace SharpBatch.Web
@@ -29,6 +30,8 @@ namespace SharpBatch.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSharpBatchTrackingDB(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddScoped<IReportProvider, ReportProvider>();
+
             //services.TryAddSingleton<ISharpBatchTracking, TrackingMemory>();
             //var embeddedProvider = new EmbeddedFileProvider(typeof(Model).GetTypeInfo().Assembly);
             services.AddMvc();

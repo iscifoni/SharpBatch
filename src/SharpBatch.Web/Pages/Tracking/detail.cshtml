@@ -13,78 +13,79 @@
     public IActionResult OnGet()
     {
         BatchList = trackingProvider.GetDataOfBatchName(BatchName);
-        
+
         return Page();
 
     }
 }
 
-@section Title{ 
-     Tracking detail <small>@BatchName</small>
+@section Title{
+    Tracking detail <small>@BatchName</small>
 }
 
-<Box >
-    <BoxBody>
-        @foreach (var item in BatchList)
-        {
-        <div class="row">
-            <div class="col-sm-10">
+
+@foreach (var item in BatchList)
+{
+    <div class="col-sm-4">
+        <Box>
+            <BoxBody>
                 <div class="row">
-                    <div class="col-sm-2"><b>BatchName :</b></div>
-                    <div class="col-sm-4">@item.BatchName</div>
+                    <div class="col-sm-3"><b>BatchName :</b></div>
+                    <div class="col-sm-9">@item.BatchName</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"><b>Session ID :</b></div>
-                    <div class="col-sm-8">@item.SessionId</div>
+                    <div class="col-sm-3"><b>Session ID :</b></div>
+                    <div class="col-sm-9">@item.SessionId</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"><b>StartDate :</b></div>
-                    <div class="col-sm-4">@item.StartDate</div>
+                    <div class="col-sm-3"><b>StartDate :</b></div>
+                    <div class="col-sm-9">@item.StartDate</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"><b>EndDate :</b></div>
-                    <div class="col-sm-4">@item.EndDate</div>
+                    <div class="col-sm-3"><b>EndDate :</b></div>
+                    <div class="col-sm-9">@item.EndDate</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"><b>Pings :</b></div>
-                    <div class="col-sm-4">
-                    @if (item.Pings != null)
-                    {
-                        foreach (var itmPing in item.Pings.OrderByDescending(p=> p).Take(5) )
+                    <div class="col-sm-3"><b>Pings :</b></div>
+                    <div class="col-sm-9">
+                        @if (item.Pings != null)
                         {
-                        <text>@itmPing.ToString("HH:mm:ss")</text><br/>
+                            foreach (var itmPing in item.Pings.OrderByDescending(p => p).Take(5))
+                            {
+                                <text>@itmPing.ToString("HH:mm:ss")</text><br />
+                            }
                         }
-                    }</div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"><b>State :</b></div>
-                    <div class="col-sm-4">@item.State.ToString()</div>
+                    <div class="col-sm-3"><b>State :</b></div>
+                    <div class="col-sm-9">@item.State.ToString()</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-10"><b>Messages :</b><br />
-                    @if (item.Messages != null)
-                    {
-                        foreach (var itmMsg in item.Messages)
+                    <div class="col-sm-12">
+                        <b>Messages :</b><br />
+                        @if (item.Messages != null)
                         {
-                            <text>@itmMsg</text><br />
+                            foreach (var itmMsg in item.Messages)
+                            {
+                                <text>@itmMsg</text><br />
+                            }
                         }
-                    }</div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-10"><b>Exception :</b><br>
-                    @if (item.Ex != null)
-                    {
-                        foreach (var itmEx in item.Ex)
+                    <div class="col-sm-12">
+                        <b>Exception :</b><br>
+                        @if (item.Ex != null)
                         {
-                        <text>@itmEx.ToString()</text><br />
+                            foreach (var itmEx in item.Ex)
+                            {
+                                <text>@itmEx.ToString()</text><br />
+                            }
                         }
-                    }</div>
+                    </div>
                 </div>
-                
-            </div>
-        </div>
-        <hr />
-        
-        }
-    </BoxBody>
-</Box>
+            </BoxBody>
+        </Box>
+    </div>
+}

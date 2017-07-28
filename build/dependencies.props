@@ -2,8 +2,8 @@
   <PropertyGroup>
     <DependencyModelVersion>2.0.0-*</DependencyModelVersion>
     <NETStandardLibraryNETFrameworkVersion>2.0.0-*</NETStandardLibraryNETFrameworkVersion>
-    <RoslynVersion>2.3.0-beta1</RoslynVersion>
+	<NetStandardImplicitPackageVersion>2.0.0-*</NetStandardImplicitPackageVersion>
     <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
-
+	<RoslynVersion>2.3.0-beta1</RoslynVersion>
   </PropertyGroup>
 </Project>

@@ -34,7 +34,7 @@ namespace SharpBatch.Web.Controllers
             await _trackingProvider.StopAsync(sessionID);
 
             sessionID = Guid.NewGuid();
-            await _trackingProvider.StartAsync("Batch1", sessionID);
+            await _trackingProvider.StartAsync("Batch2", sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.PingAsync(sessionID);
@@ -42,14 +42,14 @@ namespace SharpBatch.Web.Controllers
             await _trackingProvider.StopAsync(sessionID);
 
             sessionID = Guid.NewGuid();
-            await _trackingProvider.StartAsync("Batch1", sessionID);
+            await _trackingProvider.StartAsync("Batch2", sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.AddMessageAsync(sessionID, "Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1");
             await _trackingProvider.StopAsync(sessionID);
 
             sessionID = Guid.NewGuid();
-            await _trackingProvider.StartAsync("Batch1", sessionID);
+            await _trackingProvider.StartAsync("Batch2", sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.PingAsync(sessionID);
             await _trackingProvider.AddMessageAsync(sessionID, "Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1 Messaggio 1");

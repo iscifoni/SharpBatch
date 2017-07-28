@@ -1,15 +1,18 @@
 ﻿@page
+@using SharpBatch.Tracking.Abstraction
+@inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+
 @{
 }
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-play" sb-smallbox-url="/tracking/list/Running">
-    <h3>150</h3>
+    <h3>@trackingProvider.GetRunningCount()</h3>
     <p>Running Batch</p>
 </SmallBox>
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-checkmark-circled" sb-smallbox-url="/tracking/list/Stopped">
-    <h3>150</h3>
+    <h3>@trackingProvider.GetByStatusCount(StatusEnum.Stopped)</h3>
     <p>Complete Batch</p>
 </SmallBox>
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-close-circled" sb-smallbox-url="/tracking/list/Error">
-    <h3>150</h3>
+    <h3>@trackingProvider.GetErrorsCount()</h3>
     <p>Errors</p>
 </SmallBox>
