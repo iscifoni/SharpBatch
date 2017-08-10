@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -74,25 +76,13 @@ namespace SharpBatch.Tracking.DB
             return trackings;
         }
 
-        public List<BatchTrackingModel> GetErrors()
-        {
-            return GetByStatus(StatusEnum.Error);
-        }
+        public List<BatchTrackingModel> GetErrors() => GetByStatus(StatusEnum.Error);
 
-        public int GetErrorsCount()
-        {
-            return GetByStatusCount(StatusEnum.Error);
-        }
+        public int GetErrorsCount() => GetByStatusCount(StatusEnum.Error);
 
-        public List<BatchTrackingModel> GetRunning()
-        {
-            return GetByStatus(StatusEnum.Running);
-        }
+        public List<BatchTrackingModel> GetRunning() => GetByStatus(StatusEnum.Running);
 
-        public int GetRunningCount()
-        {
-            return GetByStatusCount(StatusEnum.Running);
-        }
+        public int GetRunningCount() => GetByStatusCount(StatusEnum.Running);
 
         public Task<BatchTrackingModel> GetStatusAsync(Guid SessionId)
         {
@@ -187,6 +177,10 @@ namespace SharpBatch.Tracking.DB
                 .Select(p => (BatchTrackingModel)p)
                 .ToList<BatchTrackingModel>();
         }
-        
+
+        public BatchTrackingModel GetDataOfSessionId(Guid SessionId)
+        {
+            return _trackingContext.Trackings.Where(p => p.SessionId == SessionId).Select(m=>(BatchTrackingModel)m).FirstOrDefault();
+        }
     }
 }

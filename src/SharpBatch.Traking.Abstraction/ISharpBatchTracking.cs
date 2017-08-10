@@ -13,8 +13,10 @@
 //limitations under the License.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SharpBatch.Tracking.Abstraction
@@ -35,6 +37,8 @@ namespace SharpBatch.Tracking.Abstraction
         List<BatchTrackingModel> GetByStatus(StatusEnum status);
         int GetByStatusCount(StatusEnum status);
         List<BatchTrackingModel> GetDataOfBatchName(string batchName);
+        BatchTrackingModel GetDataOfSessionId(Guid SessionId);
         List<BatchTrackingModel> GetAll();
+        
     }
 }

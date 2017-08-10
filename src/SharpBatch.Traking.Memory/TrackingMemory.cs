@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SharpBatch.Tracking.Abstraction;
 
@@ -32,23 +33,16 @@ namespace SharpBatch.Tracking.Memory
              });
         }
 
-        public Task PingAsync(Guid sessionId)
-        {
-            return Task.Run(() => Ping(sessionId));
-        }
+        public Task PingAsync(Guid sessionId) => Task.Run(() => Ping(sessionId));
 
         private void Ping(Guid sessionId)
         {
-            BatchTrackingModel traking;
-            _traks.TryGetValue(sessionId, out traking);
+            _traks.TryGetValue(sessionId, out BatchTrackingModel traking);
             traking.Pings.Add(DateTime.Now);
             traking.State = StatusEnum.Running;
         }
 
-        public Task StartAsync(string BatchName, Guid sessionId)
-        {
-            return Task.Run(() => Start(BatchName, sessionId));
-        }
+        public Task StartAsync(string BatchName, Guid sessionId) => Task.Run(() => Start(BatchName, sessionId));
 
         private void Start(string batchName, Guid sessionId)
         {
@@ -61,38 +55,22 @@ namespace SharpBatch.Tracking.Memory
             });
         }
 
-        public Task StopAsync(Guid sessionId)
-        {
-            return Task.Run(() => Stop(sessionId));
-        }
+        public Task StopAsync(Guid sessionId) => Task.Run(() => Stop(sessionId));
 
         private void Stop(Guid sessionId)
         {
-            BatchTrackingModel traking;
-            _traks.TryGetValue(sessionId, out traking);
+            _traks.TryGetValue(sessionId, out BatchTrackingModel traking);
             traking.EndDate = DateTime.Now;
             traking.State = StatusEnum.Stopped;
         }
 
-        public List<BatchTrackingModel> GetRunning()
-        {
-            return GetByStatus(StatusEnum.Running);
-        }
+        public List<BatchTrackingModel> GetRunning() => GetByStatus(StatusEnum.Running);
 
-        public int GetRunningCount()
-        {
-            return GetByStatusCount(StatusEnum.Running);
-        }
+        public int GetRunningCount() => GetByStatusCount(StatusEnum.Running);
 
-        public List<BatchTrackingModel> GetErrors()
-        {
-            return GetByStatus(StatusEnum.Error);
-        }
+        public List<BatchTrackingModel> GetErrors() => GetByStatus(StatusEnum.Error);
 
-        public int GetErrorsCount()
-        {
-            return GetByStatusCount(StatusEnum.Error);
-        }
+        public int GetErrorsCount() => GetByStatusCount(StatusEnum.Error);
 
         public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
         {
@@ -103,15 +81,11 @@ namespace SharpBatch.Tracking.Memory
                 .ToList<BatchTrackingModel>();
         }
 
-        public Task AddExAsync(Guid sessionId, Exception ex)
-        {
-            return Task.Run(() => AddEx(sessionId, ex));
-        }
+        public Task AddExAsync(Guid sessionId, Exception ex) => Task.Run(() => AddEx(sessionId, ex));
 
         private void AddEx(Guid sessionId, Exception ex)
         {
-            BatchTrackingModel traking;
-            _traks.TryGetValue(sessionId, out traking);
+            _traks.TryGetValue(sessionId, out BatchTrackingModel traking);
             if ( traking.Ex == null)
             {
                 traking.Ex = new List<Exception>();
@@ -120,15 +94,11 @@ namespace SharpBatch.Tracking.Memory
             traking.Ex.Add(ex);
         }
 
-        public Task AddMessageAsync(Guid sessionId, string Message)
-        {
-            return Task.Run(() => AddMessage(sessionId, Message));
-        }
+        public Task AddMessageAsync(Guid sessionId, string Message) => Task.Run(() => AddMessage(sessionId, Message));
 
         private void AddMessage(Guid sessionId, string Message)
         {
-            BatchTrackingModel traking;
-            _traks.TryGetValue(sessionId, out traking);
+            _traks.TryGetValue(sessionId, out BatchTrackingModel traking);
             if (traking.Messages == null)
             {
                 traking.Messages = new List<string>();
@@ -153,9 +123,13 @@ namespace SharpBatch.Tracking.Memory
                     .ToList<BatchTrackingModel>();
         }
 
-        public int GetByStatusCount(StatusEnum status)
+        public int GetByStatusCount(StatusEnum status) => _traks.Count(p => p.Value.State == status);
+
+        public BatchTrackingModel GetDataOfSessionId(Guid SessionId)
         {
-            return _traks.Count(p => p.Value.State == status);
+            return _traks.Where(p => p.Value.SessionId == SessionId)
+                  .Select(m => m.Value)
+                  .FirstOrDefault();
         }
     }
 }

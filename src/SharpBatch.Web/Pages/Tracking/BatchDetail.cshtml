@@ -1,0 +1,91 @@
+﻿@page "{BatchName}"
+@using SharpBatch.Tracking.Abstraction
+@inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
+
+@functions{
+
+    [FromRoute]
+    public string BatchName { get; set; }
+
+    [BindProperty]
+    public List<BatchTrackingModel> BatchList { get; set; }
+
+    public IActionResult OnGet()
+    {
+        BatchList = trackingProvider.GetDataOfBatchName(BatchName).Take(12).ToList();
+
+        return Page();
+
+    }
+}
+
+@section Title{
+    Tracking detail <small>@BatchName</small>
+}
+
+
+@foreach (var item in BatchList)
+{
+    <div class="col-sm-4">
+        <Box>
+            <BoxBody>
+                <div class="row">
+                    <div class="col-sm-3"><b>BatchName :</b></div>
+                    <div class="col-sm-9">@item.BatchName</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><b>Session ID :</b></div>
+                    <div class="col-sm-9">@item.SessionId</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><b>StartDate :</b></div>
+                    <div class="col-sm-9">@item.StartDate</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><b>EndDate :</b></div>
+                    <div class="col-sm-9">@item.EndDate</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><b>Pings :</b></div>
+                    <div class="col-sm-9">
+                        @if (item.Pings != null)
+                        {
+                            foreach (var itmPing in item.Pings.OrderByDescending(p => p).Take(5))
+                            {
+                                <text>@itmPing.ToString("HH:mm:ss")</text><br />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><b>State :</b></div>
+                    <div class="col-sm-9">@item.State.ToString()</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <b>Messages :</b><br />
+                        @if (item.Messages != null)
+                        {
+                            foreach (var itmMsg in item.Messages)
+                            {
+                                <text>@itmMsg</text><br />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <b>Exception :</b><br>
+                        @if (item.Ex != null)
+                        {
+                            foreach (var itmEx in item.Ex)
+                            {
+                                <text>@itmEx.ToString()</text><br />
+                            }
+                        }
+                    </div>
+                </div>
+            </BoxBody>
+        </Box>
+    </div>
+}

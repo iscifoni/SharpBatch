@@ -1,18 +1,18 @@
-﻿@page "{BatchName}"
+﻿@page "{SessionId}"
 @using SharpBatch.Tracking.Abstraction
 @inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
 
 @functions{
 
     [FromRoute]
-    public string BatchName { get; set; }
+    public Guid SessionId { get; set; }
 
     [BindProperty]
-    public List<BatchTrackingModel> BatchList { get; set; }
+    public BatchTrackingModel BatchData { get; set; }
 
     public IActionResult OnGet()
     {
-        BatchList = trackingProvider.GetDataOfBatchName(BatchName);
+        BatchData = trackingProvider.GetDataOfSessionId(SessionId);
 
         return Page();
 
@@ -20,55 +20,54 @@
 }
 
 @section Title{
-    Tracking detail <small>@BatchName</small>
+    Tracking execution detail <small>@BatchData?.BatchName </small>
 }
 
-
-@foreach (var item in BatchList)
-{
+    @if (BatchData != null)
+    {
     <div class="col-sm-4">
         <Box>
             <BoxBody>
                 <div class="row">
                     <div class="col-sm-3"><b>BatchName :</b></div>
-                    <div class="col-sm-9">@item.BatchName</div>
+                    <div class="col-sm-9">@BatchData.BatchName</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><b>Session ID :</b></div>
-                    <div class="col-sm-9">@item.SessionId</div>
+                    <div class="col-sm-9">@BatchData.SessionId</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><b>StartDate :</b></div>
-                    <div class="col-sm-9">@item.StartDate</div>
+                    <div class="col-sm-9">@BatchData.StartDate</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><b>EndDate :</b></div>
-                    <div class="col-sm-9">@item.EndDate</div>
+                    <div class="col-sm-9">@BatchData.EndDate</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><b>Pings :</b></div>
                     <div class="col-sm-9">
-                        @if (item.Pings != null)
+                        @if (BatchData.Pings != null)
                         {
-                            foreach (var itmPing in item.Pings.OrderByDescending(p => p).Take(5))
+                            foreach (var itmPing in BatchData.Pings.OrderByDescending(p => p).Take(5))
                             {
-                                <text>@itmPing.ToString("HH:mm:ss")</text><br />
+                            <text>@itmPing.ToString("HH:mm:ss")</text><br />
                             }
                         }
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3"><b>State :</b></div>
-                    <div class="col-sm-9">@item.State.ToString()</div>
+                    <div class="col-sm-9">@BatchData.State.ToString()</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <b>Messages :</b><br />
-                        @if (item.Messages != null)
+                        @if (BatchData.Messages != null)
                         {
-                            foreach (var itmMsg in item.Messages)
+                            foreach (var itmMsg in BatchData.Messages)
                             {
-                                <text>@itmMsg</text><br />
+                            <text>@itmMsg</text><br />
                             }
                         }
                     </div>
@@ -76,11 +75,11 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <b>Exception :</b><br>
-                        @if (item.Ex != null)
+                        @if (BatchData.Ex != null)
                         {
-                            foreach (var itmEx in item.Ex)
+                            foreach (var itmEx in BatchData.Ex)
                             {
-                                <text>@itmEx.ToString()</text><br />
+                            <text>@itmEx.ToString()</text><br />
                             }
                         }
                     </div>
@@ -88,4 +87,5 @@
             </BoxBody>
         </Box>
     </div>
-}
+    }
+

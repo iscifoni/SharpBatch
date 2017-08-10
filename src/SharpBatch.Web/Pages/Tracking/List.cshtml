@@ -66,8 +66,8 @@
                             @foreach (var item in Data)
     {
                                 <tr>
-                                    <td><a asp-page="./detail" asp-route-BatchName="@item.BatchName" >@item.BatchName</a></td>
-                                    <td>@item.SessionId</td>
+                                    <td><a asp-page="./BatchDetail" asp-route-BatchName="@item.BatchName" >@item.BatchName</a></td>
+                                    <td><a asp-page="./BatchExecutionDetail" asp-route-SessionId="@item.SessionId">@item.SessionId</a></td>
                                     <td>@item.StartDate</td>
                                     <td>@item.EndDate</td>
                                     <td>@item.MachineName</td>
