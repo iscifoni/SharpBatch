@@ -337,7 +337,9 @@
             </section>
             <!-- Main content -->
             <section class="content">
-                @RenderBody()
+                <div class="row">
+                    @RenderBody()
+                </div>
             </section>
             </div>
     </div>
@@ -566,5 +568,7 @@
             setTimeout(mdraw, mrefreshinterval);
         }
     </script>
+
+    @RenderSection("JavascriptSection", required: false)
 </body>
 </html>

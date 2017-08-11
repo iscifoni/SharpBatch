@@ -24,6 +24,8 @@ namespace SharpBatch.Web.Internals
 
         public decimal ErrorPercentageToNow() => percentage(StatusEnum.Error);
 
+        public decimal RunningPercentageToNow() => percentage(StatusEnum.Running);
+
         private decimal percentage(StatusEnum status)
         {
             var total = _sharpBatchTracking.GetByStatusCount(StatusEnum.Error) + _sharpBatchTracking.GetByStatusCount(StatusEnum.Running) + _sharpBatchTracking.GetByStatusCount(StatusEnum.Stopped) + _sharpBatchTracking.GetByStatusCount(StatusEnum.Started);

@@ -47,4 +47,8 @@
     <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="model\" />
+  </ItemGroup>
+
 </Project>
