@@ -18,9 +18,11 @@
 		<ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0-rtm-26383" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0-rtm-26383" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0-rtm-26383" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0-preview1-26627" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.0-preview1-26627" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="2.0.0-preview1-final" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0-preview1-26627" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-preview1-26627" />
 	  <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
 	</ItemGroup>
 

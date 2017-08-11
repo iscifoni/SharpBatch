@@ -25,7 +25,11 @@ namespace SharpBatch.Tracking.DB
         {
             return Task.Run(() =>
             {
-                var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
+                var tracking = _trackingContext.Trackings
+                                    .Include(p => p.Ex)
+                                    .Include(p => p.Messages)
+                                    .Include(p => p.Pings)
+                                    .Where(p => p.SessionId == sessionId).Single();
                 if (tracking.Ex == null)
                 {
                     tracking.Ex = new List<ExceptionModel>();
@@ -41,7 +45,11 @@ namespace SharpBatch.Tracking.DB
         {
             return Task.Run(() =>
             {
-                var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
+                var tracking = _trackingContext.Trackings
+                                    .Include(p => p.Ex)
+                                    .Include(p => p.Messages)
+                                    .Include(p => p.Pings)
+                                    .Where(p => p.SessionId == sessionId).Single();
                 if (tracking.Messages == null)
                 {
                     tracking.Messages = new List<MessagesModel>();
@@ -57,8 +65,11 @@ namespace SharpBatch.Tracking.DB
         public List<BatchTrackingModel> GetAll()
         {
             return _trackingContext.Trackings
-                .Select(p => (BatchTrackingModel)p)
-                .ToList<BatchTrackingModel>();
+                        .Include(p => p.Ex)
+                        .Include(p => p.Messages)
+                        .Include(p => p.Pings)
+                        .Select(p => (BatchTrackingModel)p)
+                        .ToList<BatchTrackingModel>();
         }
 
         public int GetByStatusCount(StatusEnum status)
@@ -70,24 +81,22 @@ namespace SharpBatch.Tracking.DB
         {
             var trackings = _trackingContext
                                 .Trackings
+                                .Include(p => p.Ex)
+                                .Include(p => p.Messages)
+                                .Include(p => p.Pings)
                                 .Where(p => p.BatchName.Equals(batchName, StringComparison.OrdinalIgnoreCase))
                                 .Select(m=>(BatchTrackingModel)m)
                                 .ToList<BatchTrackingModel>();
             return trackings;
         }
-
-        public List<BatchTrackingModel> GetErrors() => GetByStatus(StatusEnum.Error);
-
-        public int GetErrorsCount() => GetByStatusCount(StatusEnum.Error);
-
-        public List<BatchTrackingModel> GetRunning() => GetByStatus(StatusEnum.Running);
-
-        public int GetRunningCount() => GetByStatusCount(StatusEnum.Running);
-
+        
         public Task<BatchTrackingModel> GetStatusAsync(Guid SessionId)
         {
             return Task.Run(()=> {
                 return _trackingContext.Trackings
+                        .Include(p => p.Ex)
+                        .Include(p => p.Messages)
+                        .Include(p => p.Pings)
                         .Where(p => p.SessionId == SessionId)
                         .Select(p => (BatchTrackingModel)p)
                         .Single<BatchTrackingModel>();
@@ -100,7 +109,12 @@ namespace SharpBatch.Tracking.DB
             {
                 try
                 {
-                    var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
+                    var tracking = _trackingContext.Trackings
+                                        .Include(p => p.Ex)
+                                        .Include(p => p.Messages)
+                                        .Include(p => p.Pings)
+                                        .Where(p => p.SessionId == sessionId).Single();
+
                     if(tracking.Pings == null)
                     {
                         tracking.Pings = new List<PingsModel>();
@@ -150,7 +164,11 @@ namespace SharpBatch.Tracking.DB
             {
                 try
                 {
-                    var tracking = _trackingContext.Trackings.Where(p => p.SessionId == sessionId).Single();
+                    var tracking = _trackingContext.Trackings
+                                        .Include(p => p.Ex)
+                                        .Include(p => p.Messages)
+                                        .Include(p => p.Pings)
+                                        .Where(p => p.SessionId == sessionId).Single();
                     tracking.EndDate = DateTime.Now;
                     if (tracking.Ex != null && tracking.Ex.Count() > 0)
                     {
@@ -173,6 +191,9 @@ namespace SharpBatch.Tracking.DB
         public List<BatchTrackingModel> GetByStatus(StatusEnum status)
         {
             return _trackingContext.Trackings
+                .Include(p => p.Ex)
+                .Include(p => p.Messages)
+                .Include(p => p.Pings)
                 .Where(p => p.State == status.ToString())
                 .Select(p => (BatchTrackingModel)p)
                 .ToList<BatchTrackingModel>();
@@ -180,7 +201,20 @@ namespace SharpBatch.Tracking.DB
 
         public BatchTrackingModel GetDataOfSessionId(Guid SessionId)
         {
-            return _trackingContext.Trackings.Where(p => p.SessionId == SessionId).Select(m=>(BatchTrackingModel)m).FirstOrDefault();
+            var response = _trackingContext.Trackings
+                    .Include(p => p.Ex)
+                    .Include(p => p.Messages)
+                    .Include(p => p.Pings)
+                    .Where(p => p.SessionId == SessionId)
+                    .Select(m => (BatchTrackingModel)m)
+                    .FirstOrDefault();
+
+            return response;
+        }
+
+        public List<BatchTrackingModel> LastWeekData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

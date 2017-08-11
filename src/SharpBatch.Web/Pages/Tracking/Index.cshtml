@@ -5,7 +5,7 @@
 @{
 }
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-play" sb-smallbox-url="/tracking/list/Running">
-    <h3>@trackingProvider.GetRunningCount()</h3>
+    <h3>@trackingProvider.GetByStatusCount(StatusEnum.Running)</h3>
     <p>Running Batch</p>    
 </SmallBox>
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-checkmark-circled" sb-smallbox-url="/tracking/list/Stopped">
@@ -13,6 +13,6 @@
     <p>Complete Batch</p>
 </SmallBox>
 <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-close-circled" sb-smallbox-url="/tracking/list/Error">
-    <h3>@trackingProvider.GetErrorsCount()</h3>
+    <h3>@trackingProvider.GetByStatusCount(StatusEnum.Error)</h3>
     <p>Errors</p>
 </SmallBox>

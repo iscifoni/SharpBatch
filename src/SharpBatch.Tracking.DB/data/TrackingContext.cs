@@ -17,7 +17,12 @@ namespace SharpBatch.Tracking.DB.data
         {
             modelBuilder.Entity<TrackingModel>()
                 .ToTable("SB_Tracking_Tracking")
-                .HasAlternateKey(p=> p.SessionId );
+                .HasAlternateKey(p=> p.SessionId);
+
+            modelBuilder.Entity<TrackingModel>()
+                .HasMany(p => p.Messages);
+            modelBuilder.Entity<TrackingModel>()
+                .HasMany(p => p.Ex);
 
             modelBuilder.Entity<PingsModel>().ToTable("SB_Tracking_Ping");
             modelBuilder.Entity<MessagesModel>().ToTable("SB_Tracking_Message");

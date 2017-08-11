@@ -64,14 +64,6 @@ namespace SharpBatch.Tracking.Memory
             traking.State = StatusEnum.Stopped;
         }
 
-        public List<BatchTrackingModel> GetRunning() => GetByStatus(StatusEnum.Running);
-
-        public int GetRunningCount() => GetByStatusCount(StatusEnum.Running);
-
-        public List<BatchTrackingModel> GetErrors() => GetByStatus(StatusEnum.Error);
-
-        public int GetErrorsCount() => GetByStatusCount(StatusEnum.Error);
-
         public List<BatchTrackingModel> GetDataOfBatchName(string batchName)
         {
             return _traks
@@ -130,6 +122,11 @@ namespace SharpBatch.Tracking.Memory
             return _traks.Where(p => p.Value.SessionId == SessionId)
                   .Select(m => m.Value)
                   .FirstOrDefault();
+        }
+
+        public List<BatchTrackingModel> LastWeekData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

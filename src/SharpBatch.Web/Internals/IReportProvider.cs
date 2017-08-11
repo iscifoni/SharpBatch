@@ -7,8 +7,8 @@ namespace SharpBatch.Web.Internals
 {
     public interface IReportProvider
     {
-        byte ErrorPercentageToNow();
-        byte CompletedPercentageToNow();
-
+        decimal ErrorPercentageToNow();
+        decimal CompletedPercentageToNow();
+        (List<string> labels, List<(string serieName, List<int> data)> series) ChartWeekly();
     }
 }

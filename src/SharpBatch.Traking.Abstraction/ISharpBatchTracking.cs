@@ -30,15 +30,11 @@ namespace SharpBatch.Tracking.Abstraction
         Task AddExAsync(Guid sessionId, Exception ex);
         Task AddMessageAsync(Guid sessionId, string Message);
 
-        List<BatchTrackingModel> GetRunning();
-        int GetRunningCount();
-        List<BatchTrackingModel> GetErrors();
-        int GetErrorsCount();
         List<BatchTrackingModel> GetByStatus(StatusEnum status);
         int GetByStatusCount(StatusEnum status);
         List<BatchTrackingModel> GetDataOfBatchName(string batchName);
         BatchTrackingModel GetDataOfSessionId(Guid SessionId);
         List<BatchTrackingModel> GetAll();
-        
+        List<BatchTrackingModel> LastWeekData();
     }
 }
