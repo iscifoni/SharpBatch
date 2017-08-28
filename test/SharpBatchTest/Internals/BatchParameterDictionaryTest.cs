@@ -162,7 +162,7 @@ namespace SharpBatchTest.Internals
             //Assert
             Assert.True(result);
             Assert.NotNull(item);
-            Assert.IsType(typeof(string), item);
+            Assert.IsType<string>(item);
             Assert.Equal("value2", item);
         }
 
@@ -240,8 +240,7 @@ namespace SharpBatchTest.Internals
             //Assert
             foreach(var item in batchParameterDictionary)
             {
-                Assert.NotNull(item);
-                Assert.IsType(typeof(KeyValuePair<string, object>), item);
+                Assert.IsType<KeyValuePair<string, object>>(item);
             }
         }
     }

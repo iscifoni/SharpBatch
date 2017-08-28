@@ -41,19 +41,19 @@ namespace SharpBatchTest.Internals
             Assert.Equal(3, response.Count());
             Assert.Collection(response,
                 (p) => {
-                    Assert.Equal(p.BatchName, "SimplePOCO");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("SimplePOCO", p.BatchName);
+                    Assert.Equal("method1", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                     },
                 (p) => {
-                    Assert.Equal(p.BatchName, "SimplePOCO");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
+                    Assert.Equal("SimplePOCO", p.BatchName);
+                    Assert.Equal("method2", p.ActionName);
+                    Assert.Equal(typeof(int), p.ReturnType);
                 },
                 (p) => {
-                    Assert.Equal(p.BatchName, "SimplePOCO");
-                    Assert.Equal(p.ActionName, "method3");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("SimplePOCO", p.BatchName);
+                    Assert.Equal("method3", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                 }
             );
         }
@@ -74,19 +74,19 @@ namespace SharpBatchTest.Internals
             Assert.Equal(3, response.Count());
             Assert.Collection(response,
                 (p) => {
-                    Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("InferitFromSimplePOCO", p.BatchName);
+                    Assert.Equal("method1", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                 },
                 (p) => {
-                    Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
+                    Assert.Equal("InferitFromSimplePOCO", p.BatchName);
+                    Assert.Equal("method2", p.ActionName);
+                    Assert.Equal(typeof(int), p.ReturnType);
                 },
                 (p) => {
-                    Assert.Equal(p.BatchName, "InferitFromSimplePOCO");
-                    Assert.Equal(p.ActionName, "method3");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("InferitFromSimplePOCO", p.BatchName);
+                    Assert.Equal("method3", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                 }
             );
         }
@@ -107,14 +107,14 @@ namespace SharpBatchTest.Internals
             Assert.Equal(2, response.Count());
             Assert.Collection(response,
                 (p) => {
-                    Assert.Equal(p.BatchName, "BatchFromAttribute");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("BatchFromAttribute", p.BatchName);
+                    Assert.Equal("method1", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                 },
                 (p) => {
-                    Assert.Equal(p.BatchName, "BatchFromAttribute");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
+                    Assert.Equal("BatchFromAttribute", p.BatchName);
+                    Assert.Equal("method2", p.ActionName);
+                    Assert.Equal(typeof(int), p.ReturnType);
                 }
             );
         }
@@ -136,14 +136,14 @@ namespace SharpBatchTest.Internals
             Assert.Equal(2, response.Count());
             Assert.Collection(response,
                 (p) => {
-                    Assert.Equal(p.BatchName, "InheritFromBatchAttribute");
-                    Assert.Equal(p.ActionName, "method1");
-                    Assert.Equal(p.ReturnType, typeof(string));
+                    Assert.Equal("InheritFromBatchAttribute", p.BatchName);
+                    Assert.Equal("method1", p.ActionName);
+                    Assert.Equal(typeof(string), p.ReturnType);
                 },
                 (p) => {
-                    Assert.Equal(p.BatchName, "InheritFromBatchAttribute");
-                    Assert.Equal(p.ActionName, "method2");
-                    Assert.Equal(p.ReturnType, typeof(int));
+                    Assert.Equal("InheritFromBatchAttribute", p.BatchName);
+                    Assert.Equal("method2", p.ActionName);
+                    Assert.Equal(typeof(int), p.ReturnType);
                 }
             );
         }

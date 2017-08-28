@@ -26,7 +26,7 @@ namespace SharpBatchTest.Internals
            configureAttributeExecutor.execute(ref action);
 
             //Assert
-            Assert.Equal(action.BatchName, "BatchName");
+            Assert.Equal("BatchName", action.BatchName);
         }
     }
 }

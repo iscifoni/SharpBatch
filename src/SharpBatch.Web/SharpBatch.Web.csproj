@@ -23,15 +23,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview1-26462" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.0-preview2-final" />
-  </ItemGroup>
 
-  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
-    <Exec Command="bower install" />
-    <Exec Command="dotnet bundle" />
-  </Target>
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.0-preview2-final" />
+	</ItemGroup>
+
+	<Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+		<Exec Command="bower install" />
+		<Exec Command="dotnet bundle" />
+	</Target>
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.2.301" />
@@ -43,12 +43,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharpBatch.Tracking.DB\SharpBatch.Tracking.DB.csproj" />
-    <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
+	<ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="model\" />
-  </ItemGroup>
+
 
 </Project>

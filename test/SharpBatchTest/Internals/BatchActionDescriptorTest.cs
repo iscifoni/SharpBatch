@@ -38,12 +38,12 @@ namespace SharpBatchTest.Internals
             Assert.Collection<KeyValuePair<string, object>>(batchActionDescriptor.BatchConfiguration.AsEnumerable<KeyValuePair<string, object>>(),
                 (p) => 
                 {
-                    Assert.IsType(typeof(string), p.Value);
+                    Assert.IsType<string>(p.Value);
                     Assert.Equal("batchname", (string)p.Value);
                 },
                 (p) => 
                 {
-                    Assert.IsType(typeof(string), p.Value);
+                    Assert.IsType<string>(p.Value);
                     Assert.Equal("actionname", (string)p.Value);
                 }
             );

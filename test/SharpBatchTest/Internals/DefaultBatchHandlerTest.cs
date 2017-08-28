@@ -57,7 +57,7 @@ namespace SharpBatchTest.Internals
             //Assert
             Assert.NotNull(response);
             Assert.IsType<string[]>(response);
-            Assert.Equal(response.Length, 6);
+            Assert.Equal(6, response.Length);
             Assert.Equal("finish", response[5].Trim());
 
             batchActionFactory.Verify();
