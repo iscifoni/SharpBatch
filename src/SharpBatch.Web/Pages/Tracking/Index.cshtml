@@ -3,11 +3,17 @@
 @inject SharpBatch.Tracking.Abstraction.ISharpBatchTracking trackingProvider
 @inject SharpBatch.Web.Internals.IReportProvider reportProvider
 
-@{
-    var chartData = reportProvider.ChartWeekly();
+@functions{
+    [BindProperty]
+    public (List<string> labels, List<(string serieName, List<int> data)> series)? chartData { get; set; }
+
+    public IActionResult OnGet()
+    {
+        chartData = reportProvider.ChartWeekly();
+        return Page();
+    }
 }
-<div class="col-md-1"></div>
-<div class="col-md-11">
+
     <div class="row">
         <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-play" sb-smallbox-url="/tracking/list/Running">
             <h3>@trackingProvider.GetByStatusCount(StatusEnum.Running)</h3>
@@ -41,7 +47,6 @@
             </div>
         </div>
     </div>
-</div>
 
 @section javascriptSection{
 <script src="~/lib/adminlte/plugins/chartjs/Chart.min.js"></script>

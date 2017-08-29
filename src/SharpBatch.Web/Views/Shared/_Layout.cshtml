@@ -331,14 +331,14 @@
                     @*Dashboard
                     <small>Control panel</small>*@
                 </h1>
-
-                @await Component.InvokeAsync("Breadcrumb")
-                <vc:Breadcrumb></vc:Breadcrumb>
+                @RenderSection("Breadcrumb", required: false)
             </section>
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    @RenderBody()
+                    <div class="col-md-11">
+                        @RenderBody()
+                    </div>
                 </div>
             </section>
             </div>

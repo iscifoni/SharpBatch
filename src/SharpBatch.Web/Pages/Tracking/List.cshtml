@@ -34,11 +34,13 @@
         else
         {
             <text>@status.ToString()</text>
-    }
-} Tracking List
+        }
+    } Tracking List
+}
+@section Breadcrumb{ 
+    @await Component.InvokeAsync("Breadcrumb")
 }
 
-<div class="row">
     <div class="col-md-8">
         <Box>
             @*<BoxHeader>
@@ -55,23 +57,23 @@
                                 <th>End Date</th>
                                 <th>Machine Name</th>
                                 @{
-        if (status == null)
-        {
+                                    if (status == null)
+                                    {
                                         <th>Status</th>
                                     }
-    }
+                                }
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Data)
-    {
+                            {
                                 <tr>
-                                    <td><a asp-page="./BatchDetail" asp-route-BatchName="@item.BatchName" >@item.BatchName</a></td>
+                                    <td><a asp-page="./BatchDetail" asp-route-BatchName="@item.BatchName">@item.BatchName</a></td>
                                     <td><a asp-page="./BatchExecutionDetail" asp-route-SessionId="@item.SessionId">@item.SessionId</a></td>
                                     <td>@item.StartDate</td>
                                     <td>@item.EndDate</td>
                                     <td>@item.MachineName</td>
-                                    @if(status == null)
+                                    @if (status == null)
                                     {
                                         <td>@item.State.ToString()</td>
                                     }
@@ -83,4 +85,3 @@
             </BoxBody>
         </Box>
     </div>
-</div>

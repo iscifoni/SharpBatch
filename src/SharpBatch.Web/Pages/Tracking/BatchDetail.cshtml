@@ -10,6 +10,13 @@
     [BindProperty]
     public List<BatchTrackingModel> BatchList { get; set; }
 
+    private Dictionary<StatusEnum, string> iconMapForStatus { get; } = new Dictionary<StatusEnum, string>() {
+                                                                             { StatusEnum.Running, "ion-play"},
+                                                                             { StatusEnum.Error, "ion-close-circled"},
+                                                                             { StatusEnum.Started, ""},
+                                                                             { StatusEnum.Stopped, "ion-checkmark-circled"}
+                                                                        };
+
     public IActionResult OnGet()
     {
         BatchList = trackingProvider.GetDataOfBatchName(BatchName).Take(12).ToList();
@@ -17,85 +24,95 @@
         return Page();
 
     }
-}
+    }
 
-@section Title{
-    Tracking detail <small>@BatchName</small>
+    @section Title{
+        Tracking detail <small>@BatchName</small>
 }
 
 <div class="row">
     @foreach (var item in BatchList)
-    {
+        {
 
         <div class="col-sm-4">
             <Box>
                 <BoxBody>
                     <div class="row">
-                        <div class="col-sm-3"><b>BatchName :</b></div>
-                        <div class="col-sm-9">@item.BatchName</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>Session ID :</b></div>
-                        <div class="col-sm-9">@item.SessionId</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>StartDate :</b></div>
-                        <div class="col-sm-9">@item.StartDate</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>EndDate :</b></div>
-                        <div class="col-sm-9">@item.EndDate</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>Pings :</b></div>
-                        <div class="col-sm-9">
-                            @if (item.Pings != null)
+                        <div class="col-sm-10 ">
+                            <div class="row">
+                                <div class="col-sm-3"><b>BatchName :</b></div>
+                                <div class="col-sm-9">@item.BatchName</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>Session ID :</b></div>
+                                <div class="col-sm-9">@item.SessionId</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>StartDate :</b></div>
+                                <div class="col-sm-9">@item.StartDate</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>EndDate :</b></div>
+                                <div class="col-sm-9">@item.EndDate</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>Pings :</b></div>
+                                <div class="col-sm-9">
+                                    @if (item.Pings != null)
                             {
                                 foreach (var itmPing in item.Pings.OrderByDescending(p => p).Take(5))
                                 {
-                                    <text>@itmPing.ToString("HH:mm:ss")</text><br />
+                                            <text>@itmPing.ToString("HH:mm:ss") / </text>
                                 }
                             }
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>State :</b></div>
-                        <div class="col-sm-9">@item.State.ToString()</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>Messages :</b></div>
-                        <div class="col-sm-9">
-                            @{
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>State :</b></div>
+                                <div class="col-sm-9">@item.State.ToString()</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>Messages :</b></div>
+                                <div class="col-sm-9">
+                                    @{
                                 if (item.Messages != null && item.Messages.Count() >0)
                                 {
-                                    <text>YES</text>
-                                }
+                                            <text>YES</text>
+    }
                                 else
                                 {
-                                    <text>NO</text>
+                                            <text>NO</text>
                                 }
-                            }
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"><b>Exception :</b></div>
-                        <div class="col-sm-9">
-                            @{
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><b>Exception :</b></div>
+                                <div class="col-sm-9">
+                                    @{
                                 if (item.Ex != null && item.Ex.Count() > 0)
                                 {
-                                    <text>YES</text>
+                                            <text>YES</text>
                                 }
                                 else
                                 {
-                                    <text>NO</text>
+                                            <text>NO</text>
                                 }
-                            }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 small-box">
+                            <div class=" icon">
+                                <i class=" ion @iconMapForStatus[item.State]"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9"></div>
                         <div class="col-sm-3"><a asp-page="./BatchExecutionDetail" asp-route-SessionId="@item.SessionId">go to detail</a></div>
                     </div>
+                    
                 </BoxBody>
             </Box>
         </div>
