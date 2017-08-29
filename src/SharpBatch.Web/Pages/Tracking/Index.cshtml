@@ -14,6 +14,13 @@
     }
 }
 
+@section Breadcrumb{
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>Tracking</li>
+    </ol>
+}
+
     <div class="row">
         <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-play" sb-smallbox-url="/tracking/list/Running">
             <h3>@trackingProvider.GetByStatusCount(StatusEnum.Running)</h3>
@@ -47,6 +54,7 @@
             </div>
         </div>
     </div>
+
 
 @section javascriptSection{
 <script src="~/lib/adminlte/plugins/chartjs/Chart.min.js"></script>

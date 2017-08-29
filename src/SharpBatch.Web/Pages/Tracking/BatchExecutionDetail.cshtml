@@ -22,7 +22,13 @@
 @section Title{
     Tracking execution detail <small>@BatchData?.BatchName </small>
 }
-
+@section Breadcrumb{
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a asp-page="./Index">Tracking</a></li>
+        <li>Execution</li>
+    </ol>
+}
     @if (BatchData != null)
     {
     <div class="col-sm-4">

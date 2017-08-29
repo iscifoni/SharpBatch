@@ -37,8 +37,13 @@
         }
     } Tracking List
 }
+
 @section Breadcrumb{ 
-    @await Component.InvokeAsync("Breadcrumb")
+<ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a asp-page="./Index" >Tracking</a></li>
+    <li>List</li>
+</ol>
 }
 
     <div class="col-md-8">
