@@ -23,40 +23,25 @@ namespace SharpBatch.Web.Internals
             var notCompletedList = list.Where(p => p.State != StatusEnum.Stopped).ToList();
 
             List<DateTime> dateList = new List<DateTime>() {
-                DateTime.Today,
                 DateTime.Today.AddDays(-6),
                 DateTime.Today.AddDays(-5),
                 DateTime.Today.AddDays(-4),
                 DateTime.Today.AddDays(-3),
                 DateTime.Today.AddDays(-2),
-                DateTime.Today.AddDays(-1)
+                DateTime.Today.AddDays(-1),
+                DateTime.Today
             };
 
-            //var dataCompleted = (from date in dateList
-            //                    join completed in completedList on date equals completed.StartDate.Value.Date
-            //                    group completed by completed.StartDate.Value.Date into g
-            //                    orderby g.First().StartDate
-            //                    select new { date = g.First().StartDate, count = g.Count() } ).ToList() ;
-
-            //var dataNotCompleted = (from date in dateList
-            //                        join completed in notCompletedList on date equals completed.StartDate.Value.Date
-            //                        group new { completed, date } by new { completed.StartDate.Value.Date, date } into g
-            //                        orderby g.Key.Date
-            //                        select new { date = g.Key.Date, count = g.Count() }).ToList();
-
+          
             var dataCompleted = (from date in dateList
                                  join completed in completedList on date equals completed.StartDate.Value.Date into Tab1
-                                 from Tab2 in Tab1.DefaultIfEmpty()
-                                 group Tab2 by date into g
-                                 orderby g.Key 
-                                 select new { date = g.Key, count = g.Count(p=>p!= null) }).ToList();
+                                 orderby date 
+                                 select new { date = date, count = Tab1.Count() }).ToList();
 
             var dataNotCompleted = (from date in dateList
                                     join completed in notCompletedList on date equals completed.StartDate.Value.Date into Tab1
-                                    from Tab2 in Tab1.DefaultIfEmpty()
-                                    group Tab2 by date into g
-                                    orderby g.Key 
-                                    select new { date = g.Key, count = g.Count(p => p != null) }).ToList();
+                                    orderby date
+                                    select new { date = date, count = Tab1.Count() }).ToList();
 
 
             List<(string serieName, List<int> data)> seriesData = new List<(string serieName, List<int> data)>();
