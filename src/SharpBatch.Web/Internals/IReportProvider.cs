@@ -10,6 +10,6 @@ namespace SharpBatch.Web.Internals
         decimal ErrorPercentageToNow();
         decimal CompletedPercentageToNow();
         decimal RunningPercentageToNow();
-        (List<string> labels, List<(string serieName, List<int> data)> series) ChartWeekly();
+        (List<string> labels, List<(string serieName, List<int> data)> series)? ChartWeekly();
     }
 }

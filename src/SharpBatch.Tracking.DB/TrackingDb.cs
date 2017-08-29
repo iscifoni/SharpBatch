@@ -214,7 +214,13 @@ namespace SharpBatch.Tracking.DB
 
         public List<BatchTrackingModel> LastWeekData()
         {
-            throw new NotImplementedException();
+            return _trackingContext.Trackings
+                       .Where(p=>p.StartDate.HasValue && p.StartDate.Value.Date >= DateTime.Today.AddDays(-7))
+                       .Include(p => p.Ex)
+                       .Include(p => p.Messages)
+                       .Include(p => p.Pings)
+                       .Select(p => (BatchTrackingModel)p)
+                       .ToList<BatchTrackingModel>();
         }
     }
 }
