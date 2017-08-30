@@ -45,14 +45,14 @@
                 <BoxBody>
                     <div class="row">
                         <div class="col-sm-10 ">
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="col-sm-3"><b>BatchName :</b></div>
                                 <div class="col-sm-9">@item.BatchName</div>
-                            </div>
-                            <div class="row">
+                            </div>*@
+                            @*<div class="row">
                                 <div class="col-sm-3"><b>Session ID :</b></div>
                                 <div class="col-sm-9">@item.SessionId</div>
-                            </div>
+                            </div>*@
                             <div class="row">
                                 <div class="col-sm-3"><b>StartDate :</b></div>
                                 <div class="col-sm-9">@item.StartDate</div>
@@ -61,7 +61,7 @@
                                 <div class="col-sm-3"><b>EndDate :</b></div>
                                 <div class="col-sm-9">@item.EndDate</div>
                             </div>
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="col-sm-3"><b>Pings :</b></div>
                                 <div class="col-sm-9">
                                     @if (item.Pings != null)
@@ -72,7 +72,7 @@
                                 }
                             }
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="row">
                                 <div class="col-sm-3"><b>State :</b></div>
                                 <div class="col-sm-9">@item.State.ToString()</div>
@@ -115,8 +115,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-9"></div>
-                        <div class="col-sm-3"><a asp-page="./BatchExecutionDetail" asp-route-SessionId="@item.SessionId">go to detail</a></div>
+                        <div class="col-sm-7">&nbsp;</div>
+                        <div class="col-sm-5"><a asp-page="./BatchExecutionDetail" asp-route-SessionId="@item.SessionId">go to detail</a></div>
                     </div>
                     
                 </BoxBody>
