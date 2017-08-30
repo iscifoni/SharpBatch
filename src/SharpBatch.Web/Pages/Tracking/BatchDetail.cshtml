@@ -45,14 +45,6 @@
                 <BoxBody>
                     <div class="row">
                         <div class="col-sm-10 ">
-                            @*<div class="row">
-                                <div class="col-sm-3"><b>BatchName :</b></div>
-                                <div class="col-sm-9">@item.BatchName</div>
-                            </div>*@
-                            @*<div class="row">
-                                <div class="col-sm-3"><b>Session ID :</b></div>
-                                <div class="col-sm-9">@item.SessionId</div>
-                            </div>*@
                             <div class="row">
                                 <div class="col-sm-3"><b>StartDate :</b></div>
                                 <div class="col-sm-9">@item.StartDate</div>
@@ -61,18 +53,6 @@
                                 <div class="col-sm-3"><b>EndDate :</b></div>
                                 <div class="col-sm-9">@item.EndDate</div>
                             </div>
-                            @*<div class="row">
-                                <div class="col-sm-3"><b>Pings :</b></div>
-                                <div class="col-sm-9">
-                                    @if (item.Pings != null)
-                            {
-                                foreach (var itmPing in item.Pings.OrderByDescending(p => p).Take(5))
-                                {
-                                            <text>@itmPing.ToString("HH:mm:ss") / </text>
-                                }
-                            }
-                                </div>
-                            </div>*@
                             <div class="row">
                                 <div class="col-sm-3"><b>State :</b></div>
                                 <div class="col-sm-9">@item.State.ToString()</div>
