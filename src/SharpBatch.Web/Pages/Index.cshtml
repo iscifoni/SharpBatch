@@ -20,7 +20,9 @@
         <li>Tracking</li>
     </ol>
 }
-
+@section Title{
+    Dashboard
+}
     <div class="row">
         <SmallBox sb-smallbox-bgcolor="bg-aqua" sb-smallbox-icon="ion-play" sb-smallbox-url="/tracking/list/Running">
             <h3>@trackingProvider.GetByStatusCount(StatusEnum.Running)</h3>
@@ -45,7 +47,7 @@
         <GraphKnob class="col-xs-6 col-md-3" sb-Knob-Value="@completedPercentage" sb-Knob-Width="180" sb-Knob-Height="180" sb-Knob-Thickness="0.2" sb-Knob-Title="Completed @completedPercentage  %" sb-Knob-fgColor="#3c8dbc" sb-knob-angleOffset="-125" sb-knob-angleArc="250" sb-Knob-Skin="tron"></GraphKnob>
         <GraphKnob class="col-xs-6 col-md-3" sb-Knob-Value="@errorPercentage" sb-Knob-Width="180" sb-Knob-Height="180" sb-Knob-Thickness="0.2" sb-Knob-Title="Error @errorPercentage  %" sb-Knob-fgColor="#3c8dbc" sb-knob-angleOffset="-125" sb-knob-angleArc="250" sb-Knob-Skin="tron"></GraphKnob>
     </div>
-    <div class="row"></div>
+    <div class="row"><p>&nbsp</p></div>
     <div class="row">
         <div class="col-md-10">
             <div class="chart">

@@ -10,11 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Views\Home\Index.cshtml" />
-    <EmbeddedResource Include="Views\Shared\_Layout.cshtml" />
-    <EmbeddedResource Include="Views\Tracking\RunningBatchPartial.cshtml" />
-    <EmbeddedResource Include="Views\_ViewImports.cshtml" />
-    <EmbeddedResource Include="Views\_ViewStart.cshtml" />
+    <EmbeddedResource Include="Pages\IndexControls.cshtml" />
+    <EmbeddedResource Include="Pages\_Layout.cshtml" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -35,10 +32,6 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.2.301" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Tracking\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
