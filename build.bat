@@ -47,7 +47,7 @@ call dotnet pack src\SharpBatch.Traking.Memory --configuration %config% %version
 if not "%errorlevel%"=="0" goto failure
 
 :success
-REM exit 0
+exit 0
 
 :failure
-REM exit -1
+exit -1
