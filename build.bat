@@ -24,7 +24,7 @@ REM - Option 2: Let msbuild handle things and build the solution
 
 REM MSBuild.exe SharpBatch.sln /p:Configuration=%config% /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
-dotnet build SharpBatch.sln --configuration %config%
+dotnet build SharpBatch.NoWeb.sln --configuration %config%
 
 if not "%errorlevel%"=="0" goto failure
 
