@@ -21,6 +21,7 @@ REM Build
 REM - Option 1: Run dotnet build for every source folder in the project
 REM   e.g. call dotnet build <path> --configuration %config%
 REM - Option 2: Let msbuild handle things and build the solution
+
 MSBuild.exe SharpBatch.sln /p:Configuration=%config% /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 REM dotnet build SharpBatch.sln --configuration %config%
