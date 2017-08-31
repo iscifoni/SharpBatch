@@ -4,9 +4,9 @@ if "%config%" == "" (
    set config=Release
 )
 
-set Version=
+set version=
 if not "%BuildCounter%" == "" (
-   set Version=--version-suffix %BuildCounter%
+   set version=--version-suffix %BuildCounter%
 )
 
 REM (optional) build.bat is in the root of our repo, cd to the correct folder where sources/projects are
