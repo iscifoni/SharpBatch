@@ -49,7 +49,7 @@ namespace SharpBatch
         /// <inheritdoc/>
         public virtual Task onExecuted(BatchConfigContext context)
         {
-            return TaskWrapper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc/>
@@ -59,7 +59,7 @@ namespace SharpBatch
             {
                 context.BatchConfiguration.AddOrUpdate(_name, _value);
             }
-            return TaskWrapper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

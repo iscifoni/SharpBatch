@@ -26,7 +26,7 @@ namespace SharpBatch.internals
         {
             var actionToExecute = context.ActionDescriptor;
             actionToExecute.PropertyInfo.SetValue(obj, context);
-            return TaskWrapper.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

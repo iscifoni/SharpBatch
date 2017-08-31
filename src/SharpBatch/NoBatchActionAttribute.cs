@@ -30,7 +30,7 @@ namespace SharpBatch
         public override Task onExecuting(BatchConfigContext context)
         {
             context.ActionDescriptor = null;
-            return TaskWrapper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         public new int Order { get; set; } = 60001;
