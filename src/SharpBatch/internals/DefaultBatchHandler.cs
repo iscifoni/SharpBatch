@@ -62,7 +62,7 @@ namespace SharpBatch.internals
             contextInvoker.BatchName = urlManager.RequestBatchName;
             contextInvoker.ActionName = urlManager.RequestBatchAction;
             contextInvoker.ActionDescriptor = null;
-            contextInvoker.ParentSessionID = parentSessionId;
+            contextInvoker.ParentSessionId = parentSessionId;
 
             await InvokeAsync(contextInvoker, urlManager, parentSessionId);
         }

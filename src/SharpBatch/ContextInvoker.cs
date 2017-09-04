@@ -57,7 +57,7 @@ namespace SharpBatch
 
         public Guid SessionId { get; set; }
 
-        public Guid? ParentSessionID { get; set; }
+        public Guid? ParentSessionId { get; set; }
 
         public IShareMessageCollection ShareMessage { get; } = new ShareMessageCollection();
         
