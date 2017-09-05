@@ -16,13 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpBatch.JSonSerializer\SharpBatch.JSonSerializer.csproj" />
+    <ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.0-rtm-26383" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0-rtm-26383" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0-preview3-25518-01" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0" />
   </ItemGroup>
 </Project>

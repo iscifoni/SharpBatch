@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
     <ProjectReference Include="..\..\src\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
     <ProjectReference Include="..\LinkedAssembly\LinkedAssembly.csproj" />
     <ProjectReference Include="..\..\src\SharpBatch\SharpBatch.csproj" />

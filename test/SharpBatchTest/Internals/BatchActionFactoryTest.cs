@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Memory;
 using Xunit;
 
@@ -23,14 +24,16 @@ namespace SharpBatchTest.Internals
                 .Returns(new TrackingMemory())
                 .Verifiable();
 
+            var modelSerializer = new Mock<IModelSerializer>(MockBehavior.Strict);
+
             IPropertyInvoker propertyInvoker = new DefaultPropertyInvoker();
             MethodActivator methodActivator = new MethodActivator();
-            IBatchInvoker batchInvoker = new DefaultBatchInvoker(propertyInvoker, methodActivator, sharpBatchTrakingFactory.Object);
+            IBatchInvoker batchInvoker = new DefaultBatchInvoker(propertyInvoker, methodActivator, sharpBatchTrakingFactory.Object, modelSerializer.Object);
             IBatchInvokerProvider batchInvokerProvider = new DefaultBatchInvokerProvider(batchInvoker,sharpBatchTrakingFactory.Object);
             ApplicationBatchManager applicationBatchManager = new ApplicationBatchManager();
             BatchActionProvider batchActionProvider = new BatchActionProvider(applicationBatchManager, batchInvokerProvider);
 
-            SystemActionProvider systemActionProvider = new SystemActionProvider(sharpBatchTrakingFactory.Object);
+            SystemActionProvider systemActionProvider = new SystemActionProvider(sharpBatchTrakingFactory.Object, modelSerializer.Object);
             IBatchActionFactory batchActionFactory = new BatchActionFactory(batchActionProvider, systemActionProvider);
 
             var batchUrlManager = new Mock<IBatchUrlManager>(MockBehavior.Strict);
