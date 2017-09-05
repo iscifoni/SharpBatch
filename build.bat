@@ -4,6 +4,10 @@ if "%config%" == "" (
    set config=Release
 )
 
+set version=
+if not "%BuildCounter%" == "" (
+   set packversionsuffix=--version-suffix ci-%BuildCounter%
+)
 
 REM (optional) build.bat is in the root of our repo, cd to the correct folder where sources/projects are
 REM cd MyLibrary
