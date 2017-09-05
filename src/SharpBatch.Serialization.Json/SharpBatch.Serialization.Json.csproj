@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+	  <Description>SharpBatch serialization Json</Description>
+	  <NoWarn>$(NoWarn);CS1591</NoWarn>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <AssemblyName>SharpBatch.Serialization.Json</AssemblyName>
+	  <PackageId>SharpBatch.Serialization.Json</PackageId>
+	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
