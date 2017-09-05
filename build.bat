@@ -6,7 +6,7 @@ if "%config%" == "" (
 
 set version=
 if not "%BuildCounter%" == "" (
-   set packversionsuffix=--version-suffix ci-%BuildCounter%
+   set packversionsuffix= ci-%BuildCounter%
 )
 echo *****************************************************************************************************************
 echo ****  packversionsuffix --> %packversionsuffix% 
