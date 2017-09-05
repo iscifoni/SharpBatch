@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch.internals
@@ -23,9 +24,22 @@ namespace SharpBatch.internals
     public class SystemActionProvider : IBatchActionProvider
     {
         private ISharpBatchTracking _trakingProvider;
-        public SystemActionProvider(ISharpBatchTrackingFactory trakingFactory)
+        private IModelSerializer _modelSerializer;
+
+        public SystemActionProvider(ISharpBatchTrackingFactory trakingFactory, IModelSerializer modelSerializer)
         {
+            if (trakingFactory == null)
+            {
+                throw new ArgumentNullException(nameof(trakingFactory));
+            }
+
+            if (modelSerializer == null)
+            {
+                throw new ArgumentNullException(nameof(modelSerializer));
+            }
+
             _trakingProvider = trakingFactory.getTrakingProvider();
+            _modelSerializer = modelSerializer;
         }
 
         public async Task<string> InvokeAsync(IBatchUrlManager urlManager, ContextInvoker context)
@@ -34,7 +48,7 @@ namespace SharpBatch.internals
                 {
                 case BatchUrlManagerCommand.Status:
                     var batchStaus = await _trakingProvider.GetStatusAsync(new Guid(context.Parameters["sessionid"].ToString()));
-                    var result = JSonSerializer.JSonModelSerializer.Serialize(batchStaus);
+                    var result = _modelSerializer.Serialize(batchStaus);
                     return result;
                 default:
                     throw new InvalidCastException($"Command {urlManager.RequestCommand.ToString()} not found");

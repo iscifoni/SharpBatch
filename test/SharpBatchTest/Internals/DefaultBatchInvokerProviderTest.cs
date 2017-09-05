@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
-using SharpBatch.Tracking.Memory;
+using SharpBatch.Tracking.Abstraction;
 using Xunit;
 
 namespace SharpBatchTest.Internals
@@ -19,9 +19,14 @@ namespace SharpBatchTest.Internals
         {
             //Arrange
             var batchInvoker = new Mock<IBatchInvoker>(MockBehavior.Strict);
+            var tracking = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
+            tracking.Setup(s => s.StartAsync(It.IsAny<string>(), It.IsAny<Guid>())).Returns(Task.CompletedTask);
+            tracking.Setup(s => s.PingAsync(It.IsAny<Guid>())).Returns(Task.CompletedTask);
+            tracking.Setup(s => s.StopAsync(It.IsAny<Guid>())).Returns(Task.CompletedTask);
+
             var sharpBatchTrakingFactory = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
             sharpBatchTrakingFactory.Setup((s) => s.getTrakingProvider())
-                .Returns(new TrackingMemory())
+                .Returns(tracking.Object)
                 .Verifiable();
 
             var defaultBatchInvokerProvider = new DefaultBatchInvokerProvider(batchInvoker.Object, sharpBatchTrakingFactory.Object);
@@ -50,8 +55,14 @@ namespace SharpBatchTest.Internals
             context.Setup((s) => s.Response).Returns(httpResponse.Object).Verifiable();
             context.Setup((s) => s.RequestServices).Returns(requestService.Object).Verifiable();
 
+
+            //var contextInvoker = ContextInvoker.Create(context.Object);
             var contextInvoker = ContextInvoker.Create(context.Object);
             contextInvoker.SessionId = Guid.NewGuid();
+            contextInvoker.ActionDescriptor = new BatchActionDescriptor()
+            {
+                BatchName = "Name"
+            };
 
             //Act
             var response = await defaultBatchInvokerProvider.InvokeAsync(contextInvoker);

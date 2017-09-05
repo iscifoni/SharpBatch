@@ -18,7 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpBatch;
 using SharpBatch.internals;
-using SharpBatch.JSonSerializer;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Abstraction;
 using Xunit;
 using Moq;
@@ -29,44 +29,24 @@ namespace SharpBatchTest
     public class ResponseToTrackingAttributeText
     {
         [Fact]
-        public void ResponseToTrackingAttribute_SerializerErrorTest()
-        {
-            //Arrange
-            var sessionID = Guid.NewGuid();
-            var content = "Test";
-            var attribute = new ResponseToTrackingAttribute();
-            var context = createBatchExecutionContext(sessionID, content);
-            var trackingService = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
-            trackingService.Setup((s) => s.AddMessageAsync(sessionID, content)).Returns(Task.CompletedTask).Verifiable();
-            var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
-
-            requestService.Setup((s) => s.GetService(It.IsAny<Type>())).Returns(trackingService.Object).Verifiable();
-
-            context.RequestServices = requestService.Object;
-
-            //Act
-            var ex = Record.Exception(() => attribute.onExecuted(context));
-
-            //Assert
-            requestService.Verify();
-            Assert.NotNull(ex);
-            Assert.IsType<MockException>(ex);
-        }
-
-        [Fact]
         public void ResponseToTrackingAttribute_SerializerStringTest()
         {
             //Arrange
             var sessionID = Guid.NewGuid();
-            var content = "Test";
+            object content = "Test";
+            var serializedContent = $"\"{content}\"";
             var attribute = new ResponseToTrackingAttribute();
             var context = createBatchExecutionContext(sessionID, content);
-            var serializedContent = JSonModelSerializer.Serialize(content);
+
+            var modelSerializer = new Mock<IModelSerializer>(MockBehavior.Strict);
+            modelSerializer.Setup((s) => s.Serialize(content)).Returns(serializedContent).Verifiable();
+
             var trackingService = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
             trackingService.Setup((s) => s.AddMessageAsync(sessionID, serializedContent)).Returns(Task.CompletedTask).Verifiable();
-            var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
 
-            requestService.Setup((s) => s.GetService(It.IsAny<Type>())).Returns(trackingService.Object).Verifiable();
+            var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals("ISharpBatchTracking")))).Returns(trackingService.Object).Verifiable();
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals("IModelSerializer")))).Returns(modelSerializer.Object).Verifiable();
 
             context.RequestServices = requestService.Object;
 
@@ -82,20 +62,25 @@ namespace SharpBatchTest
         {
             //Arrange
             var sessionID = Guid.NewGuid();
-            var content = new modelTest()
+            object content = new modelTest()
             {
                 Name = "Name",
                 Surname = "Surname"
             };
+            var serializedContent = "{ \"Name\":\"Name\", \"Surname\":\"Surname\" }";
 
-            var serializedContent = JSonModelSerializer.Serialize(content); // "{ \"Name\":\"Name\", \"Surname\":\"Surname\" }";
+            var modelSerializer = new Mock<IModelSerializer>(MockBehavior.Strict);
+            modelSerializer.Setup((s) => s.Serialize(It.IsAny<object>())).Returns(serializedContent);
+            
             var attribute = new ResponseToTrackingAttribute();
             var context = createBatchExecutionContext(sessionID, content);
+
             var trackingService = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
             trackingService.Setup((s) => s.AddMessageAsync(sessionID, serializedContent)).Returns(Task.CompletedTask).Verifiable();
-            var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
 
-            requestService.Setup((s) => s.GetService(It.IsAny<Type>())).Returns(trackingService.Object).Verifiable();
+            var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t=> t.Name.Equals(nameof(ISharpBatchTracking))))).Returns(trackingService.Object).Verifiable();
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals(nameof(IModelSerializer))))).Returns(modelSerializer.Object).Verifiable();
 
             context.RequestServices = requestService.Object;
 
