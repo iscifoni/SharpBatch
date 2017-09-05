@@ -14,13 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Abstrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Memory", "src\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj", "{B42D6FC1-A683-40D0-BEC2-D60ACEC50CAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Web", "src\SharpBatch.Web\SharpBatch.Web.csproj", "{980BFBF2-CD2D-47FF-9AE7-070BDA6E5FAC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedAssembly", "test\LinkedAssembly\LinkedAssembly.csproj", "{7CF71A56-227C-4B5F-91ED-E25D54D7BAF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatchTest", "test\SharpBatchTest\SharpBatchTest.csproj", "{B6C3FFB4-5AAC-4D47-8848-CCA0091E074D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "test\WebApplication\WebApplication.csproj", "{11950C6D-8275-4ADC-BB34-51D204B01CD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{81D53723-22BF-4C05-A828-A61A959185FD}"
 	ProjectSection(SolutionItems) = preProject
