@@ -10,8 +10,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch", "src\SharpBatc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Abstraction", "src\SharpBatch.Abstraction\SharpBatch.Abstraction.csproj", "{7A811BC4-1F1B-4E78-BBCF-FF50D1638969}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.JSonSerializer", "src\SharpBatch.JSonSerializer\SharpBatch.JSonSerializer.csproj", "{24510CB6-FBC5-42B2-AAEB-217391563FD6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Abstraction", "src\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj", "{CBD7AB80-0D38-42FD-949F-B3C959C710F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Tracking.Memory", "src\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj", "{B42D6FC1-A683-40D0-BEC2-D60ACEC50CAA}"
@@ -36,9 +34,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Serialization.Ab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Serialization.Json", "src\SharpBatch.Serialization.Json\SharpBatch.Serialization.Json.csproj", "{2FD29EE7-D7CA-4882-BEA1-E301F74EAB88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBatch.Serialization.Xml", "src\SharpBatch.Serialization.Xml\SharpBatch.Serialization.Xml.csproj", "{86D0A5ED-B800-4244-8CB5-2A23CC4C29E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Serialization.Xml", "src\SharpBatch.Serialization.Xml\SharpBatch.Serialization.Xml.csproj", "{86D0A5ED-B800-4244-8CB5-2A23CC4C29E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBatch.Serialization.XmlTest", "SharpBatch.Serialization.XmlTest\SharpBatch.Serialization.XmlTest.csproj", "{B7F73C86-9EA3-4274-BD26-E71682B323B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBatch.Serialization.XmlTest", "test\SharpBatch.Serialization.XmlTest\SharpBatch.Serialization.XmlTest.csproj", "{B7F73C86-9EA3-4274-BD26-E71682B323B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,18 +72,6 @@ Global
 		{7A811BC4-1F1B-4E78-BBCF-FF50D1638969}.Release|x64.Build.0 = Release|Any CPU
 		{7A811BC4-1F1B-4E78-BBCF-FF50D1638969}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A811BC4-1F1B-4E78-BBCF-FF50D1638969}.Release|x86.Build.0 = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|x64.Build.0 = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Debug|x86.Build.0 = Debug|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|x64.ActiveCfg = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|x64.Build.0 = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|x86.ActiveCfg = Release|Any CPU
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6}.Release|x86.Build.0 = Release|Any CPU
 		{CBD7AB80-0D38-42FD-949F-B3C959C710F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBD7AB80-0D38-42FD-949F-B3C959C710F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD7AB80-0D38-42FD-949F-B3C959C710F1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -225,7 +211,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{48AC4CD2-6467-4CD1-8989-3A296DC89868} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
 		{7A811BC4-1F1B-4E78-BBCF-FF50D1638969} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
-		{24510CB6-FBC5-42B2-AAEB-217391563FD6} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
 		{CBD7AB80-0D38-42FD-949F-B3C959C710F1} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
 		{B42D6FC1-A683-40D0-BEC2-D60ACEC50CAA} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
 		{980BFBF2-CD2D-47FF-9AE7-070BDA6E5FAC} = {89031800-C001-447A-A3D7-8EDE594C2A9E}
