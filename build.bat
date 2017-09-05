@@ -10,12 +10,13 @@ echo ****  BuildCounter       %BuildCounter%
 echo ****  packversionsuffix  %packversionsuffix% 
 echo **************************************************
 
-set version=1.0.0
+set version=
 if not "%BuildCounter%" == "" (
    set packversionsuffix= "ci-%BuildCounter%"
 )
 echo **************************************************
 echo ****  packversionsuffix  %packversionsuffix% 
+echo ****  version  %version% 
 echo **************************************************
 
 REM (optional) build.bat is in the root of our repo, cd to the correct folder where sources/projects are
