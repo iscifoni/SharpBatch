@@ -13,8 +13,8 @@ echo *********************************
 echo ****  Restoring package
 echo *********************************
 
-call dotnet restore SharpBatch.NoWeb.sln
-if not "%errorlevel%"=="0" goto failure
+REM call dotnet restore SharpBatch.NoWeb.sln
+REM if not "%errorlevel%"=="0" goto failure
 
 echo *********************************
 echo ****  Restore completed
