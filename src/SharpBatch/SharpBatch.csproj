@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
+    <ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
     <ProjectReference Include="..\SharpBatch.Traking.Memory\SharpBatch.Tracking.Memory.csproj" />
   </ItemGroup>

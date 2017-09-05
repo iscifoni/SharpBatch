@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
     <ProjectReference Include="..\..\src\SharpBatch\SharpBatch.csproj" />
   </ItemGroup>
 
