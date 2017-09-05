@@ -15,7 +15,7 @@ if not "%BuildCounter%" == "" (
    set packversionsuffix= "ci-%BuildCounter%"
 )
 echo **************************************************
-echo ****  packversionsuffix --> %packversionsuffix% 
+echo ****  packversionsuffix  %packversionsuffix% 
 echo **************************************************
 
 REM (optional) build.bat is in the root of our repo, cd to the correct folder where sources/projects are
