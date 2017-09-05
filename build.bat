@@ -12,7 +12,7 @@ echo **************************************************
 
 set version=
 if not "%BuildCounter%" == "" (
-   set packversionsuffix= ci-%BuildCounter%
+   set packversionsuffix= "ci-%BuildCounter%"
 )
 echo **************************************************
 echo ****  packversionsuffix --> %packversionsuffix% 
