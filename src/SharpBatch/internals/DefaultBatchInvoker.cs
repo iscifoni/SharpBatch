@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch.internals
@@ -31,8 +32,9 @@ namespace SharpBatch.internals
         IPropertyInvoker _propertyInvoker;
         MethodActivator _activator;
         ISharpBatchTracking _sharpBatchTraking;
+        IModelSerializer _modelSerializer;
         
-        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator, ISharpBatchTrackingFactory trakingFactory )
+        public DefaultBatchInvoker(IPropertyInvoker propertyInvoker, MethodActivator activator, ISharpBatchTrackingFactory trakingFactory, IModelSerializer modelserializer )
         {
             if (propertyInvoker == null)
             {
@@ -44,14 +46,20 @@ namespace SharpBatch.internals
                 throw new ArgumentNullException(nameof(activator));
             }
 
-            if(trakingFactory == null)
+            if (trakingFactory == null)
             {
                 throw new ArgumentNullException(nameof(trakingFactory));
+            }
+
+            if (modelserializer == null)
+            {
+                throw new ArgumentNullException(nameof(modelserializer));
             }
 
             _propertyInvoker = propertyInvoker;
             _activator = activator;
             _sharpBatchTraking = trakingFactory.getTrakingProvider();
+            _modelSerializer = modelserializer;
         }
 
         public async Task<object> InvokeAsync(ContextInvoker context)
@@ -74,7 +82,7 @@ namespace SharpBatch.internals
                 executionAttribute.onExecuting(batchExecutionContext);
             }
 
-            var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo);
+            var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo, _modelSerializer);
             var parameters = parameterBinding.Bind();
 
             var result = executor.Execute(activatorInstance, parameters);
@@ -126,7 +134,7 @@ namespace SharpBatch.internals
             //If result not null i serialize it 
             if (result != null)
             {
-                serializedResult = JSonSerializer.JSonModelSerializer.Serialize(response);
+                serializedResult = _modelSerializer.Serialize(response);
             }
             return serializedResult;
         }

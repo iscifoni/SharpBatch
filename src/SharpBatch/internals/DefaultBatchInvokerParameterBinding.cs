@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using SharpBatch.JSonSerializer;
+using SharpBatch.Serialization.Abstract;
 
 namespace SharpBatch.internals
 {
@@ -25,8 +25,9 @@ namespace SharpBatch.internals
     {
         private BatchParameterDictionary _parameters;
         private MethodInfo _methodInfo;
+        private IModelSerializer _modelSerializer;
 
-        public DefaultBatchInvokerParameterBinding(BatchParameterDictionary parameters, MethodInfo methodInfo)
+        public DefaultBatchInvokerParameterBinding(BatchParameterDictionary parameters, MethodInfo methodInfo, IModelSerializer modelSerializer)
         {
             if (parameters == null)
             {
@@ -57,7 +58,7 @@ namespace SharpBatch.internals
                     result[i] = Convert.ChangeType(parameterValue, item.ParameterType);
                 }else
                 {
-                    MethodInfo method = typeof(JSonModelSerializer).GetMethod("Deserialize");
+                    MethodInfo method = typeof(IModelSerializer).GetMethod("Deserialize");
                     MethodInfo genericMethod = method.MakeGenericMethod(item.ParameterType);
                     result[i] = genericMethod.Invoke(null, new object[] { (string)parameterValue });
                 }

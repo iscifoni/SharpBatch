@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using SharpBatch;
 using SharpBatch.internals;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Memory;
 using Xunit;
 
@@ -27,10 +28,14 @@ namespace SharpBatchTest.Internals
             var isharpBatchTrackingActivator = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
             isharpBatchTrackingActivator.Setup((s) => s.getTrakingProvider()).Returns(new TrackingMemory()).Verifiable();
 
+            var modelSerializer = new Mock<IModelSerializer>(MockBehavior.Strict);
+            modelSerializer.Setup((s) => s.Serialize((object)"method1")).Returns("\"method1\"");
+
             DefaultBatchInvoker defaultBatchInvoker = new DefaultBatchInvoker(
                 propertyInvoker.Object, 
                 methodActivator, 
-                isharpBatchTrackingActivator.Object);
+                isharpBatchTrackingActivator.Object,
+                modelSerializer.Object);
 
             var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
             requestService.Setup((s) => s.GetService(It.IsAny<Type>())).Returns((object)"Any").Verifiable();

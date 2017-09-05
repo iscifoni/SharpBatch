@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SharpBatch.JSonSerializer;
+using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Abstraction;
 
 namespace SharpBatch
@@ -29,8 +29,9 @@ namespace SharpBatch
             var response = context.ShareMessage.Get<IResponseObject>();
             var responseType = response.Response.GetType();
             var trackingService = (ISharpBatchTracking)context.RequestServices.GetService(typeof(ISharpBatchTracking));
-            
-            trackingService.AddMessageAsync(context.SessionId, JSonModelSerializer.Serialize(response.Response));
+            var serializer = (IModelSerializer)context.RequestServices.GetService(typeof(IModelSerializer));
+
+            trackingService.AddMessageAsync(context.SessionId, serializer.Serialize(response.Response));
         }
 
         public override void onExecuting(BatchExecutionContext context)

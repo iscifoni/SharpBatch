@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using SharpBatch;
 using SharpBatch.internals;
+using SharpBatch.Serialization.Abstract;
+using Moq;
 using Xunit;
 
 namespace SharpBatchTest.Internals
@@ -24,7 +26,9 @@ namespace SharpBatchTest.Internals
             var batchParameterDictionary = new BatchParameterDictionary();
             batchParameterDictionary.Add("param1", "first param");
 
-            var batchInvokerParameterBinding = new DefaultBatchInvokerParameterBinding(batchParameterDictionary, descriptions.Last().ActionInfo);
+            var serializer = new Mock<IModelSerializer>(MockBehavior.Strict);
+
+            var batchInvokerParameterBinding = new DefaultBatchInvokerParameterBinding(batchParameterDictionary, descriptions.Last().ActionInfo, serializer.Object);
 
             //Act
             var response = batchInvokerParameterBinding.Bind();
