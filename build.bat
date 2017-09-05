@@ -75,7 +75,7 @@ call dotnet pack src\SharpBatch.Tracking.DB --configuration %config% %version% -
 if not "%errorlevel%"=="0" goto failure
 
 :success
-rem exit 0
+exit 0
 
 :failure
-rem exit -1
+exit -1
