@@ -27,7 +27,7 @@ echo *********************************
 echo ****  Restoring package
 echo *********************************
 
-call dotnet restore SharpBatch.sln --verbosity diag
+call dotnet restore SharpBatch.sln --verbosity d
 if not "%errorlevel%"=="0" goto failure
 
 echo *********************************
