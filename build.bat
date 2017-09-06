@@ -62,10 +62,10 @@ echo *********************************
 echo ****  Test Started
 echo *********************************
 cd test\SharpBatchTest
-call dotnet test --configuration %config% -verbose
+call dotnet test --configuration %config% --verbosity m
 
 cd ..\SharpBatch.Serialization.Xml
-call dotnet test --configuration %config% -verbose
+call dotnet test --configuration %config% --verbosity m
 
 echo *********************************
 echo ****  Test ended
