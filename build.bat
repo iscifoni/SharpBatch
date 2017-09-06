@@ -16,7 +16,7 @@ set version=
 if not "%BuildCounter%" == "" (
    set packversionsuffix= ci-%BuildCounter%
 )
-set PackageVersion = 1.0.0
+set PackageVersion=1.0.0
 echo **************************************************
 echo ****  version            %version% 
 echo ****  BuildCounter       %BuildCounter%
