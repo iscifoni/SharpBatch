@@ -76,22 +76,22 @@ echo *********************************
 cd ..\..\
 
 REM Package
-mkdir %cd%\Artifacts
+REM mkdir %cd%\Artifacts
 
 REM call dotnet pack src\SharpBatch --configuration %config% %version% --output Artifacts
 REM if not "%errorlevel%"=="0" goto failure
 
-call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
-if not "%errorlevel%"=="0" goto failure
+REM call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
+REM if not "%errorlevel%"=="0" goto failure
 
-call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
-if not "%errorlevel%"=="0" goto failure
+REM call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
+REM if not "%errorlevel%"=="0" goto failure
 
-call dotnet pack src\SharpBatch.Traking.Memory --configuration %config% %version% --output Artifacts
-if not "%errorlevel%"=="0" goto failure
+REM call dotnet pack src\SharpBatch.Traking.Memory --configuration %config% %version% --output Artifacts
+REM if not "%errorlevel%"=="0" goto failure
 
-call dotnet pack src\SharpBatch.Tracking.DB --configuration %config% %version% --output Artifacts
-if not "%errorlevel%"=="0" goto failure
+REM call dotnet pack src\SharpBatch.Tracking.DB --configuration %config% %version% --output Artifacts
+REM if not "%errorlevel%"=="0" goto failure
 
 :success
 exit 0
