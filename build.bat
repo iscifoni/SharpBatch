@@ -32,7 +32,7 @@ echo *********************************
 echo ****  Restoring package
 echo *********************************
 
-call dotnet restore SharpBatch.sln --verbosity q
+call dotnet restore SharpBatch.sln --verbosity m
 if not "%errorlevel%"=="0" goto failure
 
 echo *********************************
@@ -47,7 +47,7 @@ echo *********************************
 echo ****  Build started
 echo *********************************
 REM C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
-call "%MsBuildExe%" SharpBatch.sln /t:restore /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+call "%MsBuildExe%" SharpBatch.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 REM call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" SharpBatch.NoWeb.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 REM call dotnet build SharpBatch.NoWeb.sln --configuration %config%
@@ -63,19 +63,19 @@ echo ****  Test Started
 echo *********************************
 cd test\SharpBatchTest
 call dotnet test --configuration %config% --verbosity m
+if not "%errorlevel%"=="0" goto failure
 
 cd ..\SharpBatch.Serialization.Xml
 call dotnet test --configuration %config% --verbosity m
+if not "%errorlevel%"=="0" goto failure
 
 echo *********************************
 echo ****  Test ended
 echo *********************************
 
 cd ..\..\
-if not "%errorlevel%"=="0" goto failure
 
 REM Package
-
 mkdir %cd%\Artifacts
 
 call dotnet pack src\SharpBatch --configuration %config% %version% --output Artifacts
