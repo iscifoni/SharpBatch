@@ -28,7 +28,7 @@ namespace SharpBatchTest.Internals
 
             var serializer = new Mock<IModelSerializer>(MockBehavior.Strict);
 
-            var batchInvokerParameterBinding = new DefaultBatchInvokerParameterBinding(batchParameterDictionary, descriptions.Last().ActionInfo, serializer.Object);
+            var batchInvokerParameterBinding = new DefaultBatchInvokerParameterBinding(batchParameterDictionary, descriptions.Single((p)=>p.ActionName.Equals("method3")).ActionInfo, serializer.Object);
 
             //Act
             var response = batchInvokerParameterBinding.Bind();

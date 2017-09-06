@@ -39,7 +39,7 @@ namespace SharpBatchTest.Internals
             Assert.NotNull(response);
             Assert.NotEmpty(response);
             Assert.Equal(3, response.Count());
-            Assert.Collection(response,
+            Assert.Collection(response.OrderBy((p)=>p.ActionName),
                 (p) => {
                     Assert.Equal("SimplePOCO", p.BatchName);
                     Assert.Equal("method1", p.ActionName);
@@ -72,7 +72,7 @@ namespace SharpBatchTest.Internals
             Assert.NotNull(response);
             Assert.NotEmpty(response);
             Assert.Equal(3, response.Count());
-            Assert.Collection(response,
+            Assert.Collection(response.OrderBy(p=>p.ActionName),
                 (p) => {
                     Assert.Equal("InferitFromSimplePOCO", p.BatchName);
                     Assert.Equal("method1", p.ActionName);
@@ -105,7 +105,7 @@ namespace SharpBatchTest.Internals
             Assert.NotNull(response);
             Assert.NotEmpty(response);
             Assert.Equal(2, response.Count());
-            Assert.Collection(response,
+            Assert.Collection(response.OrderBy(p => p.ActionName),
                 (p) => {
                     Assert.Equal("BatchFromAttribute", p.BatchName);
                     Assert.Equal("method1", p.ActionName);
@@ -134,7 +134,7 @@ namespace SharpBatchTest.Internals
             Assert.NotNull(response);
             Assert.NotEmpty(response);
             Assert.Equal(2, response.Count());
-            Assert.Collection(response,
+            Assert.Collection(response.OrderBy(p => p.ActionName),
                 (p) => {
                     Assert.Equal("InheritFromBatchAttribute", p.BatchName);
                     Assert.Equal("method1", p.ActionName);
