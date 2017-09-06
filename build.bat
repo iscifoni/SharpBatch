@@ -13,11 +13,12 @@ echo ****  PackageVersion     %PackageVersion%
 echo **************************************************
 
 set version=
-if not "%BuildCounter%" == "" (
-   set packversionsuffix=ci-%BuildCounter%
-)
-set PackageVersion=1.0.0-Alpha1-%packversionsuffix%
+REM if not "%BuildCounter%" == "" (
+REM   set packversionsuffix=-%BuildCounter%
+REM )
+set PackageVersion=1.0.0-Beta1-%BuildCounter%
 set version = %PackageVersion%
+
 echo **************************************************
 echo ****  version            %version% 
 echo ****  BuildCounter       %BuildCounter%
@@ -41,9 +42,6 @@ echo ****  Restore completed
 echo *********************************
 
 REM Build
-REM - Option 1: Run dotnet build for every source folder in the project
-REM   e.g. call dotnet build <path> --configuration %config%
-REM - Option 2: Let msbuild handle things and build the solution
 echo *********************************
 echo ****  Build started
 echo *********************************
@@ -54,7 +52,6 @@ if not "%errorlevel%"=="0" goto failure
 echo *********************************
 echo ****  Build ended
 echo *********************************
-
 
 REM Unit tests
 echo *********************************
