@@ -39,7 +39,7 @@ namespace SharpBatchTest.Internals
             Assert.NotNull(response);
             Assert.NotEmpty(response);
             Assert.Equal(3, response.Count());
-            Assert.Collection(response,
+            Assert.Collection(response.OrderBy((p)=>p.ActionName),
                 (p) => {
                     Assert.Equal("SimplePOCO", p.BatchName);
                     Assert.Equal("method1", p.ActionName);
