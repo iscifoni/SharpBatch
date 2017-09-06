@@ -14,20 +14,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SharpBatch.internals;
+using System.Text;
+using SharpBatch.Serialization.Abstract;
+using SharpBatch.Serialization.DataContract;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace SharpBatch
+namespace SharpBatch.Serialization.DataContract.DependencyInjection
 {
-    /// <summary>
-    /// the name of <see cref="batchConfigurationDictionary"/>.
-    /// </summary>
-    public static class BatchConfigurationFieldName
+    public static class SharpBatchSerializerDataContractServiceCollectionExtention
     {
-        public static readonly string BatchName = "BatchName";
-        public static readonly string BatchActionName = "BatchActionName";
-        public static readonly string AsyncCall = "AsyncCall";
-        public static readonly string TimeOut = "TimeOut";
+        public static IServiceCollection AddSharpBatchDataContractSerializer(this IServiceCollection services)
+        {
+            services.TryAddSingleton<IModelSerializer, ModelDataContractSerializer>();
+            return services;
+        }
     }
 }

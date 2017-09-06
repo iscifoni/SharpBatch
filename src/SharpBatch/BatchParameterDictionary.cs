@@ -12,15 +12,16 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SharpBatch.internals
+namespace SharpBatch
 {
-    public class batchConfigurationDictionary : IDictionary<string, object>
+    public class BatchParameterDictionary : IDictionary<string, object>
     {
         //to do: check performance to use vector instead of list.
         IList<KeyValuePair<string, object>> _items = new List<KeyValuePair<string, object>>();
@@ -35,7 +36,7 @@ namespace SharpBatch.internals
             }
             set
             {
-                Add((KeyValuePair<string, object>)value);
+                throw new NotImplementedException();
             }
         }
 
@@ -69,27 +70,21 @@ namespace SharpBatch.internals
 
         public bool ContainsKey(string key)
         {
-            foreach (var item  in _items)
-            {
-                if (item.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return _items.Any(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
         }
 
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
-            foreach (var item in _items)
+            foreach(var item in _items)
             {
                 array[arrayIndex++] = item;
             }
+            
         }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _items.GetEnumerator();
         }
 
         public bool Remove(KeyValuePair<string, object> item)
@@ -108,18 +103,10 @@ namespace SharpBatch.internals
             object itemValue;
             try
             {
-                value = null;
-                foreach(var item in _items)
-                {
-                    if(item.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
-                    {
-                        value = item;
-                        return true;
-                    }
-                }
-                return false;
-
-            }catch
+                itemValue = _items.Where(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).First().Value;
+                found = true;
+            }
+            catch
             {
                 itemValue = null;
                 found = false;
@@ -130,19 +117,36 @@ namespace SharpBatch.internals
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
-        public bool AddOrUpdate(string key, object value)
+
+        public bool AddFromQueryString(QueryString queryString)
         {
-            bool result = false;
-            if ( ContainsKey(key))
+            return AddFromQueryString(queryString.Value);
+        }
+
+        //ToDo manage the right return value
+        public bool AddFromQueryString(string queryString)
+        {
+            if (queryString[0] == '?')
             {
-                Remove(key);
-                result = true;
+                queryString = queryString.Substring(1);
             }
-            Add(key, value);
-            return result;
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                var stringsVector = queryString.Split('&');
+
+                for (var i = 0; i < stringsVector.Length; i++)
+                {
+                    var itemString = stringsVector[i];
+                    var itemVector = itemString.Split('=');
+
+                    Add(itemVector[0], System.Net.WebUtility.UrlDecode(itemVector[1]));
+                }
+            }
+            return true;
         }
     }
+
 }
