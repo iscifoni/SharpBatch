@@ -7,5 +7,8 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AssemblyName>SharpBatch.Tracking.Abstraction</AssemblyName>
 		<PackageId>SharpBatch.Traking.Abstraction</PackageId>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<IncludeSource>True</IncludeSource>
 	</PropertyGroup>
 </Project>

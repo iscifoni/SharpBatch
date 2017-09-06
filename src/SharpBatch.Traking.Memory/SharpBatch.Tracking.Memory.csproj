@@ -1,20 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="..\..\build\common.props" />
-  <PropertyGroup>
-    <Description>Memory tracking provider for SharpBatch</Description>
+	<PropertyGroup>
+		<Description>Memory tracking provider for SharpBatch</Description>
 
-	  <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>SharpBatch.Tracking.Memory</AssemblyName>
-    <PackageId>SharpBatch.Traking.Memory</PackageId>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
-  </ItemGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>SharpBatch.Tracking.Memory</AssemblyName>
+		<PackageId>SharpBatch.Traking.Memory</PackageId>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<IncludeSource>True</IncludeSource>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
+	</ItemGroup>
 
 </Project>
