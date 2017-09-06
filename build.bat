@@ -6,9 +6,10 @@ if "%config%" == "" (
 
 
 echo **************************************************
+echo ****  version            %version% 
 echo ****  BuildCounter       %BuildCounter%
 echo ****  packversionsuffix  %packversionsuffix% 
-echo ****  PackageVersion      %PackageVersion%
+echo ****  PackageVersion     %PackageVersion%
 echo **************************************************
 
 set version=
@@ -16,8 +17,10 @@ if not "%BuildCounter%" == "" (
    set packversionsuffix= "ci-%BuildCounter%"
 )
 echo **************************************************
+echo ****  version            %version% 
+echo ****  BuildCounter       %BuildCounter%
 echo ****  packversionsuffix  %packversionsuffix% 
-echo ****  version  %version% 
+echo ****  PackageVersion     %PackageVersion%
 echo **************************************************
 
 REM (optional) build.bat is in the root of our repo, cd to the correct folder where sources/projects are
@@ -28,7 +31,7 @@ echo *********************************
 echo ****  Restoring package
 echo *********************************
 
-call dotnet restore SharpBatch.sln --verbosity d
+call dotnet restore SharpBatch.sln --verbosity q
 if not "%errorlevel%"=="0" goto failure
 
 echo *********************************
