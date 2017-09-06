@@ -14,9 +14,10 @@ echo **************************************************
 
 set version=
 if not "%BuildCounter%" == "" (
-   set packversionsuffix= ci-%BuildCounter%
+   set packversionsuffix=ci-%BuildCounter%
 )
-set PackageVersion=1.0.0
+set PackageVersion=1.0.0-Alpha1-%packversionsuffix%
+set version = %PackageVersion%
 echo **************************************************
 echo ****  version            %version% 
 echo ****  BuildCounter       %BuildCounter%
@@ -46,16 +47,14 @@ REM - Option 2: Let msbuild handle things and build the solution
 echo *********************************
 echo ****  Build started
 echo *********************************
-REM C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
 call "%MsBuildExe%" SharpBatch.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 REM call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" SharpBatch.NoWeb.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+if not "%errorlevel%"=="0" goto failure
 
-REM call dotnet build SharpBatch.NoWeb.sln --configuration %config%
 echo *********************************
 echo ****  Build ended
 echo *********************************
 
-if not "%errorlevel%"=="0" goto failure
 
 REM Unit tests
 echo *********************************
@@ -72,26 +71,6 @@ if not "%errorlevel%"=="0" goto failure
 echo *********************************
 echo ****  Test ended
 echo *********************************
-
-cd ..\..\
-
-REM Package
-REM mkdir %cd%\Artifacts
-
-REM call dotnet pack src\SharpBatch --configuration %config% %version% --output Artifacts
-REM if not "%errorlevel%"=="0" goto failure
-
-REM call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
-REM if not "%errorlevel%"=="0" goto failure
-
-REM call dotnet pack src\SharpBatch.Traking.Abstraction --configuration %config% %version% --output Artifacts
-REM if not "%errorlevel%"=="0" goto failure
-
-REM call dotnet pack src\SharpBatch.Traking.Memory --configuration %config% %version% --output Artifacts
-REM if not "%errorlevel%"=="0" goto failure
-
-REM call dotnet pack src\SharpBatch.Tracking.DB --configuration %config% %version% --output Artifacts
-REM if not "%errorlevel%"=="0" goto failure
 
 :success
 exit 0
