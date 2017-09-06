@@ -8,6 +8,7 @@ if "%config%" == "" (
 echo **************************************************
 echo ****  BuildCounter       %BuildCounter%
 echo ****  packversionsuffix  %packversionsuffix% 
+echo ****  PacageVersion      %PacageVersion%
 echo **************************************************
 
 set version=
