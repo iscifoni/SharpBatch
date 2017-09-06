@@ -1,11 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\build\common.props" />
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<IncludeSource>True</IncludeSource>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\build\common.props" />
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Description>SharpBatch serialization Json</Description>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>SharpBatch.Serialization.Json</AssemblyName>
+		<PackageId>SharpBatch.Serialization.Json</PackageId>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<IncludeSource>True</IncludeSource>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <Description>SharpBatch serialization Json</Description>
-	  <NoWarn>$(NoWarn);CS1591</NoWarn>
-	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-	  <AssemblyName>SharpBatch.Serialization.Json</AssemblyName>
-	  <PackageId>SharpBatch.Serialization.Json</PackageId>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <IncludeSymbols>True</IncludeSymbols>
-	  <IncludeSource>True</IncludeSource>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SharpBatch.Serialization.Abstract\SharpBatch.Serialization.Abstract.csproj" />
+	</ItemGroup>
 
 </Project>
