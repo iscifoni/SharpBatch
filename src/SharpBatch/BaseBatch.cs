@@ -45,9 +45,9 @@ namespace SharpBatch
         public HttpResponse response => batchContext.Response;
 
         /// <summary>
-        /// The <see cref="internals.BatchParameterDictionary"/> of current execution.
+        /// The <see cref="BatchParameterDictionary"/> of current execution.
         /// </summary>
-        public internals.BatchParameterDictionary parameters => batchContext.Parameters;
+        public BatchParameterDictionary parameters => batchContext.Parameters;
 
         /// <summary>
         /// The sessionId of current execution.
@@ -61,9 +61,9 @@ namespace SharpBatch
         public Guid? parentSessionId => batchContext.ParentSessionId;
 
         /// <summary>
-        /// The <see cref="internals.batchConfigurationDictionary"/> of current execution.
+        /// The <see cref="batchConfigurationDictionary"/> of current execution.
         /// </summary>
-        public internals.batchConfigurationDictionary configuration => batchContext.ActionDescriptor.BatchConfiguration;
+        public batchConfigurationDictionary configuration => batchContext.ActionDescriptor.BatchConfiguration;
 
 
     }
