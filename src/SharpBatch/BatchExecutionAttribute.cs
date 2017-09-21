@@ -23,9 +23,13 @@ namespace SharpBatch
     {
         public virtual int Order { get; set; }
 
+        public string BatchName{ get; set; }
+        public string ActionName { get; set; }
+
         public virtual void onExecuted(BatchExecutionContext context)
         {
-            throw new NotImplementedException();
+            var batchUtils = (IBatchUtils)context.RequestServices.GetService(typeof(IBatchUtils));
+            batchUtils.startBatch(BatchName, ActionName, context);
         }
 
         public virtual void onExecuting(BatchExecutionContext context)

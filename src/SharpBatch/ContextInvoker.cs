@@ -43,6 +43,22 @@ namespace SharpBatch
             return contextInvoker;
         }
 
+        public static ContextInvoker Create(IServiceProvider requestServices, HttpRequest request, HttpResponse response)
+        {
+            var contextInvoker = new ContextInvoker()
+            {
+                RequestServices = requestServices,
+                Request = request,
+                Response = response,
+                SessionId = Guid.NewGuid()
+            };
+
+            if (request.QueryString.HasValue)
+            {
+                contextInvoker.Parameters.AddFromQueryString(request.QueryString);
+            }
+            return contextInvoker;
+        }
         public IServiceProvider RequestServices { get; private set; }
 
         public HttpRequest Request { get; private set; }
