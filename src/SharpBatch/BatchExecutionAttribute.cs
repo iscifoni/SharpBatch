@@ -19,11 +19,21 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
+    /// <summary>
+    /// Attribute to identify nex batch to start.
+    /// </summary>
     public class BatchExecutionAttribute : Attribute, IBatchExecutionAttribute
     {
         public virtual int Order { get; set; }
 
+        /// <summary>
+        /// Batch name to start
+        /// </summary>
         public string BatchName{ get; set; }
+
+        /// <summary>
+        /// Action name to start
+        /// </summary>
         public string ActionName { get; set; }
 
         public virtual void onExecuted(BatchExecutionContext context)
