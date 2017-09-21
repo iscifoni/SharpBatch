@@ -34,7 +34,7 @@ namespace SharpBatch
 
         public virtual void onExecuting(BatchExecutionContext context)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
