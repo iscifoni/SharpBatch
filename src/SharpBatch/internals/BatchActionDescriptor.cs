@@ -68,7 +68,7 @@ namespace SharpBatch.internals
         public KeyValuePair<string, Type> Parameters { get; set; }
 
         //Todo
-        public IList<object> ExceptionFilter { get; set; }
+        public List<IBatchExceptionAttribute> ExceptionAttribute { get; set; }
 
         public List<IBatchConfigAttributeAsync> ConfigureAttribute { get; set; }
 
