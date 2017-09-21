@@ -139,7 +139,7 @@ namespace SharpBatch.internals
             return serializedResult;
         }
 
-        private Task checkStatus(bool isComplete)
+        private Task CheckStatus(bool isComplete)
         {
             var response = new Task(null);
             return response;
