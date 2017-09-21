@@ -22,7 +22,7 @@ namespace SharpBatch
     /// <summary>
     /// Attribute to identify nex batch to start.
     /// </summary>
-    public class BatchExecutionAttribute : Attribute, IBatchExecutionAttribute
+    public class BatchStartAttribute : Attribute, IBatchExecutionAttribute
     {
         public virtual int Order { get; set; }
 
