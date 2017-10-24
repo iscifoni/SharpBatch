@@ -46,7 +46,7 @@ namespace SharpBatch.internals
             }
             else
             {
-                //ToDo manage batch not found
+                throw new BatchNotFoundException(urlManager.RequestBatchName);
             }
         }
 
