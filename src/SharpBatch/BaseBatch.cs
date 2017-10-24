@@ -77,66 +77,15 @@ namespace SharpBatch
         /// <param name="content">Data to save into a file</param>
         /// <param name="fileName">The file name to use, if not exist will be created</param>
         /// <param name="fileExtention">The extention of a file</param>
-        /// <param name="Path">The path where the file is created</param>
+        /// <param name="path">The path where the file is created</param>
         /// <param name="timeStampToken">If true insert the timestamp into file name</param>
         /// <param name="sessionIdInFileName">If true inset the sessionId into file name</param>
         /// <returns>The file name generated</returns>
-        public string ToFile(object content, string fileName, string fileExtention, string Path, bool timeStampToken, bool sessionIdInFileName)
+        public string ToFile(object content, string fileName, string fileExtention, string path, bool timeStampToken, bool sessionIdInFileName)
         {
-            var encoder = new UTF8Encoding();
-            char[] contentToSave;
-            var response = new ResponseObject(content, SessionId);
-            var responseType = response.Response.GetType();
-            string fullFileName;
+            var responseToFile = new ResponseToFileManager(SessionId);
 
-            if (typeof(byte[]).GetTypeInfo().IsAssignableFrom(responseType))
-            {
-                contentToSave = encoder.GetChars((byte[])response.Response);
-            }
-            else
-            {
-                if (typeof(string).GetTypeInfo().IsAssignableFrom(responseType))
-                {
-                    contentToSave = ((string)response.Response).ToCharArray();
-                }
-                else
-                {
-                    if (typeof(char[]).GetTypeInfo().IsAssignableFrom(responseType))
-                    {
-                        contentToSave = (char[])response.Response;
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Response type not supported for ResponseToFileAttribute");
-                    }
-                }
-            }
-
-            fullFileName = $"{Path ?? ""}{fileName}";
-            if (sessionIdInFileName)
-            {
-                fullFileName += $"-{response.SessionId.ToString()}";
-            }
-
-            if (timeStampToken)
-            {
-                fullFileName += $"-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
-            }
-
-            if (!string.IsNullOrEmpty(fileExtention))
-            {
-                fullFileName += $".{fileExtention}";
-            }
-
-            var logFile = System.IO.File.Create(fullFileName);
-            using(var logWriter = new System.IO.StreamWriter(logFile))
-            {
-                var logTask = logWriter.WriteAsync(contentToSave);
-                logTask.Wait();
-                logWriter.Flush();
-            }
-
-            return fullFileName;
+            return responseToFile.ToFile(content, fileName, fileExtention, path, timeStampToken, sessionIdInFileName);
         }
 
         /// <summary>
@@ -145,12 +94,12 @@ namespace SharpBatch
         /// <param name="content">Data to save into a file</param>
         /// <param name="fileName">The file name to use, if not exist will be created</param>
         /// <param name="fileExtention">The extention of a file</param>
-        /// <param name="Path">The path where the file is created</param>
+        /// <param name="path">The path where the file is created</param>
         /// <param name="timeStampToken">If true insert the timestamp into file name</param>
         /// <returns>The file name generated</returns>
-        public string ToFile(object content, string fileName, string fileExtention, string Path, bool timeStampToken)
+        public string ToFile(object content, string fileName, string fileExtention, string path, bool timeStampToken)
         {
-            return ToFile(content, fileName, fileExtention, Path, timeStampToken, false);
+            return ToFile(content, fileName, fileExtention, path, timeStampToken, false);
         }
 
         /// <summary>
@@ -159,11 +108,11 @@ namespace SharpBatch
         /// <param name="content">Data to save into a file</param>
         /// <param name="fileName">The file name to use, if not exist will be created</param>
         /// <param name="fileExtention">The extention of a file</param>
-        /// <param name="Path">The path where the file is created</param>
+        /// <param name="path">The path where the file is created</param>
         /// <returns>The file name generated</returns>
-        public string ToFile(object content, string fileName, string fileExtention, string Path)
+        public string ToFile(object content, string fileName, string fileExtention, string path)
         {
-            return ToFile(content, fileName, fileExtention, Path, false, false);
+            return ToFile(content, fileName, fileExtention, path, false, false);
         }
 
         /// <summary>
@@ -197,9 +146,9 @@ namespace SharpBatch
         public Task ToTracking(string content)
         {
             ISharpBatchTrackingFactory trackingFactory = (ISharpBatchTrackingFactory)BatchContext.RequestServices.GetService(typeof(ISharpBatchTrackingFactory));
-            ISharpBatchTracking tracking = trackingFactory.getTrakingProvider();
+            var responseToTracking = new ResponseToTrackingManager(trackingFactory, SessionId);
 
-            return tracking.AddMessageAsync(SessionId, content);
+            return responseToTracking.ToTracking(content);
         }
 
         /// <summary>
@@ -211,7 +160,10 @@ namespace SharpBatch
         public Task ToTracking(object data)
         {
             IModelSerializer serializer = (IModelSerializer)BatchContext.RequestServices.GetService(typeof(IModelSerializer));
-            return ToTracking(serializer.Serialize(data));
+            ISharpBatchTrackingFactory trackingFactory = (ISharpBatchTrackingFactory)BatchContext.RequestServices.GetService(typeof(ISharpBatchTrackingFactory));
+            var responseToTracking = new ResponseToTrackingManager(trackingFactory, serializer, SessionId);
+
+            return responseToTracking.ToTracking(data);
         }
 
         /// <summary>
@@ -222,7 +174,10 @@ namespace SharpBatch
         /// <returns></returns>
         public Task ToTracking(object data, IModelSerializer serializer)
         {
-            return ToTracking(serializer.Serialize(data));
+            ISharpBatchTrackingFactory trackingFactory = (ISharpBatchTrackingFactory)BatchContext.RequestServices.GetService(typeof(ISharpBatchTrackingFactory));
+            var responseToTracking = new ResponseToTrackingManager(trackingFactory, SessionId);
+
+            return responseToTracking.ToTracking(data, serializer);
         }
     }
 }

@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SharpBatch.internals;
 using SharpBatch.Serialization.Abstract;
 using SharpBatch.Tracking.Abstraction;
 
@@ -27,11 +28,10 @@ namespace SharpBatch
         public override void onExecuted(BatchExecutionContext context)
         {
             var response = context.ShareMessage.Get<IResponseObject>();
-            var responseType = response.Response.GetType();
-            var trackingService = (ISharpBatchTracking)context.RequestServices.GetService(typeof(ISharpBatchTracking));
-            var serializer = (IModelSerializer)context.RequestServices.GetService(typeof(IModelSerializer));
+            var sharpBatchTracking = (ISharpBatchTrackingFactory)context.RequestServices.GetService(typeof(ISharpBatchTrackingFactory));
+            var responseToTrackingManager = new ResponseToTrackingManager(sharpBatchTracking, context.SessionId);
 
-            trackingService.AddMessageAsync(context.SessionId, serializer.Serialize(response.Response));
+            responseToTrackingManager.ToTracking(response);
         }
 
         public override void onExecuting(BatchExecutionContext context)
