@@ -27,7 +27,7 @@ namespace SharpBatch.internals
         private string _batchName;
         private string _actionName;
 
-        public batchConfigurationDictionary BatchConfiguration { get; } = new batchConfigurationDictionary();
+        public BatchConfigurationDictionary BatchConfiguration { get; } = new BatchConfigurationDictionary();
 
         public string Id
         {

@@ -67,9 +67,9 @@ namespace SharpBatch
         public Guid? ParentSessionId => BatchContext.ParentSessionId;
 
         /// <summary>
-        /// The <see cref="batchConfigurationDictionary"/> of current execution.
+        /// The <see cref="BatchConfigurationDictionary"/> of current execution.
         /// </summary>
-        public batchConfigurationDictionary Configuration => BatchContext.ActionDescriptor.BatchConfiguration;
+        public BatchConfigurationDictionary Configuration => BatchContext.ActionDescriptor.BatchConfiguration;
 
         /// <summary>
         /// Save the value of content into a file.
