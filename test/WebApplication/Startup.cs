@@ -52,8 +52,14 @@ namespace TestWebApplication
             // Setup a bit more localization.
             services.AddTransient<ISharpBatchTracking, TrackingMemory>();
 
+            //services.Configure<SkedulerSettings>(options => Configuration.GetSection("Skeduler").Bind(options));
+
             // Add framework services.
-            services.AddSharpBatch();
+            services
+                .AddSharpBatch()
+                .AddSharpBatchJsonSerializer()
+                .AddSharpBatchSkeduler(options => Configuration.GetSection("Skeduler").Bind(options));
+
             services.AddMvc();
                 
         }
@@ -63,8 +69,7 @@ namespace TestWebApplication
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-
+            
 
             if (env.IsDevelopment())
             {
@@ -78,7 +83,9 @@ namespace TestWebApplication
 
             app.UseStaticFiles();
 
-            app.UseSharpBatch();
+            app
+                .UseSharpBatch()
+                .UseSharpBatchSkeduler();
 
             app.UseMvc(routes =>
             {
