@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SharpBatch;
@@ -15,8 +17,11 @@ namespace SharpBatch.Skeduler
         IList<BatchActionDescriptor> _batchActionDescription;
         IOptions<SkedulerSettings> _options;
         ILoggerFactory _loggerFactory;
+        
 
-        public BaseSkeduler(IApplicationBatchManager applicationBatchManager, IOptions<SkedulerSettings> options, ILoggerFactory loggerFactory)
+        public BaseSkeduler(IApplicationBatchManager applicationBatchManager, 
+                            IOptions<SkedulerSettings> options, 
+                            ILoggerFactory loggerFactory)
         {
             _batchActionDescription = (from item in applicationBatchManager.BatchActions
                      from detail in item.ConfigureAttribute
@@ -34,19 +39,23 @@ namespace SharpBatch.Skeduler
                 try
                 {
                     var batchInvokerLogger = _loggerFactory.CreateLogger<BatchInvoker>();
-
+                    
                     while (true)
                     {
                         var baseDateTime = DateTime.Now;
-                        var batchList = _batchActionDescription.Where(p =>  p.GetNextExecutionDate() >= baseDateTime && 
-                                                                            p.GetNextExecutionDate() <= baseDateTime.AddSeconds(30)
+                        var batchList = _batchActionDescription.Where(p => {
+                                                                                DateTime nextItemExecutionDate = p.GetNextExecutionDate();
+                                                                                return nextItemExecutionDate <= baseDateTime;
+                                                                            }
                                                                      ).ToList();
+
                         foreach(var item in batchList)
                         {
                             var tsk = BatchInvoker.invoke(item, _options, batchInvokerLogger);
-                            item.Reskedule();
+                            item.Reskedule(baseDateTime);
                         }
-                        await Task.Delay(30000);
+
+                        await Task.Delay(1000);
                     }
                 }
                 catch(Exception ex)

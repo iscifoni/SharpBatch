@@ -10,13 +10,17 @@ namespace SharpBatch.Skeduler
     {
         public static DateTime GetNextExecutionDate(this BatchActionDescriptor batchActionDescriptor)
         {
+            DateTime nextExecutionDate = DateTime.Now.AddSeconds(10);
             var configItem = batchActionDescriptor.BatchConfiguration["NextSkeduledDate"];
             if ( configItem == null)
             {
-                return DateTime.Now;
+                batchActionDescriptor.SetNextExecutionDate(nextExecutionDate);
+            }else
+            {
+                nextExecutionDate = (DateTime)((KeyValuePair<string, object>)configItem).Value;
             }
 
-            return (DateTime)((KeyValuePair<string, object>)configItem).Value;
+            return nextExecutionDate;
         }
 
         public static void SetNextExecutionDate(this BatchActionDescriptor batchActionDescriptor, DateTime nextSkeduledDate)
@@ -24,10 +28,23 @@ namespace SharpBatch.Skeduler
             batchActionDescriptor.BatchConfiguration.AddOrUpdate("NextSkeduledDate", nextSkeduledDate);
         }
 
-        public static void Reskedule(this BatchActionDescriptor batchActionDescriptor)
+        public static void Reskedule(this BatchActionDescriptor batchActionDescriptor, DateTime currentDate)
         {
-            var skedulerToken = (string)((KeyValuePair<string, object>)batchActionDescriptor.BatchConfiguration["SkedulerToken"]).Value;
-            batchActionDescriptor.SetNextExecutionDate(CrontabParser.getNextDateTime(skedulerToken, DateTime.Now));
+            var skedulerToken = batchActionDescriptor.BatchConfiguration["SkedulerToken"];
+            DateTime nextDate;
+
+            if (skedulerToken == null)
+            {
+                var skedulerTimeSpan = batchActionDescriptor.BatchConfiguration["SkedulerTimeSpan"];
+                nextDate = currentDate.Add((TimeSpan)((KeyValuePair<string, object>)skedulerTimeSpan).Value);
+            }
+            else
+            {
+                nextDate = CrontabParser.getNextDateTime((string)((KeyValuePair<string, object>)skedulerToken).Value, currentDate);
+            }
+
+            batchActionDescriptor.SetNextExecutionDate(nextDate);
+
         }
 
     }

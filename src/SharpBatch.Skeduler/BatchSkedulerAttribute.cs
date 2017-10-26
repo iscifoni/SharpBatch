@@ -12,5 +12,11 @@ namespace SharpBatch.Skeduler
         {
 
         }
+
+        public BatchSkedulerAttribute(int seconds)
+            : base ("SkedulerTimeSpan", TimeSpan.FromSeconds(seconds))
+        {
+
+        }
     }
 }
