@@ -66,7 +66,7 @@ namespace SharpBatch
             var responseType = response.Response.GetType();
 
             var responseToFileManager = new ResponseToFileManager(context.SessionId);
-            responseToFileManager.ToFile(response.Response, FileName, FileExention, Path, TimeStampTocken, SessionIdInFileName);
+            FullFileName = responseToFileManager.ToFile(response.Response, FileName, FileExention, Path, TimeStampTocken, SessionIdInFileName);
         }
 
         public override void onExecuting(BatchExecutionContext context)

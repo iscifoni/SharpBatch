@@ -29,9 +29,10 @@ namespace SharpBatch
         {
             var response = context.ShareMessage.Get<IResponseObject>();
             var sharpBatchTracking = (ISharpBatchTrackingFactory)context.RequestServices.GetService(typeof(ISharpBatchTrackingFactory));
-            var responseToTrackingManager = new ResponseToTrackingManager(sharpBatchTracking, context.SessionId);
+            var modelSerializer = (IModelSerializer)context.RequestServices.GetService(typeof(IModelSerializer));
+            var responseToTrackingManager = new ResponseToTrackingManager(sharpBatchTracking, modelSerializer ,context.SessionId);
 
-            responseToTrackingManager.ToTracking(response);
+            responseToTrackingManager.ToTracking(response.Response);
         }
 
         public override void onExecuting(BatchExecutionContext context)
