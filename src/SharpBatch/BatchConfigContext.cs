@@ -28,9 +28,9 @@ namespace SharpBatch
     public class BatchConfigContext
     {
         /// <summary>
-        /// The <see cref="batchConfigurationDictionary"/>.
+        /// The <see cref="BatchConfigurationDictionary"/>.
         /// </summary>
-        public batchConfigurationDictionary BatchConfiguration { get; set; }
+        public BatchConfigurationDictionary BatchConfiguration { get; set; }
         /// <summary>
         /// The <see cref="HttpRequest"/>.
         /// </summary>

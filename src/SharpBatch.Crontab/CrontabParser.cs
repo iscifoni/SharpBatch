@@ -1,4 +1,4 @@
-﻿//Copyright 2016 Scifoni Ivano
+﻿//Copyright 2017 Scifoni Ivano
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,20 +14,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SharpBatch.internals;
+using System.Text;
+using NCrontab;
 
-namespace SharpBatch
+namespace SharpBatch.Crontab
 {
-    /// <summary>
-    /// the name of <see cref="BatchConfigurationDictionary"/>.
-    /// </summary>
-    public static class BatchConfigurationFieldName
+    public class CrontabParser
     {
-        public static readonly string BatchName = "BatchName";
-        public static readonly string BatchActionName = "BatchActionName";
-        public static readonly string AsyncCall = "AsyncCall";
-        public static readonly string TimeOut = "TimeOut";
+        public static DateTime getNextDateTime(string token, DateTime startDate)
+        {
+            var schedule = CrontabSchedule.Parse(token);
+            return schedule.GetNextOccurrence(startDate);
+        }
     }
 }

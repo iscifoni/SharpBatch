@@ -12,7 +12,6 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +20,31 @@ using System.Threading.Tasks;
 namespace SharpBatch
 {
     /// <summary>
-    /// Utility class to manage chield Batch start.
+    /// Attribute to identify nex batch to start.
     /// </summary>
-    public interface IBatchUtils
+    public class BatchStartAttribute : Attribute, IBatchExecutionAttribute
     {
-        /// <summary>
-        /// Start nested batch action.
-        /// </summary>
-        /// <param name="batchName">Batch name</param>
-        /// <param name="actionName">Action name</param>
-        /// <param name="context">Context</param>
-        /// <returns>Return a <see cref="Task"/></returns>
-        Task startBatch(string batchName, string actionName, ContextInvoker context);
+        public virtual int Order { get; set; }
 
-        Task startBatch(string batchName, string actionName, BatchExecutionContext context);
+        /// <summary>
+        /// Batch name to start
+        /// </summary>
+        public string BatchName{ get; set; }
+
+        /// <summary>
+        /// Action name to start
+        /// </summary>
+        public string ActionName { get; set; }
+
+        public virtual void onExecuted(BatchExecutionContext context)
+        {
+            var batchUtils = (IBatchUtils)context.RequestServices.GetService(typeof(IBatchUtils));
+            batchUtils.startBatch(BatchName, ActionName, context);
+        }
+
+        public virtual void onExecuting(BatchExecutionContext context)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

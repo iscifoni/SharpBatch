@@ -26,17 +26,17 @@ namespace SharpBatch
     public class SharpBatchMiddleware
     {
         RequestDelegate _next;
-        ILoggerFactory _loggerFactory;
+        ILogger<SharpBatchMiddleware> _logger;
         IBatchHandler _batchHandler;
 
         public SharpBatchMiddleware(
             RequestDelegate next,
-            ILoggerFactory loggerFactory,
+            ILogger<SharpBatchMiddleware> logger,
             IBatchHandler batchHandler
             )
         {
             _next = next;
-            _loggerFactory = loggerFactory;
+            _logger = logger;
             _batchHandler = batchHandler;
         }
 
@@ -46,7 +46,14 @@ namespace SharpBatch
             //to do patternize it using StringPath from config
             if (context.Request.Path.StartsWithSegments(new PathString("/batch"), out batchCallPath))
             {
-                await _batchHandler.InvokeAsync(context);
+                try
+                {
+                    await _batchHandler.InvokeAsync(context);
+                }catch (BatchNotFoundException ex )
+                {
+                    _logger.LogError(ex, ex.Message);
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                }
             }
             else if (_next  != null )
             {

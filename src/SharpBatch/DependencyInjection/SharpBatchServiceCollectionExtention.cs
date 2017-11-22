@@ -50,6 +50,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<ISharpBatchTrackingFactory, SharpBatchTrackingFactory>();
 
             services.TryAddScoped<IBatchUtils, BatchUtils>();
+
             return services;
         }
 

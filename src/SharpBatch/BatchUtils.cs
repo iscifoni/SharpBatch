@@ -42,12 +42,27 @@ namespace SharpBatch
         /// </summary>
         /// <param name="batchName">Batch name</param>
         /// <param name="actionName">Action name</param>
-        /// <param name="context">Context</param>
+        /// <param name="context">The <see cref="ContextInvoker"/> context</param>
         /// <returns>Return a <see cref="Task"/></returns>
-        public async Task startBatch(string batchName, string actionName, ContextInvoker context)
+        public Task startBatch(string batchName, string actionName, ContextInvoker context)
         {
             BatchUrlManager urlManager = new BatchUrlManager(batchName, actionName);
-            await _batchHandler.InvokeAsync(context, urlManager);
+            return _batchHandler.InvokeAsync(context, urlManager);
+        }
+
+        /// <summary>
+        /// Start nested batch action
+        /// </summary>
+        /// <param name="batchName">Batch name</param>
+        /// <param name="actionName">Action name</param>
+        /// <param name="context">The <see cref="BatchExecutionContext"/> context</param>
+        /// <returns></returns>
+        public Task startBatch(string batchName, string actionName, BatchExecutionContext context)
+        {
+            BatchUrlManager urlManager = new BatchUrlManager(batchName, actionName);
+            
+            var contextInvoker = ContextInvoker.Create(context.RequestServices, context.Request, context.Response);
+            return _batchHandler.InvokeAsync(contextInvoker, urlManager);
         }
     }
 }

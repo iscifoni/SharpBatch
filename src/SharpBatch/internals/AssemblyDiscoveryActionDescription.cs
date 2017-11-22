@@ -89,6 +89,11 @@ namespace SharpBatch.internals
                             batchActionDescriptor.ExecutionAttribute.AddRange(typeInfo.GetCustomAttributes<BatchExecutionAttribute>(true));
                             batchActionDescriptor.ExecutionAttribute.AddRange(action.GetCustomAttributes<BatchExecutionAttribute>(true));
 
+                            batchActionDescriptor.ExceptionAttribute = new List<IBatchExceptionAttribute>();
+                            batchActionDescriptor.ExceptionAttribute.AddRange(typeInfo.GetCustomAttributes<BatchExceptionAttribute>(true));
+                            batchActionDescriptor.ExceptionAttribute.AddRange(action.GetCustomAttributes<BatchExceptionAttribute>(true));
+
+
                             executeConfigureAttribute(ref batchActionDescriptor);
 
                             if (batchActionDescriptor != null)

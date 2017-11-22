@@ -14,20 +14,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SharpBatch.internals;
+using System.Text;
+using SharpBatch.Skeduler;
 
-namespace SharpBatch
+namespace Microsoft.Extensions.DependencyInjection
 {
-    /// <summary>
-    /// the name of <see cref="BatchConfigurationDictionary"/>.
-    /// </summary>
-    public static class BatchConfigurationFieldName
+    public static class SharpBatchSkedulerServiceCollectionExtentions
     {
-        public static readonly string BatchName = "BatchName";
-        public static readonly string BatchActionName = "BatchActionName";
-        public static readonly string AsyncCall = "AsyncCall";
-        public static readonly string TimeOut = "TimeOut";
+        public static IServiceCollection AddSharpBatchSkeduler(this IServiceCollection services, Action<SkedulerSettings> action)
+        {
+            services.Configure<SkedulerSettings>(action);
+            services.AddSingleton<BaseSkeduler>();
+
+            return services;
+        }
     }
 }

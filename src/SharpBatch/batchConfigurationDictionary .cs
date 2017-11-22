@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace SharpBatch
 {
-    public class batchConfigurationDictionary : IDictionary<string, object>
+    public class BatchConfigurationDictionary : IDictionary<string, object>
     {
         //to do: check performance to use vector instead of list.
         IList<KeyValuePair<string, object>> _items = new List<KeyValuePair<string, object>>();

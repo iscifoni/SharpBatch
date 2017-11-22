@@ -27,7 +27,7 @@ namespace SharpBatch.internals
         private string _batchName;
         private string _actionName;
 
-        public batchConfigurationDictionary BatchConfiguration { get; } = new batchConfigurationDictionary();
+        public BatchConfigurationDictionary BatchConfiguration { get; } = new BatchConfigurationDictionary();
 
         public string Id
         {
@@ -68,7 +68,7 @@ namespace SharpBatch.internals
         public KeyValuePair<string, Type> Parameters { get; set; }
 
         //Todo
-        public IList<object> ExceptionFilter { get; set; }
+        public List<IBatchExceptionAttribute> ExceptionAttribute { get; set; }
 
         public List<IBatchConfigAttributeAsync> ConfigureAttribute { get; set; }
 
