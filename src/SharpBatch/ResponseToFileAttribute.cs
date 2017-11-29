@@ -19,6 +19,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SharpBatch.internals;
 
 namespace SharpBatch
 {
@@ -61,58 +62,11 @@ namespace SharpBatch
 
         public override void onExecuted(BatchExecutionContext context)
         {
-            var encoder = new UTF8Encoding();
-            char[] content;
             var response = context.ShareMessage.Get<IResponseObject>();
             var responseType = response.Response.GetType();
 
-            if (typeof(byte[]).GetTypeInfo().IsAssignableFrom(responseType))
-            {
-                content = encoder.GetChars((byte[])response.Response);
-            }
-            else
-            {
-                if (typeof(string).GetTypeInfo().IsAssignableFrom(responseType))
-                {
-                    content = ((string)response.Response).ToCharArray();
-                }
-                else
-                {
-                    if (typeof(char[]).GetTypeInfo().IsAssignableFrom(responseType))
-                    {
-                        content = (char[])response.Response;
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Response type not supported for ResponseToFileAttribute");
-                    }
-                }
-            }
-
-            FullFileName = $"{Path.ToString()}{FileName}";
-            if (SessionIdInFileName)
-            {
-                FullFileName += $"-{response.SessionId.ToString()}";
-            }
-
-            if (TimeStampTocken)
-            {
-                FullFileName += $"-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
-            }
-
-            if (!string.IsNullOrEmpty(FileExention))
-            {
-                FullFileName += $".{FileExention}";
-            }
-
-            var logFile = System.IO.File.Create(FullFileName);
-            using(var logWriter = new System.IO.StreamWriter(logFile))
-            {
-                var logTask = logWriter.WriteAsync(content);
-                logTask.Wait();
-                logWriter.Flush();
-            }
-
+            var responseToFileManager = new ResponseToFileManager(context.SessionId);
+            FullFileName = responseToFileManager.ToFile(response.Response, FileName, FileExention, Path, TimeStampTocken, SessionIdInFileName);
         }
 
         public override void onExecuting(BatchExecutionContext context)

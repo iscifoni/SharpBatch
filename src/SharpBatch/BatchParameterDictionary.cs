@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SharpBatch.internals
+namespace SharpBatch
 {
     public class BatchParameterDictionary : IDictionary<string, object>
     {

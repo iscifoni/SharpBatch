@@ -114,13 +114,9 @@ namespace SharpBatch.internals
                 IResponseObject responseObject = new ResponseObject(ex, context.SessionId);
                 context.ShareMessage.Set<IResponseObject>(responseObject);
                 await _sharpBatchTraking.AddExAsync(context.SessionId, ex);
-
-                //
-                var exceptionAttribute = actionToExecute.ExecutionAttribute.OfType<ExceptionAttribute>();
-                foreach(var item in exceptionAttribute)
+                
+                foreach(var item in actionToExecute.ExceptionAttribute)
                 {
-                    item.onExecuting(batchExecutionContext);
-
                     item.onExecuted(batchExecutionContext);
                 } 
             }
@@ -139,7 +135,7 @@ namespace SharpBatch.internals
             return serializedResult;
         }
 
-        private Task checkStatus(bool isComplete)
+        private Task CheckStatus(bool isComplete)
         {
             var response = new Task(null);
             return response;

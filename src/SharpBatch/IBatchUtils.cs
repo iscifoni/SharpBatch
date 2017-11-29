@@ -33,5 +33,7 @@ namespace SharpBatch
         /// <param name="context">Context</param>
         /// <returns>Return a <see cref="Task"/></returns>
         Task startBatch(string batchName, string actionName, ContextInvoker context);
+
+        Task startBatch(string batchName, string actionName, BatchExecutionContext context);
     }
 }

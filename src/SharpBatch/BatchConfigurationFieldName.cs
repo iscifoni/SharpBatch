@@ -12,7 +12,6 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ using SharpBatch.internals;
 namespace SharpBatch
 {
     /// <summary>
-    /// the name of <see cref="batchConfigurationDictionary"/>.
+    /// the name of <see cref="BatchConfigurationDictionary"/>.
     /// </summary>
     public static class BatchConfigurationFieldName
     {

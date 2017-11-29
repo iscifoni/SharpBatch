@@ -44,9 +44,12 @@ namespace SharpBatchTest
             var trackingService = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
             trackingService.Setup((s) => s.AddMessageAsync(sessionID, serializedContent)).Returns(Task.CompletedTask).Verifiable();
 
+            var trackingFactoryService = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
+            trackingFactoryService.Setup((s) => s.getTrakingProvider()).Returns(trackingService.Object).Verifiable();
+
             var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
-            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals("ISharpBatchTracking")))).Returns(trackingService.Object).Verifiable();
-            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals("IModelSerializer")))).Returns(modelSerializer.Object).Verifiable();
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals(nameof(ISharpBatchTrackingFactory))))).Returns(trackingFactoryService.Object).Verifiable();
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals(nameof(IModelSerializer))))).Returns(modelSerializer.Object).Verifiable();
 
             context.RequestServices = requestService.Object;
 
@@ -75,11 +78,15 @@ namespace SharpBatchTest
             var attribute = new ResponseToTrackingAttribute();
             var context = createBatchExecutionContext(sessionID, content);
 
+            
             var trackingService = new Mock<ISharpBatchTracking>(MockBehavior.Strict);
             trackingService.Setup((s) => s.AddMessageAsync(sessionID, serializedContent)).Returns(Task.CompletedTask).Verifiable();
 
+            var trackingFactoryService = new Mock<ISharpBatchTrackingFactory>(MockBehavior.Strict);
+            trackingFactoryService.Setup((s) => s.getTrakingProvider()).Returns(trackingService.Object).Verifiable();
+
             var requestService = new Mock<IServiceProvider>(MockBehavior.Strict);
-            requestService.Setup((s) => s.GetService(It.Is<Type>(t=> t.Name.Equals(nameof(ISharpBatchTracking))))).Returns(trackingService.Object).Verifiable();
+            requestService.Setup((s) => s.GetService(It.Is<Type>(t=> t.Name.Equals(nameof(ISharpBatchTrackingFactory))))).Returns(trackingFactoryService.Object).Verifiable();
             requestService.Setup((s) => s.GetService(It.Is<Type>(t => t.Name.Equals(nameof(IModelSerializer))))).Returns(modelSerializer.Object).Verifiable();
 
             context.RequestServices = requestService.Object;
