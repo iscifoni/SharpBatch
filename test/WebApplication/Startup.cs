@@ -57,8 +57,8 @@ namespace TestWebApplication
             // Add framework services.
             services
                 .AddSharpBatch()
-                .AddSharpBatchJsonSerializer()
-                .AddSharpBatchSkeduler(options => Configuration.GetSection("Skeduler").Bind(options));
+                .AddSharpBatchJsonSerializer();
+                //.AddSharpBatchSkeduler(options => Configuration.GetSection("Skeduler").Bind(options));
 
             services.AddMvc();
                 
@@ -84,8 +84,8 @@ namespace TestWebApplication
             app.UseStaticFiles();
 
             app
-                .UseSharpBatch()
-                .UseSharpBatchSkeduler();
+                .UseSharpBatch();
+                //.UseSharpBatchSkeduler();
 
             app.UseMvc(routes =>
             {

@@ -8,7 +8,7 @@ namespace SharpBatch
     {
         public virtual int Order { get; set; }
 
-        public virtual void onExecuted(BatchExecutionContext context)
+        public virtual void onExecuted(BatchExecutionContext context, Exception ex)
         {
         }
     }

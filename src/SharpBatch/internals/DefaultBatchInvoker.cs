@@ -85,12 +85,13 @@ namespace SharpBatch.internals
             var parameterBinding = new DefaultBatchInvokerParameterBinding(context.Parameters, actionToExecute.ActionInfo, _modelSerializer);
             var parameters = parameterBinding.Bind();
 
-            var result = executor.Execute(activatorInstance, parameters);
-            
-            var response = (object)null;
+            object result = null;
+            object response = null;
 
             try
             {
+                result = executor.Execute(activatorInstance, parameters);
+
                 if (actionToExecute.IsAsync)
                 {
                     var task = result as Task;
@@ -117,7 +118,7 @@ namespace SharpBatch.internals
                 
                 foreach(var item in actionToExecute.ExceptionAttribute)
                 {
-                    item.onExecuted(batchExecutionContext);
+                    item.onExecuted(batchExecutionContext, ex);
                 } 
             }
 
