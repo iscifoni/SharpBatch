@@ -59,7 +59,7 @@ namespace SharpBatch.internals
                 else
                 {
                     var response = await _batchInvokerProvider.InvokeAsync(context) as string;
-                    return response.ToString();
+                    return response?.ToString();
                 }
             }catch(Exception ex)
             {

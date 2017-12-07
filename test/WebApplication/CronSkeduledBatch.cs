@@ -11,7 +11,7 @@ namespace WebApplication
     
     public class SkeduledBatch
     {
-        [BatchSkeduler("* * * * *")]
+        //[BatchSkeduler("* * * * *")]
         public string EveryMinute()
         {
             return DateTime.Now.ToLongDateString();

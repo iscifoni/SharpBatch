@@ -8,6 +8,6 @@ namespace SharpBatch
     {
         int Order { get; set; }
 
-        void onExecuted(BatchExecutionContext context);
+        void onExecuted(BatchExecutionContext context, Exception ex);
     }
 }
