@@ -1,9 +1,9 @@
 <Project>
-  <PropertyGroup>
-    <DependencyModelVersion>2.0.0-*</DependencyModelVersion>
-    <NETStandardLibraryNETFrameworkVersion>2.0.0-*</NETStandardLibraryNETFrameworkVersion>
-	<NetStandardImplicitPackageVersion>2.0.0-*</NetStandardImplicitPackageVersion>
-    <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
-	<RoslynVersion>2.3.0-beta1</RoslynVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RuntimeFrameworkVersion>2.1.0-preview1-26216-03</RuntimeFrameworkVersion>
+		<NcrontabSigned>3.3.0</NcrontabSigned>
+		<NewtonsoftJson>11.0.2</NewtonsoftJson>
+		<RoslynVersion>2.3.0-beta1</RoslynVersion>
+		<MicrosoftASPNetVersion>2.0.0</MicrosoftASPNetVersion>
+	</PropertyGroup>
 </Project>
