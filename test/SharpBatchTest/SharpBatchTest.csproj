@@ -2,7 +2,7 @@
   <Import Project="..\..\build\common.props" />
   <PropertyGroup>
 	<TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-	  <RuntimeFrameworkVersion>2.1.0-preview2-26314-02</RuntimeFrameworkVersion>
+	  <RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
     <AssemblyName>SharpBatchTest</AssemblyName>
     <PackageId>SharpBatchTest</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
