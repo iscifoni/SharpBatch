@@ -16,7 +16,8 @@ set version=
 REM if not "%BuildCounter%" == "" (
 REM   set packversionsuffix=-%BuildCounter%
 REM )
-set PackageVersion=1.0.0-Beta1-%BuildCounter%
+REM set PackageVersion=1.0.0-Beta1-%BuildCounter%
+set PackageVersion=1.0.0
 set version = %PackageVersion%
 
 echo **************************************************
@@ -70,7 +71,9 @@ echo ****  Test ended
 echo *********************************
 
 :success
+echo success
 exit 0
 
 :failure
+echo failed 
 exit -1
