@@ -18,6 +18,6 @@
 		<MicrosoftEntityFrameworkCoreSqlServerPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreSqlServerPackageVersion>
 		<MicrosoftEntityFrameworkCoreToolsPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreToolsPackageVersion>
 		<MicrosoftEntityFrameworkCoreToolsDotnetPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreToolsDotnetPackageVersion>
-		<MicrosoftAspNetCoreAllPackageVersion>2.1.0-preview1-final</MicrosoftAspNetCoreAllPackageVersion>
+		<MicrosoftAspNetCoreAllPackageVersion>2.1.8</MicrosoftAspNetCoreAllPackageVersion>
 	</PropertyGroup>
 </Project>
