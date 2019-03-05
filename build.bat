@@ -16,8 +16,8 @@ set version=
 REM if not "%BuildCounter%" == "" (
 REM   set packversionsuffix=-%BuildCounter%
 REM )
-REM set PackageVersion=1.0.0-Beta1-%BuildCounter%
-set PackageVersion=1.0.0
+set PackageVersion=1.0.0-Beta2-%BuildCounter%
+REM set PackageVersion=1.0.0
 set version = %PackageVersion%
 
 echo **************************************************
