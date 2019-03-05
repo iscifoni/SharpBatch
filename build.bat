@@ -59,7 +59,7 @@ echo *********************************
 echo ****  Nuget SharpBatch.all
 echo *********************************
 cd src\SharpBatch.All
-call "nuget.exe pack SharpBatch.All.nuspec"
+call "%NuGet% pack SharpBatch.All.nuspec"
 cd ..\..\
 echo *********************************
 echo ****  Nuget SharpBatch.all Ended
