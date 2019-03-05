@@ -54,6 +54,17 @@ echo *********************************
 echo ****  Build ended
 echo *********************************
 
+REM Meta Package
+echo *********************************
+echo ****  Nuget SharpBatch.all
+echo *********************************
+cd src\SharpBatch.All
+call "nuget.exe pack SharpBatch.All.nuspec"
+cd ..\..\
+echo *********************************
+echo ****  Nuget SharpBatch.all Ended
+echo *********************************
+
 REM Unit tests
 echo *********************************
 echo ****  Test Started
