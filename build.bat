@@ -59,7 +59,8 @@ echo *********************************
 echo ****  Nuget SharpBatch.all
 echo *********************************
 cd src\SharpBatch.All
-call "%NuGet% pack SharpBatch.All.nuspec"
+call "%NuGet%" pack SharpBatch.All.nuspec
+if not "%errorlevel%"=="0" goto failure
 cd ..\..\
 echo *********************************
 echo ****  Nuget SharpBatch.all Ended
