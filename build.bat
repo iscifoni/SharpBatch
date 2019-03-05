@@ -16,6 +16,7 @@ set version=
 REM if not "%BuildCounter%" == "" (
 REM   set packversionsuffix=-%BuildCounter%
 REM )
+
 set PackageVersion=1.0.0-Beta2-%BuildCounter%
 REM set PackageVersion=1.0.0
 set version = %PackageVersion%
@@ -59,7 +60,7 @@ echo *********************************
 echo ****  Nuget SharpBatch.all
 echo *********************************
 cd src\SharpBatch.All
-call "%NuGet%" pack SharpBatch.All.nuspec -Version "%version%" -Properties DepVersion="%version%"
+call "%NuGet%" pack SharpBatch.All.nuspec -Version "%PackageVersion%" -Properties DepVersion="%PackageVersion%"
 if not "%errorlevel%"=="0" goto failure
 cd ..\..\
 
