@@ -16,8 +16,8 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) SharpBatch.sln /property:Version=1.0.0-CI$(Build.BuildId)
   displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
   inputs:
     command: test
     projects: 'test/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-    displayName: 'dotnet test'
