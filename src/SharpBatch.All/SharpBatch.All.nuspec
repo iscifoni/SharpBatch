@@ -5,24 +5,23 @@
     <authors>Scifoni Ivano</authors>
     <owners>Scifoni Ivano</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>https://github.com/iscifoni/SharpBatch/wiki</licenseUrl>
     <projectUrl>https://github.com/iscifoni/SharpBatch/wiki</projectUrl>    
     <description>SharpBatch.All</description>
     <copyright>Copyright © Scifoni Ivano</copyright>
     <tags>sharpbatch</tags>
     <dependencies>
       <group targetFramework=".NETCoreApp2.1">
-        <dependency id="SharpBatch" version="1.0.0" />
-        <dependency id="SharpBatch.Abstraction" version="1.0.0" />
-        <dependency id="SharpBatch.Crontab" version="1.0.0" />
-        <dependency id="SharpBatch.Serialization.Abstraction" version="1.0.0" />
-        <dependency id="SharpBatch.Serialization.DataContract" version="1.0.0" />
-        <dependency id="SharpBatch.Serialization.Json" version="1.0.0" />
-        <dependency id="SharpBatch.Serialization.Xml" version="1.0.0" />
-        <dependency id="SharpBatch.Skeduler" version="1.0.0" />
-        <dependency id="SharpBatch.Traking.Abstraction" version="1.0.0" />
-        <dependency id="SharpBatch.Traking.Db" version="1.0.0" />
-        <dependency id="SharpBatch.Traking.Memory" version="1.0.0" />
+        <dependency id="SharpBatch" version="$DepVersion$" />
+        <dependency id="SharpBatch.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Crontab" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.DataContract" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Json" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Xml" version="$DepVersion$" />
+        <dependency id="SharpBatch.Skeduler" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Db" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Memory" version="$DepVersion$" />
       </group>
     </dependencies>
   </metadata>
