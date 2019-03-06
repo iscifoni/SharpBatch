@@ -1,0 +1,28 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SharpBatch.All</id>
+    <version>1.0.0</version>
+    <authors>Scifoni Ivano</authors>
+    <owners>Scifoni Ivano</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/iscifoni/SharpBatch/wiki</projectUrl>    
+    <description>SharpBatch.All</description>
+    <copyright>Copyright © Scifoni Ivano</copyright>
+    <tags>sharpbatch</tags>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="SharpBatch" version="$DepVersion$" />
+        <dependency id="SharpBatch.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Crontab" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.DataContract" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Json" version="$DepVersion$" />
+        <dependency id="SharpBatch.Serialization.Xml" version="$DepVersion$" />
+        <dependency id="SharpBatch.Skeduler" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Abstraction" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Db" version="$DepVersion$" />
+        <dependency id="SharpBatch.Traking.Memory" version="$DepVersion$" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

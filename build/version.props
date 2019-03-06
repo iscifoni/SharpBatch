@@ -1,0 +1,23 @@
+<!-- This file may be overwritten by automation. Only values allowed here are VersionPrefix and VersionSuffix.  -->
+<Project>
+	<PropertyGroup>
+		<VersionPrefix>2.0.0</VersionPrefix>
+		<VersionSuffix>preview3</VersionSuffix>
+		<BuildNumber>25426-01</BuildNumber>
+	</PropertyGroup>
+	<PropertyGroup Label="Package Versions">
+		<NetStandardPackageVersion>netstandard2.0</NetStandardPackageVersion>
+		<MicrosoftAspNetCoreHostingAbstractionsPackageVersion>2.1.0-*</MicrosoftAspNetCoreHostingAbstractionsPackageVersion>
+		<MicrosoftExtensionsDependencyInjectionPackageVersion>2.1.0-*</MicrosoftExtensionsDependencyInjectionPackageVersion>
+		<MicrosoftExtensionsDependencyModelPackageVersion>2.1.0-*</MicrosoftExtensionsDependencyModelPackageVersion>
+		<MicrosoftExtensionsDependencyInjectionPackageVersion>2.1.0-*</MicrosoftExtensionsDependencyInjectionPackageVersion>
+		<MicrosoftExtensionsOptionsPackageVersion>2.1.0-*</MicrosoftExtensionsOptionsPackageVersion>
+		<MicrosoftEntityFrameworkCorePackageVersion>2.0.0</MicrosoftEntityFrameworkCorePackageVersion>
+		<MicrosoftEntityFrameworkCoreRelationalPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreRelationalPackageVersion>
+		<MicrosoftEntityFrameworkCoreRelationalDesignPackageVersion>1.1.2</MicrosoftEntityFrameworkCoreRelationalDesignPackageVersion>
+		<MicrosoftEntityFrameworkCoreSqlServerPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreSqlServerPackageVersion>
+		<MicrosoftEntityFrameworkCoreToolsPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreToolsPackageVersion>
+		<MicrosoftEntityFrameworkCoreToolsDotnetPackageVersion>2.0.0</MicrosoftEntityFrameworkCoreToolsDotnetPackageVersion>
+		<MicrosoftAspNetCoreAllPackageVersion>2.1.8</MicrosoftAspNetCoreAllPackageVersion>
+	</PropertyGroup>
+</Project>

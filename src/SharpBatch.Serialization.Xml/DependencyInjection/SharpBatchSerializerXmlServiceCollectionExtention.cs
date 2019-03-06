@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class SharpBatchSerializerJsonServiceCollectionExtention
     {
-        public static IServiceCollection AddSharpBatchJsonSerializer(this IServiceCollection services)
+        public static IServiceCollection AddSharpBatchXmlSerializer(this IServiceCollection services)
         {
             services.TryAddSingleton<IModelSerializer, ModelXmlSerializer>();
             return services;

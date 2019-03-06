@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="..\..\build\common.props" />
 	<PropertyGroup>
 		<Description>DB tracking provider for SharpBatch</Description>
@@ -19,15 +19,11 @@
 		<ProjectReference Include="..\SharpBatch.Traking.Abstraction\SharpBatch.Tracking.Abstraction.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.2" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
-	  <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(MicrosoftEntityFrameworkCorePackageVersion)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MicrosoftEntityFrameworkCoreRelationalPackageVersion)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="$(MicrosoftEntityFrameworkCoreRelationalDesignPackageVersion)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(MicrosoftEntityFrameworkCoreSqlServerPackageVersion)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftEntityFrameworkCoreToolsPackageVersion)" />
+	  <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJson)" />
 	</ItemGroup>
 </Project>

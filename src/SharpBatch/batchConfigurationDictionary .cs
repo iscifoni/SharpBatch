@@ -47,25 +47,13 @@ namespace SharpBatch
 
         public ICollection<object> Values => _items.Select(p => p.Value).ToList();
 
-        public void Add(KeyValuePair<string, object> item)
-        {
-            _items.Add(item);
-        }
+        public void Add(KeyValuePair<string, object> item) => _items.Add(item);
 
-        public void Add(string key, object value)
-        {
-            Add(new KeyValuePair<string, object>(key, value));
-        }
+        public void Add(string key, object value) => Add(new KeyValuePair<string, object>(key, value));
 
-        public void Clear()
-        {
-            _items.Clear();
-        }
+        public void Clear() => _items.Clear();
 
-        public bool Contains(KeyValuePair<string, object> item)
-        {
-            return ContainsKey(item.Key);
-        }
+        public bool Contains(KeyValuePair<string, object> item) => ContainsKey(item.Key);
 
         public bool ContainsKey(string key)
         {
@@ -87,20 +75,11 @@ namespace SharpBatch
             }
         }
 
-        public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => throw new NotImplementedException();
 
-        public bool Remove(KeyValuePair<string, object> item)
-        {
-            return _items.Remove(_items.Where(p => p.Key.Equals(item.Key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault());
-        }
+        public bool Remove(KeyValuePair<string, object> item) => _items.Remove(_items.Where(p => p.Key.Equals(item.Key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault());
 
-        public bool Remove(string key)
-        {
-            return Remove(_items.Where(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault());
-        }
+        public bool Remove(string key) => Remove(_items.Where(p => p.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).FirstOrDefault());
 
         public bool TryGetValue(string key, out object value)
         {
@@ -128,10 +107,7 @@ namespace SharpBatch
             return found;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
 
         public bool AddOrUpdate(string key, object value)
         {
