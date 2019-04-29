@@ -25,4 +25,4 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '/home/vsts/work/1/s/src/*/bin/Release/'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)''
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
