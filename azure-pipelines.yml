@@ -23,6 +23,12 @@ steps:
     projects: 'test/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: PublishPipelineArtifact@0
+  displayName: 'Artifact SharpBatch'
   inputs:
-    artifactName: 'drop'
+    artifactName: 'drop.SharpBatch'
     targetPath: 'src/SharpBatch/bin/Release'
+- task: PublishPipelineArtifact@0
+  displayName: 'Artifact SharpBatch.Abstraction'
+  inputs:
+    artifactName: 'drop.SharpBatch.Abstraction'
+    targetPath: 'src/SharpBatch.Abstraction/bin/Release'
