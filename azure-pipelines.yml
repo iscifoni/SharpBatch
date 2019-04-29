@@ -22,7 +22,7 @@ steps:
     command: test
     projects: 'test/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-- task: CopyFiles@2
+- task: PublishPipelineArtifact@0
   inputs:
-    SourceFolder: '/home/vsts/work/1/s/src/**/bin/Release/'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
